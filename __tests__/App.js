@@ -1,15 +1,12 @@
-/**
- * @format
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 
-import 'react-native';
-import React from 'react';
-import App from '../App';
-
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
-
-it('renders correctly', () => {
-  renderer.create(<App />);
-});
+export default class HelloWorldApp extends Component {
+  render() {
+    return (
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <Text>Hello world!</Text>
+        </View>
+    );
+  }
+}

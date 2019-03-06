@@ -3865,6 +3865,11 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+native-cli@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/native-cli/-/native-cli-1.0.0.tgz#7cafa021f9678d7f2cdd9e13c1ef17df99122dc6"
+  integrity sha512-RLdS4fBwPiDF+F7Pc1YdP2+CKRtGeZOFDCnbX9oAUc1sYB7MeCzlmyVsNVPf4xwpP9wZwQK1ZbEFpLeYkFg8vA==
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"

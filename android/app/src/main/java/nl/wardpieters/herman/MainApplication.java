@@ -1,4 +1,4 @@
-package com.hermanssnackcornerklant;
+package nl.wardpieters.herman;
 
 import android.app.Application;
 

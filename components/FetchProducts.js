@@ -1,48 +1,70 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
+import {FlatList, ActivityIndicator, Text, View} from 'react-native';
+import {ListItem} from 'react-native-elements';
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 export default class FetchProducts extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {isLoading: true}
     }
 
-    componentDidMount(){
-        return fetch('https://herman.wardpieters.nl')
+    componentDidMount() {
+        return fetch('https://herman.wardpieters.nl/api/products')
             .then((response) => response.json())
             .then((responseJson) => {
 
                 this.setState({
                     isLoading: false,
-                    dataSource: responseJson.products,
-                }, function(){
+                    dataSource: responseJson,
+                }, function () {
 
                 });
 
             })
-            .catch((error) =>{
+            .catch((error) => {
                 console.error(error);
             });
     }
 
-    render(){
-
-        if(this.state.isLoading){
-            return(
+    render() {
+        if (this.state.isLoading) {
+            return (
                 <View style={{flex: 1, padding: 20}}>
                     <ActivityIndicator/>
                 </View>
             )
         }
 
-        return(
-            <View style={{flex: 1, paddingTop:20}}>
+        return (
+            <View style={{flex: 1}}>
                 <FlatList
                     data={this.state.dataSource}
-                    renderItem={({item}) => <Text>{item.price_formatted}, {item.name}</Text>}
-                    keyExtractor={({id}, index) => id.toString()}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={({item}) => (
+                        <ListItem
+                            leftAvatar={{
+
+                                rounded: false,
+                                size: "large",
+                                imageProps: {
+                                    resizeMode: "contain",
+                                    backgroundColor: 'white'
+                                },
+                                source: {
+                                    uri: "https://www.deleeuwsnacks.nl/wp-content/uploads/2014/05/Patat_los_BodieBoost.jpg"
+                                }
+                            }}
+                            title={item.name}
+                            subtitle={item.price_formatted}
+                            onPress={() => {
+                                this.refs.toast.show(item.name, DURATION.LENGTH_SHORT);
+                            }}
+                        />
+                    )}
                 />
+                <Toast ref="toast"/>
             </View>
         );
     }

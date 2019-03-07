@@ -45,7 +45,6 @@ export default class FetchProducts extends React.Component {
                     renderItem={({item}) => (
                         <ListItem
                             leftAvatar={{
-
                                 rounded: false,
                                 size: "large",
                                 imageProps: {
@@ -53,7 +52,7 @@ export default class FetchProducts extends React.Component {
                                     backgroundColor: 'white'
                                 },
                                 source: {
-                                    uri: "https://www.deleeuwsnacks.nl/wp-content/uploads/2014/05/Patat_los_BodieBoost.jpg"
+                                    uri: item.avatar_url
                                 }
                             }}
                             title={item.name}

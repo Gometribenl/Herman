@@ -1,17 +1,22 @@
 import React from 'react';
-import {FlatList, ActivityIndicator, Text, View} from 'react-native';
+import {FlatList, ActivityIndicator, Text, View, AsyncStorage} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
+import { GlobalVariables } from './../App.js'
 
 export default class FetchProducts extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {isLoading: true}
+        this.state = {
+            isLoading: true
+        };
     }
 
     componentDidMount() {
-        return fetch('https://herman.wardpieters.nl/api/products')
+        let url = GlobalVariables.BASE_URL + "products";
+
+        return fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
 
@@ -53,6 +58,21 @@ export default class FetchProducts extends React.Component {
                                 },
                                 source: {
                                     uri: item.avatar_url
+                                }
+                            }}
+                            rightAvatar={{
+                                rounded: false,
+                                size: "large",
+                                imageProps: {
+                                    resizeMode: "contain",
+                                    backgroundColor: 'white'
+                                },
+                                source: {
+                                    uri: "https://herman.wardpieters.nl/images/cart2.png"
+                                },
+                                onPress(): void {
+                                    console.log(AsyncStorage.getAllKeys());
+                                    AsyncStorage.setItem('@MySuperStore:test_key', item.id.toString());
                                 }
                             }}
                             title={item.name}

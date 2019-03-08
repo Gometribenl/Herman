@@ -24,15 +24,19 @@ const styles = StyleSheet.create({
 
 export default class HermanApp extends Component {
 
-  render() {
-    return (
-        <ThemeProvider>
-            <Header
-                centerComponent={{ text: 'Herman Snackcorner', style: { color: '#fff' } }}
-                containerStyle={styles.headerContainer}
-            />
-            <FetchProducts/>
-        </ThemeProvider>
-    );
-  }
+    render() {
+        return (
+            <ThemeProvider>
+                <Header
+                    centerComponent={{ text: 'Herman Snackcorner', style: { color: '#fff' } }}
+                    containerStyle={styles.headerContainer}
+                />
+                <FetchProducts/>
+            </ThemeProvider>
+        );
+    }
+}
+
+export class GlobalVariables {
+    static BASE_URL = "https://herman.wardpieters.nl/api/";
 }

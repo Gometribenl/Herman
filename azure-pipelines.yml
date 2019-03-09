@@ -7,7 +7,10 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'macOS 10.13'
+
+variables:
+- group: React Native Variables
 
 steps:
 - task: NodeTool@0
@@ -18,3 +21,14 @@ steps:
 - script: |
     npm install
   displayName: 'Install dependencies'
+
+- script: |
+    cd ios
+    bundle install
+    fastlane build
+  displayName: 'Build iOS'
+- script: |
+    cd android
+    bundle install
+    fastlane build
+  displayName: 'Build android'

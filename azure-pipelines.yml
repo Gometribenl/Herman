@@ -23,11 +23,6 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    cd ios
-    bundle install
-    fastlane build
-  displayName: 'Build iOS'
-- script: |
     cd android
     bundle install
     fastlane build

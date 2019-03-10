@@ -103,16 +103,6 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    signingConfigs {
-            release {
-                if (project.hasProperty('HERMAN_RELEASE_STORE_FILE')) {
-                    storeFile file(HERMAN_RELEASE_STORE_FILE)
-                    storePassword HERMAN_RELEASE_STORE_PASSWORD
-                    keyAlias HERMAN_RELEASE_KEY_ALIAS
-                    keyPassword HERMAN_RELEASE_KEY_PASSWORD
-                }
-            }
-        }
     splits {
         abi {
             reset()
@@ -125,9 +115,6 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-
-            //Signing
-            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform, AsyncStorage, StatusBar} from 'react-native';
+import { View, StyleSheet, Platform, AsyncStorage, StatusBar, YellowBox} from 'react-native';
 import { Header } from 'react-native-elements';
 import BottomNavigation, { FullTab } from 'react-native-material-bottom-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import DeviceInfo from 'react-native-device-info';
 import FetchProducts from './components/FetchProducts';
 
 const AppColors = {
@@ -43,6 +44,12 @@ export default class HermanApp extends Component {
 
     tabs = [
         {
+            key: 'home',
+            icon: 'home',
+            label: 'Home',
+            barColor: AppColors.secondary.regular,
+        },
+        {
             key: 'products',
             icon: 'list',
             label: 'Producten',
@@ -63,11 +70,16 @@ export default class HermanApp extends Component {
     ];
 
     state = {
-        activeTab: this.tabs[0].key
+        activeTab: 'home',
+        deviceId: ''
     };
 
+    componentDidMount() {
+        this.setState({ deviceId: DeviceInfo.getUniqueID() });
+    }
+
     renderIcon = icon => ({ isActive }) => (
-        <Icon size={24} color="white" name={icon} />
+        <Icon size={24} color="white" name={icon}/>
     );
 
     renderTab = ({ tab, isActive }) => (

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Text, TextInput, View, AsyncStorage, StyleSheet, Platform, StatusBar} from 'react-native';
+import {Alert, Text, TextInput, View, AsyncStorage, StyleSheet, Platform, StatusBar} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
-import { AppColors } from './../global';
+import {AppColors} from './../global';
 
 const styles = StyleSheet.create({
     container: {
@@ -11,8 +11,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
 
-    buttons: {
-    },
+    buttons: {},
 
     buttonSection: {
         flexDirection: "row",
@@ -20,9 +19,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    textSection: {
-
-    },
+    textSection: {},
 
     headerContainer: {
         height: Platform.select({
@@ -50,8 +47,39 @@ class Authentication extends Component {
         };
     }
 
-    static userSignUp() {
-        Actions.Home();
+    async saveItem(item, selectedValue) {
+        try {
+            console.warn(selectedValue);
+            await AsyncStorage.setItem(item, selectedValue);
+        } catch (error) {
+            console.error('AsyncStorage error: ' + error.message);
+        }
+    }
+
+    userSignUp() {
+        if (!this.state.email || !this.state.password) {
+            Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
+            return;
+        }
+
+        fetch('http://10.0.2.2:3001/users', {
+            method: 'POST',
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: this.state.email,
+                password: this.state.password,
+            })
+        })
+            .then((response) => {
+                if (response._bodyText === "A user with that username already exists") {
+                    Alert.alert("Failed", "A user with that username already exists!");
+                } else {
+                    this.saveItem('id_token', response.id_token);
+                    Alert.alert("Success", "Your account has been successfully created!");
+                    Actions.Home();
+                }
+            })
+            .done();
     }
 
     static userLogin() {
@@ -64,7 +92,7 @@ class Authentication extends Component {
                 <StatusBar backgroundColor={AppColors.AppColors.secondary.dark} barStyle="light-content"/>
 
                 <Header
-                    centerComponent={{text: 'Hermans Snackcorner', style: {color: '#fff', fontSize: RF(3.25)}}}
+                    centerComponent={{text: 'Hermans Snackcorner', style: {color: '#303030', fontSize: RF(3.25)}}}
                     containerStyle={styles.headerContainer}
                 />
 
@@ -100,7 +128,7 @@ class Authentication extends Component {
                     <Button
                         buttonStyle={styles.buttons}
                         title="Registreren"
-                        onPress={Authentication.userSignUp.bind(this)}
+                        onPress={this.userSignUp.bind(this)}
                     />
                 </View>
 

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {Alert, View, StyleSheet, Platform, AsyncStorage, StatusBar, YellowBox, TouchableOpacity, Text} from 'react-native';
+import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Header} from 'react-native-elements';
-import BottomNavigation, {FullTab, Badge} from 'react-native-material-bottom-navigation'
+import BottomNavigation, {Badge, FullTab} from 'react-native-material-bottom-navigation'
 import {Actions} from 'react-native-router-flux';
 import RF from "react-native-responsive-fontsize";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FetchProducts from '../components/FetchProducts';
-import { AppColors } from "../global";
+import {AppColors} from "../global";
 
 const styles = StyleSheet.create({
     container: {
@@ -30,14 +30,6 @@ const styles = StyleSheet.create({
 });
 
 class Home extends Component {
-
-    getProtectedQuote() {
-        Alert.alert('We will print a Chuck Norris quote');
-    };
-
-    userLogout() {
-        Actions.Auth();
-    };
 
     tabs = [
         {
@@ -72,6 +64,39 @@ class Home extends Component {
         deviceId: ''
     };
 
+    async getItem(item) {
+        try {
+            await AsyncStorage.getItem(item);
+        } catch (error) {
+            console.error('AsyncStorage error: ' + error.message);
+        }
+    }
+
+    testIdToken() {
+        AsyncStorage.getItem('id_token').then((token) => {
+            fetch('http://10.0.2.2:3001/api/protected/random-quote', {
+                method: 'GET',
+                headers: {'Authorization': 'Bearer ' + token}
+            })
+                .then((response) => response.text())
+                .then((response) => console.warn(response.toString()))
+                .then((quote) => {
+                    //Alert.alert('testIdToken result', quote)
+                })
+                .done();
+        })
+    };
+
+    static async userLogout() {
+        try {
+            await AsyncStorage.removeItem('id_token');
+            Alert.alert("Success", "You have been successfully logged out!");
+            Actions.Auth();
+        } catch (error) {
+            console.log('AsyncStorage error: ' + error.message);
+        }
+    }
+
     renderIcon = icon => () => {
         return <Icon size={24} color="white" name={icon}/>;
     };
@@ -101,11 +126,11 @@ class Home extends Component {
                     <Header
                         centerComponent={{text: 'Hermans Snackcorner', style: {color: '#fff', fontSize: RF(3.25)}}}
                         containerStyle={styles.headerContainer}
-                        rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                        rightComponent={<Icon name="sign-out" size={30} onPress={Home.userLogout}/>}
                     />
 
-                    <TouchableOpacity onPress={this.getProtectedQuote}>
-                        <Text>Get Chuck Norris quote!</Text>
+                    <TouchableOpacity onPress={this.testIdToken}>
+                        <Text>Test id_token</Text>
                     </TouchableOpacity>
 
                     <FetchProducts/>

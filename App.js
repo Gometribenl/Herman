@@ -5,7 +5,7 @@ import Authentication from "./routes/Authentication";
 
 export default class App extends Component {
     render() {
-        return(
+        return (
             <Router>
                 <Scene key='root'>
                     <Scene

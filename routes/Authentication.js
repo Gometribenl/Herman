@@ -47,9 +47,9 @@ class Authentication extends Component {
         };
     }
 
-    async saveItem(item, selectedValue) {
+    static async saveItem(item, selectedValue) {
         try {
-            console.warn(selectedValue);
+            console.warn("" + item + ": " + selectedValue);
             await AsyncStorage.setItem(item, selectedValue);
         } catch (error) {
             console.error('AsyncStorage error: ' + error.message);
@@ -70,14 +70,15 @@ class Authentication extends Component {
                 password: this.state.password,
             })
         })
-            .then((response) => {
-                if (response._bodyText === "A user with that username already exists") {
-                    Alert.alert("Failed", "A user with that username already exists!");
+            .then((response) => response.json())
+            .then((responseData) => {
+                if (responseData === "A user with that username already exists") {
+                    Alert.alert("Failed", "A user with that username already exists");
                 } else {
-                    this.saveItem('id_token', response.id_token);
-                    Alert.alert("Success", "Your account has been successfully created!");
+                    Authentication.saveItem('id_token', responseData.id_token);
                     Actions.Home();
                 }
+
             })
             .done();
     }

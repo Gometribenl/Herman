@@ -64,16 +64,10 @@ class Home extends Component {
         deviceId: ''
     };
 
-    async getItem(item) {
-        try {
-            await AsyncStorage.getItem(item);
-        } catch (error) {
-            console.error('AsyncStorage error: ' + error.message);
-        }
-    }
-
     testIdToken() {
         AsyncStorage.getItem('id_token').then((token) => {
+            console.warn("id_token: " + token);
+
             fetch('http://10.0.2.2:3001/api/protected/random-quote', {
                 method: 'GET',
                 headers: {'Authorization': 'Bearer ' + token}
@@ -87,7 +81,7 @@ class Home extends Component {
         })
     };
 
-    static async userLogout() {
+    async userLogout() {
         try {
             await AsyncStorage.removeItem('id_token');
             Alert.alert("Success", "You have been successfully logged out!");
@@ -126,7 +120,7 @@ class Home extends Component {
                     <Header
                         centerComponent={{text: 'Hermans Snackcorner', style: {color: '#fff', fontSize: RF(3.25)}}}
                         containerStyle={styles.headerContainer}
-                        rightComponent={<Icon name="sign-out" size={30} onPress={Home.userLogout}/>}
+                        rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
                     />
 
                     <TouchableOpacity onPress={this.testIdToken}>

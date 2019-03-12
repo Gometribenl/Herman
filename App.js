@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Platform, AsyncStorage, StatusBar, YellowBox} from 'react-native';
 import { Header } from 'react-native-elements';
-import BottomNavigation, { FullTab } from 'react-native-material-bottom-navigation'
+import BottomNavigation, { FullTab, Badge } from 'react-native-material-bottom-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from 'react-native-device-info';
 import FetchProducts from './components/FetchProducts';
@@ -66,6 +66,7 @@ export default class HermanApp extends Component {
             icon: 'shopping-cart',
             label: 'Winkelwagen',
             barColor: AppColors.secondary.regular,
+            badgeCount: 1,
         }
     ];
 
@@ -78,18 +79,24 @@ export default class HermanApp extends Component {
         this.setState({ deviceId: DeviceInfo.getUniqueID() });
     }
 
-    renderIcon = icon => ({ isActive }) => (
-        <Icon size={24} color="white" name={icon}/>
-    );
+    renderIcon = icon => ({ isActive }) => {
+        return <Icon size={24} color="white" name={icon}/>;
+    };
 
-    renderTab = ({ tab, isActive }) => (
-        <FullTab
+    renderBadge = badgeCount => ({ isActive }) => {
+        return <Badge>{badgeCount}</Badge>
+    };
+
+    renderTab = ({ tab, isActive }) => {
+        return <FullTab
             isActive={isActive}
             key={tab.key}
             label={tab.label}
             renderIcon={this.renderIcon(tab.icon)}
-        />
-    );
+            renderBadge={this.renderBadge(tab.badgeCount)}
+            showBadge={tab.badgeCount > 0}
+        />;
+    };
 
     render() {
         return (
@@ -107,6 +114,7 @@ export default class HermanApp extends Component {
                     activeTab={this.state.activeTab}
                     onTabPress={newTab => this.setState({ activeTab: newTab.key })}
                     renderTab={this.renderTab}
+                    renderBadge={this.renderBadge}
                 />
             </View>
         );

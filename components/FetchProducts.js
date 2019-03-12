@@ -62,13 +62,13 @@ export default class FetchProducts extends React.Component {
                             }}
                             rightAvatar={{
                                 rounded: false,
-                                size: "large",
+                                size: "medium",
                                 imageProps: {
                                     resizeMode: "contain",
                                     backgroundColor: 'white'
                                 },
                                 source: {
-                                    uri: "https://herman.wardpieters.nl/images/cart2.png"
+                                    uri: "https://herman.wardpieters.nl/images/cart.png"
                                 },
                                 onPress(): void {
                                     console.log(AsyncStorage.getAllKeys());

@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, ActivityIndicator, Text, View, AsyncStorage} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
-import { GlobalVariables } from './../routes/Home'
+import { API } from './../global'
 
 export default class FetchProducts extends React.Component {
 
@@ -14,7 +14,7 @@ export default class FetchProducts extends React.Component {
     }
 
     componentDidMount() {
-        let url = GlobalVariables.BASE_URL + "product/list";
+        let url = API.BASE_URL + "product/list";
 
         return fetch(url)
             .then((response) => response.json())

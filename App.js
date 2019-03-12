@@ -3,7 +3,7 @@ import {Router, Scene} from 'react-native-router-flux';
 import Home from "./routes/Home";
 import Authentication from "./routes/Authentication";
 
-class App extends Component {
+export default class App extends Component {
     render() {
         return(
             <Router>
@@ -26,5 +26,3 @@ class App extends Component {
         )
     }
 }
-
-export default App;

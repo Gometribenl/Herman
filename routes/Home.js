@@ -68,7 +68,7 @@ class Home extends Component {
         AsyncStorage.getItem('id_token').then((token) => {
             console.warn("id_token: " + token);
 
-            fetch('http://10.0.2.2:3001/api/protected/random-quote', {
+            fetch('https://10.0.2.2:3001/api/protected/random-quote', {
                 method: 'GET',
                 headers: {'Authorization': 'Bearer ' + token}
             })

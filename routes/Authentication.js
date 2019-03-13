@@ -57,16 +57,17 @@ class Authentication extends Component {
     }
 
     userSignUp() {
+        let URL = API.BASE_URL + "user/register";
         if (!this.state.email || !this.state.password) {
             Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
             return;
         }
 
-        fetch('http://10.0.2.2:3001/users', {
+        fetch(URL, {
             method: 'POST',
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
             body: JSON.stringify({
-                username: this.state.email,
+                email: this.state.email,
                 password: this.state.password,
             })
         })

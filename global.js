@@ -1,3 +1,5 @@
+import VersionNumber from 'react-native-version-number';
+
 export class AppColors {
     static AppColors = {
         primary: {
@@ -15,4 +17,6 @@ export class AppColors {
 
 export class API {
     static BASE_URL = "https://herman.wardpieters.nl/api/";
+    static USER_AGENT = "Herman/" + VersionNumber.appVersion + " (" + VersionNumber.buildVersion + "; " + VersionNumber.bundleIdentifier + ")";
+    static API_KEY = "9F5#CEgdwej2dF538k56M!$C";
 }

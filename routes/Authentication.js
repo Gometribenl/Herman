@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Alert, Text, TextInput, View, AsyncStorage, StyleSheet, Platform, StatusBar} from 'react-native';
+import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, TextInput, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
-import {AppColors, API} from './../global';
+import {API, AppColors} from './../global';
 
 const styles = StyleSheet.create({
     container: {
@@ -65,7 +65,7 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-Key': API.API_KEY, 'User-Agent': API.USER_AGENT},
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -93,7 +93,7 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-Key': API.API_KEY, 'User-Agent': API.USER_AGENT},
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,

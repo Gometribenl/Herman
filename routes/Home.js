@@ -65,8 +65,8 @@ class Home extends Component {
     };
 
     testIdToken() {
-        AsyncStorage.getItem('id_token').then((token) => {
-            console.warn("id_token: " + token);
+        AsyncStorage.getItem('jwt').then((token) => {
+            console.warn("jwt: " + token);
 
             fetch('https://10.0.2.2:3001/api/protected/random-quote', {
                 method: 'GET',
@@ -83,7 +83,7 @@ class Home extends Component {
 
     async userLogout() {
         try {
-            await AsyncStorage.removeItem('id_token');
+            await AsyncStorage.removeItem('jwt');
             Alert.alert("Success", "You have been successfully logged out!");
             Actions.Auth();
         } catch (error) {

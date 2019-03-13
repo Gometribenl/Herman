@@ -3,7 +3,7 @@ import {Alert, Text, TextInput, View, AsyncStorage, StyleSheet, Platform, Status
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
-import {AppColors} from './../global';
+import {AppColors, API} from './../global';
 
 const styles = StyleSheet.create({
     container: {
@@ -73,19 +73,44 @@ class Authentication extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData === "A user with that username already exists") {
-                    Alert.alert("Failed", "A user with that username already exists");
+                if (responseData.success === true) {
+                    Alert.alert("Success", "Your account has been created successfully, you can now login!");
+
                 } else {
-                    Authentication.saveItem('id_token', responseData.id_token);
-                    Actions.Home();
+                    Alert.alert("Error", responseData.message);
                 }
 
             })
             .done();
     }
 
-    static userLogin() {
-        Actions.Home();
+    userLogin() {
+        let URL = API.BASE_URL + "user/login";
+        if (!this.state.email || !this.state.password) {
+            Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
+            return;
+        }
+
+        fetch(URL, {
+            method: 'POST',
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password,
+            })
+        })
+            .then((response) => response.json())
+            .then((responseData) => {
+
+                if (responseData.success === true) {
+                    Authentication.saveItem("jwt", responseData.jwt);
+                    Actions.Home();
+                } else {
+                    Alert.alert("Error", responseData.message);
+                }
+
+            })
+            .done();
     }
 
     render() {
@@ -124,7 +149,7 @@ class Authentication extends Component {
                     <Button
                         buttonStyle={styles.buttons}
                         title="Inloggen"
-                        onPress={Authentication.userLogin.bind(this)}
+                        onPress={this.userLogin.bind(this)}
                     />
 
                     <Button

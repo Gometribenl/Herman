@@ -65,7 +65,7 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-Key': API.API_KEY, 'User-Agent': API.USER_AGENT},
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -93,7 +93,7 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-Key': API.API_KEY, 'User-Agent': API.USER_AGENT},
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,

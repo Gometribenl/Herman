@@ -118,7 +118,7 @@ class Home extends Component {
                     <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
 
                     <Header
-                        centerComponent={{text: 'Hermans Snackcorner', style: {color: '#fff', fontSize: RF(3.25)}}}
+                        centerComponent={{text: 'Hermans Snackcorner', style: {color: '#fff', fontSize: RF(2.75)}}}
                         containerStyle={styles.headerContainer}
                         rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
                     />

@@ -119,7 +119,7 @@ class Authentication extends Component {
                 <StatusBar backgroundColor={AppColors.AppColors.secondary.dark} barStyle="light-content"/>
 
                 <Header
-                    centerComponent={{text: 'Hermans Snackcorner', style: {color: '#303030', fontSize: RF(3.25)}}}
+                    centerComponent={{text: 'Hermans Snackcorner', style: {color: '#303030', fontSize: RF(2.75)}}}
                     containerStyle={styles.headerContainer}
                 />
 

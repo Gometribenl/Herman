@@ -16,7 +16,7 @@ export default class FetchProducts extends React.Component {
     componentDidMount() {
         let url = API.BASE_URL + "product/list";
 
-        return fetch(url)
+        return fetch(url, {headers: {'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT}})
             .then((response) => response.json())
             .then((responseJson) => {
 

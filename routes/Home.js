@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         }),
 
 
-            // Fix Header height in Android
+        // Fix Header height in Android
         paddingTop: Platform.select({
             android: 0
         }),
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.AppColors.primary.regular,
     },
 });
-
 
 
 class Home extends Component {
@@ -104,37 +103,40 @@ class Home extends Component {
     render() {
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
-            <View style={{flex: 1}}>
-            <View style={{flex: 1, backgroundColor: 'white'}}>
-                <View style={styles.container}>
+                <View style={{flex: 1}}>
+                    <View style={{flex: 1, backgroundColor: 'white'}}>
+                        <View style={styles.container}>
 
-                    <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                            <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
 
-                    <Header
-                        centerComponent={{text: 'Hermans Snackcorner', style: {color: '#fff', fontSize: RF(2.75)}}}
-                        containerStyle={styles.headerContainer}
-                        rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
-                    />
+                            <Header
+                                centerComponent={{
+                                    text: 'Hermans Snackcorner',
+                                    style: {color: '#fff', fontSize: RF(2.75)}
+                                }}
+                                containerStyle={styles.headerContainer}
+                                rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                            />
 
-                    <FetchProducts/>
+                            <FetchProducts/>
+                        </View>
+
+                        <BottomNavigation
+                            style={{
+                                paddingBottom: Platform.select({
+                                    ios: 0,
+
+                                })
+                            }}
+                            tabs={this.tabs}
+                            activeTab={this.state.activeTab}
+                            onTabPress={newTab => this.setState({activeTab: newTab.key})}
+                            renderTab={this.renderTab}
+                            renderBadge={this.renderBadge}
+                        />
+
+                    </View>
                 </View>
-
-                <BottomNavigation
-                    style={{
-                        paddingBottom: Platform.select({
-                            ios: 0,
-
-                        })
-                    }}
-                    tabs={this.tabs}
-                    activeTab={this.state.activeTab}
-                    onTabPress={newTab => this.setState({activeTab: newTab.key})}
-                    renderTab={this.renderTab}
-                    renderBadge={this.renderBadge}
-                />
-
-            </View>
-            </View>
             </SafeAreaView>
         );
     }

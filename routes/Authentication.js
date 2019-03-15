@@ -53,7 +53,6 @@ class Authentication extends Component {
 
     static async saveItem(item, selectedValue) {
         try {
-            console.warn("" + item + ": " + selectedValue);
             await AsyncStorage.setItem(item, selectedValue);
         } catch (error) {
             console.error('AsyncStorage error: ' + error.message);
@@ -64,6 +63,7 @@ class Authentication extends Component {
         let URL = API.BASE_URL + "user/validate";
 
         AsyncStorage.getItem('jwt').then((token) => {
+            // If a token has been stored, verify it and login
             if (token !== null) {
                 fetch(URL, {
                     method: 'POST',
@@ -73,8 +73,10 @@ class Authentication extends Component {
                     .then((response) => response.json())
                     .then((response) => {
                         if (response.success === true) {
-                            Alert.alert('validateToken result', response.message.toString());
+                            // Go to Home
                             Actions.Home();
+                        } else {
+                            Alert.alert("Error", response.message.toString());
                         }
                     })
                     .done();

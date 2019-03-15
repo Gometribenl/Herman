@@ -46,6 +46,10 @@ class Authentication extends Component {
             password: null
         };
     }
+    
+    componentDidMount() {
+        this.validateToken();
+    }
 
     static async saveItem(item, selectedValue) {
         try {
@@ -55,6 +59,28 @@ class Authentication extends Component {
             console.error('AsyncStorage error: ' + error.message);
         }
     }
+
+    validateToken() {
+        let URL = API.BASE_URL + "user/validate";
+
+        AsyncStorage.getItem('jwt').then((token) => {
+            if (token !== null) {
+                fetch(URL, {
+                    method: 'POST',
+                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
+                    body: JSON.stringify({'jwt': token})
+                })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        if (response.success === true) {
+                            Alert.alert('validateToken result', response.message.toString());
+                            Actions.Home();
+                        }
+                    })
+                    .done();
+            }
+        })
+    };
 
     userSignUp() {
         let URL = API.BASE_URL + "user/register";

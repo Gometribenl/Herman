@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
-import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+    Alert,
+    AsyncStorage,
+    Platform,
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import {Header} from 'react-native-elements';
 import BottomNavigation, {Badge, FullTab} from 'react-native-material-bottom-navigation'
 import {Actions} from 'react-native-router-flux';
@@ -20,7 +30,8 @@ const styles = StyleSheet.create({
             default: 44,
         }),
 
-        // Fix Header height in Android
+
+            // Fix Header height in Android
         paddingTop: Platform.select({
             android: 0
         }),
@@ -28,6 +39,8 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.AppColors.primary.regular,
     },
 });
+
+
 
 class Home extends Component {
 
@@ -112,6 +125,8 @@ class Home extends Component {
 
     render() {
         return (
+            <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
+            <View style={{flex: 1}}>
             <View style={{flex: 1, backgroundColor: 'white'}}>
                 <View style={styles.container}>
 
@@ -131,6 +146,12 @@ class Home extends Component {
                 </View>
 
                 <BottomNavigation
+                    style={{
+                        paddingBottom: Platform.select({
+                            ios: 0,
+
+                        })
+                    }}
                     tabs={this.tabs}
                     activeTab={this.state.activeTab}
                     onTabPress={newTab => this.setState({activeTab: newTab.key})}
@@ -139,6 +160,8 @@ class Home extends Component {
                 />
 
             </View>
+            </View>
+            </SafeAreaView>
         );
     }
 }

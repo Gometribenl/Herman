@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, TextInput, View} from 'react-native';
+import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, TextInput, View, SafeAreaView} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         height: Platform.select({
             android: 56,
             default: 44,
+
         }),
 
         // Fix Header height in Android
@@ -115,7 +116,9 @@ class Authentication extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
+                <View style={{flex: 1}}>
+                <View style={styles.container}>
                 <StatusBar backgroundColor={AppColors.AppColors.secondary.dark} barStyle="light-content"/>
 
                 <Header
@@ -160,6 +163,8 @@ class Authentication extends Component {
                 </View>
 
             </View>
+                </View>
+            </SafeAreaView>
         );
     }
 }

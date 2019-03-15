@@ -124,8 +124,11 @@ class Home extends Component {
                         <BottomNavigation
                             style={{
                                 paddingBottom: Platform.select({
-                                    ios: 0,
+                                    ios: 0
 
+                                }),
+                                height: Platform.select({
+                                    ios: 56
                                 })
                             }}
                             tabs={this.tabs}

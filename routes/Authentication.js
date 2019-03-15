@@ -46,7 +46,7 @@ class Authentication extends Component {
             password: null
         };
     }
-    
+
     componentDidMount() {
         this.validateToken();
     }
@@ -67,7 +67,12 @@ class Authentication extends Component {
             if (token !== null) {
                 fetch(URL, {
                     method: 'POST',
-                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': API.API_KEY,
+                        'User-Agent': API.USER_AGENT
+                    },
                     body: JSON.stringify({'jwt': token})
                 })
                     .then((response) => response.json())
@@ -93,7 +98,12 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-API-KEY': API.API_KEY,
+                'User-Agent': API.USER_AGENT
+            },
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -121,7 +131,12 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-API-KEY': API.API_KEY,
+                'User-Agent': API.USER_AGENT
+            },
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,

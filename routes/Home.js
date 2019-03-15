@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Header} from 'react-native-elements';
-import BottomNavigation, {Badge, FullTab} from 'react-native-material-bottom-navigation'
+import BottomNavigation, {Badge, IconTab} from 'react-native-material-bottom-navigation'
 import {Actions} from 'react-native-router-flux';
 import RF from "react-native-responsive-fontsize";
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -35,25 +35,21 @@ class Home extends Component {
         {
             key: 'home',
             icon: 'home',
-            label: 'Home',
             barColor: AppColors.AppColors.secondary.regular,
         },
         {
             key: 'products',
             icon: 'list',
-            label: 'Producten',
             barColor: AppColors.AppColors.secondary.regular,
         },
         {
             key: 'orders',
             icon: 'credit-card',
-            label: 'Bestellingen',
             barColor: AppColors.AppColors.secondary.regular,
         },
         {
             key: 'cart',
             icon: 'shopping-cart',
-            label: 'Winkelwagen',
             barColor: AppColors.AppColors.secondary.regular,
             badgeCount: 1,
         }
@@ -83,10 +79,9 @@ class Home extends Component {
     };
 
     renderTab = ({tab, isActive}) => {
-        return <FullTab
+        return <IconTab
             isActive={isActive}
             key={tab.key}
-            label={tab.label}
             renderIcon={this.renderIcon(tab.icon)}
             renderBadge={this.renderBadge(tab.badgeCount)}
             showBadge={tab.badgeCount > 0}
@@ -105,10 +100,6 @@ class Home extends Component {
                         containerStyle={styles.headerContainer}
                         rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
                     />
-
-                    <TouchableOpacity onPress={this.validateToken}>
-                        <Text>Test id_token</Text>
-                    </TouchableOpacity>
 
                     <FetchProducts/>
                 </View>

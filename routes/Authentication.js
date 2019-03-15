@@ -48,14 +48,47 @@ class Authentication extends Component {
         };
     }
 
+    componentDidMount() {
+        this.validateToken();
+    }
+
     static async saveItem(item, selectedValue) {
         try {
-            console.warn("" + item + ": " + selectedValue);
             await AsyncStorage.setItem(item, selectedValue);
         } catch (error) {
             console.error('AsyncStorage error: ' + error.message);
         }
     }
+
+    validateToken() {
+        let URL = API.BASE_URL + "user/validate";
+
+        AsyncStorage.getItem('jwt').then((token) => {
+            // If a token has been stored, verify it and login
+            if (token !== null) {
+                fetch(URL, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': API.API_KEY,
+                        'User-Agent': API.USER_AGENT
+                    },
+                    body: JSON.stringify({'jwt': token})
+                })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        if (response.success === true) {
+                            // Go to Home
+                            Actions.Home();
+                        } else {
+                            Alert.alert("Error", response.message.toString());
+                        }
+                    })
+                    .done();
+            }
+        })
+    };
 
     userSignUp() {
         let URL = API.BASE_URL + "user/register";
@@ -66,7 +99,12 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-API-KEY': API.API_KEY,
+                'User-Agent': API.USER_AGENT
+            },
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -94,7 +132,12 @@ class Authentication extends Component {
 
         fetch(URL, {
             method: 'POST',
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-API-KEY': API.API_KEY,
+                'User-Agent': API.USER_AGENT
+            },
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,

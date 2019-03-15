@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, ActivityIndicator, Text, View, AsyncStorage} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
-import { API } from './../global'
+import {API} from './../global'
 
 export default class FetchProducts extends React.Component {
 

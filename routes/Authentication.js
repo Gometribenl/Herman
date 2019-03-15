@@ -161,51 +161,54 @@ class Authentication extends Component {
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
                 <View style={{flex: 1}}>
-                <View style={styles.container}>
-                <StatusBar backgroundColor={AppColors.AppColors.secondary.dark} barStyle="light-content"/>
+                    <View style={styles.container}>
+                        <StatusBar backgroundColor={AppColors.AppColors.secondary.dark} barStyle="light-content"/>
 
-                <Header
-                    centerComponent={{text: 'Hermans Snackcorner', style: {color: '#303030', fontSize: RF(2.75)}}}
-                    containerStyle={styles.headerContainer}
-                />
+                        <Header
+                            centerComponent={{
+                                text: 'Hermans Snackcorner',
+                                style: {color: '#303030', fontSize: RF(2.75)}
+                            }}
+                            containerStyle={styles.headerContainer}
+                        />
 
-                <View style={styles.textSection}>
-                    <TextInput
-                        editable={true}
-                        onChangeText={(email) => this.setState({email})}
-                        placeholder='E-mailadres'
-                        ref='email'
-                        returnKeyType='next'
-                        value={this.state.email}
-                        autoComplete={'tel'}
-                    />
+                        <View style={styles.textSection}>
+                            <TextInput
+                                editable={true}
+                                onChangeText={(email) => this.setState({email})}
+                                placeholder='E-mailadres'
+                                ref='email'
+                                returnKeyType='next'
+                                value={this.state.email}
+                                autoComplete={'tel'}
+                            />
 
-                    <TextInput
-                        editable={true}
-                        onChangeText={(password) => this.setState({password})}
-                        placeholder='Wachtwoord'
-                        ref='password'
-                        returnKeyType='next'
-                        secureTextEntry={true}
-                        value={this.state.password}
-                    />
-                </View>
+                            <TextInput
+                                editable={true}
+                                onChangeText={(password) => this.setState({password})}
+                                placeholder='Wachtwoord'
+                                ref='password'
+                                returnKeyType='next'
+                                secureTextEntry={true}
+                                value={this.state.password}
+                            />
+                        </View>
 
-                <View style={styles.buttonSection}>
-                    <Button
-                        buttonStyle={styles.buttons}
-                        title="Inloggen"
-                        onPress={this.userLogin.bind(this)}
-                    />
+                        <View style={styles.buttonSection}>
+                            <Button
+                                buttonStyle={styles.buttons}
+                                title="Inloggen"
+                                onPress={this.userLogin.bind(this)}
+                            />
 
-                    <Button
-                        buttonStyle={styles.buttons}
-                        title="Registreren"
-                        onPress={this.userSignUp.bind(this)}
-                    />
-                </View>
+                            <Button
+                                buttonStyle={styles.buttons}
+                                title="Registreren"
+                                onPress={this.userSignUp.bind(this)}
+                            />
+                        </View>
 
-            </View>
+                    </View>
                 </View>
             </SafeAreaView>
         );

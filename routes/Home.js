@@ -102,45 +102,42 @@ class Home extends Component {
 
     render() {
         return (
-            <Fragment>
-                <SafeAreaView style={{flex: 0, backgroundColor: AppColors.AppColors.primary.dark}}/>
-                <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
-                    <View style={{flex: 1}}>
-                        <View style={{flex: 1, backgroundColor: 'white'}}>
-                            <View style={styles.container}>
+            <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
+                <View style={{flex: 1}}>
+                    <View style={{flex: 1, backgroundColor: 'white'}}>
+                        <View style={styles.container}>
 
-                                <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                            <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
 
-                                <Header
-                                    centerComponent={{
-                                        text: 'Hermans Snackcorner',
-                                        style: {color: '#fff', fontSize: RF(2.75)}
-                                    }}
-                                    containerStyle={styles.headerContainer}
-                                    rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
-                                />
-
-                                <FetchProducts/>
-                            </View>
-
-                            <BottomNavigation
-                                style={{
-                                    paddingBottom: Platform.select({
-                                        ios: 0,
-
-                                    })
+                            <Header
+                                centerComponent={{
+                                    text: 'Hermans Snackcorner',
+                                    style: {color: '#fff', fontSize: RF(2.75)}
                                 }}
-                                tabs={this.tabs}
-                                activeTab={this.state.activeTab}
-                                onTabPress={newTab => this.setState({activeTab: newTab.key})}
-                                renderTab={this.renderTab}
-                                renderBadge={this.renderBadge}
+                                containerStyle={styles.headerContainer}
+                                rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
                             />
 
+                            <FetchProducts/>
                         </View>
+
+                        <BottomNavigation
+                            style={{
+                                paddingBottom: Platform.select({
+                                    ios: 0,
+
+                                })
+                            }}
+                            tabs={this.tabs}
+                            activeTab={this.state.activeTab}
+                            onTabPress={newTab => this.setState({activeTab: newTab.key})}
+                            renderTab={this.renderTab}
+                            renderBadge={this.renderBadge}
+                        />
+
                     </View>
-                </SafeAreaView>
-            </Fragment>
+                </View>
+            </SafeAreaView>
         );
     }
 }

@@ -6,7 +6,7 @@ import {Actions} from 'react-native-router-flux';
 import RF from "react-native-responsive-fontsize";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FetchProducts from '../components/FetchProducts';
-import {AppColors} from "../global";
+import {API, AppColors} from "../global";
 
 const styles = StyleSheet.create({
     container: {
@@ -64,23 +64,6 @@ class Home extends Component {
         deviceId: ''
     };
 
-    testIdToken() {
-        AsyncStorage.getItem('jwt').then((token) => {
-            console.warn("jwt: " + token);
-
-            fetch('https://10.0.2.2:3001/api/protected/random-quote', {
-                method: 'GET',
-                headers: {'Authorization': 'Bearer ' + token}
-            })
-                .then((response) => response.text())
-                .then((response) => console.warn(response.toString()))
-                .then((quote) => {
-                    //Alert.alert('testIdToken result', quote)
-                })
-                .done();
-        })
-    };
-
     async userLogout() {
         try {
             await AsyncStorage.removeItem('jwt');
@@ -123,7 +106,7 @@ class Home extends Component {
                         rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
                     />
 
-                    <TouchableOpacity onPress={this.testIdToken}>
+                    <TouchableOpacity onPress={this.validateToken}>
                         <Text>Test id_token</Text>
                     </TouchableOpacity>
 

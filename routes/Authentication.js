@@ -1,25 +1,51 @@
 import React, {Component} from 'react';
-import {Alert, AsyncStorage, StatusBar, TextInput, View, SafeAreaView} from 'react-native';
+import {Alert, AsyncStorage, StatusBar, TextInput, View, SafeAreaView, StyleSheet, Platform} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
-import {API, AppColors, Styles} from './../global';
+import {API, AppColors} from './../global';
 
-const styles = Styles.styles;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff"
+    },
+
+    buttonSection: {
+        flexDirection: "row",
+        marginHorizontal: 20,
+        alignItems: 'center'
+    },
+
+    textSection: {},
+
+    headerContainer: {
+        height: Platform.select({
+            android: 56,
+            default: 44,
+        }),
+
+
+        // Fix Header height in Android
+        paddingTop: Platform.select({
+            android: 0
+        }),
+
+        backgroundColor: AppColors.AppColors.secondary.regular,
+    },
+});
 
 class Authentication extends Component {
 
     constructor() {
         super();
 
+        this.validateToken();
+
         this.state = {
             email: null,
             password: null
         };
-    }
-
-    componentDidMount() {
-        this.validateToken();
     }
 
     static async saveItem(item, selectedValue) {

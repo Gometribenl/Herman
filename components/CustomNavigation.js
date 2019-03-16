@@ -8,9 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class CustomNavigation extends React.Component {
     constructor(props) {
         super(props);
-        console.warn(this.props.activeTab);
     }
-
     tabs = [
         {
             key: 'home',
@@ -69,8 +67,8 @@ export default class CustomNavigation extends React.Component {
                 tabs={this.tabs}
                 activeTab={this.props.activeTab}
                 onTabPress={newTab => {
-                    //console.warn(newTab.key);
-                    Actions.replace(newTab.key.toString());
+                    console.log(newTab);
+                    Actions.replace(newTab.key);
                 }}
                 renderTab={this.renderTab}
                 renderBadge={this.renderBadge}

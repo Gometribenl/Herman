@@ -29,13 +29,13 @@ export default class App extends Component {
                         title='Products'
                     />
                     <Scene
-                        component={Home}
+                        component={ProductList}
                         hideNavBar={true}
                         key='orders'
                         title='Orders'
                     />
                     <Scene
-                        component={Home}
+                        component={ProductList}
                         hideNavBar={true}
                         key='cart'
                         title='Cart'

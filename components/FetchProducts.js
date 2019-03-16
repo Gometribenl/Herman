@@ -8,12 +8,15 @@ export default class FetchProducts extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             isLoading: true
         };
+
+        this.fetchProducts();
     }
 
-    componentDidMount() {
+    fetchProducts() {
         let url = API.BASE_URL + "product/list";
 
         return fetch(url, {headers: {'X-API-KEY': API.API_KEY, 'User-Agent': API.USER_AGENT}})
@@ -69,10 +72,6 @@ export default class FetchProducts extends React.Component {
                                 },
                                 source: {
                                     uri: "https://herman.wardpieters.nl/images/cart.png"
-                                },
-                                onPress(): void {
-                                    console.log(AsyncStorage.getAllKeys());
-                                    AsyncStorage.setItem('@MySuperStore:test_key', item.id.toString());
                                 }
                             }}
                             title={item.name}

@@ -1,19 +1,39 @@
 import React, {Component} from 'react';
-import AppLayout from "./Home";
-import {StatusBar, View} from "react-native";
-import {AppColors, Styles} from "../global";
+import AppLayout from "../components/AppLayout";
+import {Platform, StatusBar, StyleSheet, View} from "react-native";
+import {API, AppColors} from "../global";
 import {Header, Text} from "react-native-elements";
 import RF from "react-native-responsive-fontsize";
-import CustomNavigation from "../components/CustomNavigation";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import CustomNavigation from "../components/CustomNavigation";
 
-const styles = Styles.styles;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff"
+    },
+
+    headerContainer: {
+        height: Platform.select({
+            android: 56,
+            default: 44,
+        }),
+
+
+        // Fix Header height in Android
+        paddingTop: Platform.select({
+            android: 0
+        }),
+
+        backgroundColor: AppColors.AppColors.primary.regular,
+    },
+
+});
 
 export default class ProductList extends Component {
     constructor() {
         super();
     }
-
 
     render() {
         return (
@@ -33,7 +53,7 @@ export default class ProductList extends Component {
                     <Text>ProductList</Text>
 
                     <CustomNavigation
-                        activeTab="products"
+                        activeTab={"products"}
                     />
 
                 </View>

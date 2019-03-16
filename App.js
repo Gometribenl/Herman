@@ -12,13 +12,25 @@ export default class App extends Component {
                         component={Authentication}
                         hideNavBar={true}
                         initial={true}
-                        key='Auth'
+                        key='auth'
                         title='Authentication'
                     />
                     <Scene
                         component={Home}
                         hideNavBar={true}
-                        key='Home'
+                        key='home'
+                        title='Home'
+                    />
+                    <Scene
+                        component={Home}
+                        hideNavBar={true}
+                        key='home'
+                        title='Home'
+                    />
+                    <Scene
+                        component={Home}
+                        hideNavBar={true}
+                        key='home'
                         title='Home'
                     />
                 </Scene>

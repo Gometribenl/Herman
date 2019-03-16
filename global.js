@@ -1,4 +1,5 @@
 import VersionNumber from 'react-native-version-number';
+import React from "react";
 
 export class AppColors {
     static AppColors = {

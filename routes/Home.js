@@ -1,12 +1,13 @@
-import React, {Component, Fragment} from 'react';
-import {Alert, AsyncStorage, Platform, SafeAreaView, StatusBar, StyleSheet, View,} from 'react-native';
+import React, {Component} from 'react';
+import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, View,} from 'react-native';
 import {Header} from 'react-native-elements';
-import BottomNavigation, {Badge, IconTab} from 'react-native-material-bottom-navigation'
 import {Actions} from 'react-native-router-flux';
 import RF from "react-native-responsive-fontsize";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FetchProducts from '../components/FetchProducts';
 import {AppColors} from "../global";
+import AppLayout from "../components/AppLayout";
+import CustomNavigation from "../components/CustomNavigation";
 
 const styles = StyleSheet.create({
     container: {
@@ -33,32 +34,7 @@ const styles = StyleSheet.create({
 
 class Home extends Component {
 
-    tabs = [
-        {
-            key: 'home',
-            icon: 'home',
-            barColor: AppColors.AppColors.secondary.regular,
-        },
-        {
-            key: 'products',
-            icon: 'list',
-            barColor: AppColors.AppColors.secondary.regular,
-        },
-        {
-            key: 'orders',
-            icon: 'credit-card',
-            barColor: AppColors.AppColors.secondary.regular,
-        },
-        {
-            key: 'cart',
-            icon: 'shopping-cart',
-            barColor: AppColors.AppColors.secondary.regular,
-            badgeCount: 1,
-        }
-    ];
-
     state = {
-        activeTab: 'home',
         deviceId: ''
     };
 
@@ -66,74 +42,37 @@ class Home extends Component {
         try {
             await AsyncStorage.removeItem('jwt');
             Alert.alert("Success", "You have been successfully logged out!");
-            Actions.Auth();
+            Actions.auth();
         } catch (error) {
             console.log('AsyncStorage error: ' + error.message);
         }
     }
 
-    renderIcon = icon => () => {
-        return <Icon size={24} color="white" name={icon}/>;
-    };
-
-    renderBadge = badgeCount => () => {
-        return <Badge>{badgeCount}</Badge>
-    };
-
-    renderTab = ({tab, isActive}) => {
-        return <IconTab
-            isActive={isActive}
-            key={tab.key}
-            renderIcon={this.renderIcon(tab.icon)}
-            renderBadge={this.renderBadge(tab.badgeCount)}
-            showBadge={tab.badgeCount > 0}
-        />;
-    };
-
     render() {
         return (
-            <Fragment>
-                <SafeAreaView style={{flex: 0,backgroundColor: AppColors.AppColors.primary.dark}}/>
-                <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
-                    <View style={{flex: 1,backgroundColor: 'white'}}>
-                        <View style={styles.container}>
+            <AppLayout>
+                <View style={{flex: 1, backgroundColor: 'white'}}>
+                    <View style={styles.container}>
 
-                            <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                        <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
 
-                            <Header
-                                centerComponent={{
-                                    text: 'Hermans Snackcorner',
-                                    style: {color: '#fff', fontSize: RF(2.75)}
-                                }}
-                                containerStyle={styles.headerContainer}
-                                rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
-                            />
+                        <Header
+                            centerComponent={{
+                                text: 'Hermans Snackcorner',
+                                style: {color: '#fff', fontSize: RF(2.75)}
+                            }}
+                            containerStyle={styles.headerContainer}
+                            rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                        />
 
-                            <FetchProducts/>
+                        <FetchProducts/>
 
-                            <BottomNavigation
-                                style={{
-                                    paddingBottom: Platform.select({
-                                        ios: 0
-
-                                    }),
-                                    height: Platform.select({
-                                        default: 56,
-                                        ios: 56,
-                                    })
-                                }}
-                                tabs={this.tabs}
-                                activeTab={this.state.activeTab}
-                                onTabPress={newTab => this.setState({activeTab: newTab.key})}
-                                renderTab={this.renderTab}
-                                renderBadge={this.renderBadge}
-                            />
-
-                        </View>
+                        <CustomNavigation/>
 
                     </View>
-                </SafeAreaView>
-            </Fragment>
+
+                </View>
+            </AppLayout>
         );
     }
 }

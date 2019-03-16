@@ -3,7 +3,7 @@ import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, TextInput, View, S
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
-import {API, AppColors} from './../global';
+import {API, AppColors, AppLayout} from './../global';
 
 const styles = StyleSheet.create({
     container: {
@@ -80,7 +80,7 @@ class Authentication extends Component {
                     .then((response) => {
                         if (response.success === true) {
                             // Go to Home
-                            Actions.Home();
+                            Actions.home();
                         } else {
                             Alert.alert("Error", response.message.toString());
                         }
@@ -148,7 +148,7 @@ class Authentication extends Component {
 
                 if (responseData.success === true) {
                     Authentication.saveItem("jwt", responseData.jwt);
-                    Actions.Home();
+                    Actions.home();
                 } else {
                     Alert.alert("Error", responseData.message);
                 }

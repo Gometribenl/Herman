@@ -1,41 +1,11 @@
 import React, {Component} from 'react';
-import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, TextInput, View, SafeAreaView} from 'react-native';
+import {Alert, AsyncStorage, StatusBar, TextInput, View, SafeAreaView} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
-import {API, AppColors} from './../global';
+import {API, AppColors, Styles} from './../global';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-    },
-
-    buttons: {},
-
-    buttonSection: {
-        flexDirection: "row",
-        marginHorizontal: 20,
-        alignItems: 'center'
-    },
-
-    textSection: {},
-
-    headerContainer: {
-        height: Platform.select({
-            android: 56,
-            default: 44,
-
-        }),
-
-        // Fix Header height in Android
-        paddingTop: Platform.select({
-            android: 0
-        }),
-
-        backgroundColor: AppColors.AppColors.secondary.regular,
-    },
-});
+const styles = Styles.styles;
 
 class Authentication extends Component {
 
@@ -80,7 +50,7 @@ class Authentication extends Component {
                     .then((response) => {
                         if (response.success === true) {
                             // Go to Home
-                            Actions.Home();
+                            Actions.home();
                         } else {
                             Alert.alert("Error", response.message.toString());
                         }
@@ -148,7 +118,7 @@ class Authentication extends Component {
 
                 if (responseData.success === true) {
                     Authentication.saveItem("jwt", responseData.jwt);
-                    Actions.Home();
+                    Actions.home();
                 } else {
                     Alert.alert("Error", responseData.message);
                 }

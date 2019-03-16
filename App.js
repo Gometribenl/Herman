@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Router, Scene} from 'react-native-router-flux';
 import Home from "./routes/Home";
 import Authentication from "./routes/Authentication";
+import ProductList from "./routes/ProductList";
 
 export default class App extends Component {
     render() {
@@ -12,14 +13,32 @@ export default class App extends Component {
                         component={Authentication}
                         hideNavBar={true}
                         initial={true}
-                        key='Auth'
+                        key='auth'
                         title='Authentication'
                     />
                     <Scene
                         component={Home}
                         hideNavBar={true}
-                        key='Home'
+                        key='home'
                         title='Home'
+                    />
+                    <Scene
+                        component={ProductList}
+                        hideNavBar={true}
+                        key='products'
+                        title='Products'
+                    />
+                    <Scene
+                        component={Home}
+                        hideNavBar={true}
+                        key='orders'
+                        title='Orders'
+                    />
+                    <Scene
+                        component={Home}
+                        hideNavBar={true}
+                        key='cart'
+                        title='Cart'
                     />
                 </Scene>
             </Router>

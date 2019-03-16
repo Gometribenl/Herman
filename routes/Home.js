@@ -92,45 +92,49 @@ class Home extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.primary.dark}}>
-                <View style={{flex: 1,backgroundColor: 'white'}}>
-                    <View style={styles.container}>
+            <View>
+                <SafeAreaView style={{backgroundColor: AppColors.AppColors.primary.dark}}/>
+                <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
+                    <View style={{flex: 1,backgroundColor: 'white'}}>
+                        <View style={styles.container}>
 
-                        <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                            <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
 
-                        <Header
-                            centerComponent={{
-                                text: 'Hermans Snackcorner',
-                                style: {color: '#fff', fontSize: RF(2.75)}
-                            }}
-                            containerStyle={styles.headerContainer}
-                            rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
-                        />
+                            <Header
+                                centerComponent={{
+                                    text: 'Hermans Snackcorner',
+                                    style: {color: '#fff', fontSize: RF(2.75)}
+                                }}
+                                containerStyle={styles.headerContainer}
+                                rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                            />
 
-                        <FetchProducts/>
+                            <FetchProducts/>
 
-                        <BottomNavigation
-                            style={{
-                                paddingBottom: Platform.select({
-                                    ios: 0
+                            <BottomNavigation
+                                style={{
+                                    paddingBottom: Platform.select({
+                                        ios: 0
 
-                                }),
-                                height: Platform.select({
-                                    default: 56,
-                                    ios: 56,
-                                })
-                            }}
-                            tabs={this.tabs}
-                            activeTab={this.state.activeTab}
-                            onTabPress={newTab => this.setState({activeTab: newTab.key})}
-                            renderTab={this.renderTab}
-                            renderBadge={this.renderBadge}
-                        />
+                                    }),
+                                    height: Platform.select({
+                                        default: 56,
+                                        ios: 56,
+                                    })
+                                }}
+                                tabs={this.tabs}
+                                activeTab={this.state.activeTab}
+                                onTabPress={newTab => this.setState({activeTab: newTab.key})}
+                                renderTab={this.renderTab}
+                                renderBadge={this.renderBadge}
+                            />
+
+                        </View>
 
                     </View>
+                </SafeAreaView>
+            </View>
 
-                </View>
-            </SafeAreaView>
         );
     }
 }

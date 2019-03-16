@@ -70,12 +70,10 @@ export default class CustomNavigation extends React.Component {
                 }}
                 tabs={this.tabs}
                 activeTab={this.state.activeTab}
-                onTabPress={
-                    newTab => {
-                        this.setState({activeTab: newTab.key});
-                        Actions.replace(newTab.key);
-                    }
-                }
+                onTabPress={newTab => {
+                    this.state.activeTab = newTab.key;
+                    Actions.jump(newTab.key);
+                }}
                 renderTab={this.renderTab}
                 renderBadge={this.renderBadge}
             />

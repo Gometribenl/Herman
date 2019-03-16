@@ -24,14 +24,20 @@ export default class App extends Component {
                     <Scene
                         component={Home}
                         hideNavBar={true}
-                        key='home'
-                        title='Home'
+                        key='products'
+                        title='Products'
                     />
                     <Scene
                         component={Home}
                         hideNavBar={true}
-                        key='home'
-                        title='Home'
+                        key='orders'
+                        title='Orders'
+                    />
+                    <Scene
+                        component={Home}
+                        hideNavBar={true}
+                        key='cart'
+                        title='Cart'
                     />
                 </Scene>
             </Router>

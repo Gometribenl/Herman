@@ -1,22 +1,12 @@
 import React, {Component} from 'react';
-import {
-    Alert,
-    AsyncStorage,
-    Platform,
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import {Alert, AsyncStorage, Platform, SafeAreaView, StatusBar, StyleSheet, View,} from 'react-native';
 import {Header} from 'react-native-elements';
 import BottomNavigation, {Badge, IconTab} from 'react-native-material-bottom-navigation'
 import {Actions} from 'react-native-router-flux';
 import RF from "react-native-responsive-fontsize";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FetchProducts from '../components/FetchProducts';
-import {API, AppColors} from "../global";
+import {AppColors} from "../global";
 
 const styles = StyleSheet.create({
     container: {
@@ -103,23 +93,21 @@ class Home extends Component {
     render() {
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
-                <View style={{flex: 1}}>
-                    <View style={{flex: 1, backgroundColor: 'white'}}>
-                        <View style={styles.container}>
+                <View style={{flex: 1,backgroundColor: 'white'}}>
+                    <View style={styles.container}>
 
-                            <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                        <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
 
-                            <Header
-                                centerComponent={{
-                                    text: 'Hermans Snackcorner',
-                                    style: {color: '#fff', fontSize: RF(2.75)}
-                                }}
-                                containerStyle={styles.headerContainer}
-                                rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
-                            />
+                        <Header
+                            centerComponent={{
+                                text: 'Hermans Snackcorner',
+                                style: {color: '#fff', fontSize: RF(2.75)}
+                            }}
+                            containerStyle={styles.headerContainer}
+                            rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                        />
 
-                            <FetchProducts/>
-                        </View>
+                        <FetchProducts/>
 
                         <BottomNavigation
                             style={{
@@ -128,7 +116,8 @@ class Home extends Component {
 
                                 }),
                                 height: Platform.select({
-                                    ios: 56
+                                    default: 56,
+                                    ios: 56,
                                 })
                             }}
                             tabs={this.tabs}
@@ -139,6 +128,7 @@ class Home extends Component {
                         />
 
                     </View>
+
                 </View>
             </SafeAreaView>
         );

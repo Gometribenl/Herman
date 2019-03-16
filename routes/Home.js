@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, View,} from 'react-native';
-import {Header} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
-import RF from "react-native-responsive-fontsize";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import FetchProducts from '../components/FetchProducts';
 import {AppColors} from "../global";
 import AppLayout from "../components/AppLayout";
+import {Header} from "react-native-elements";
+import RF from "react-native-responsive-fontsize";
 import CustomNavigation from "../components/CustomNavigation";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
     container: {
@@ -51,26 +51,21 @@ class Home extends Component {
     render() {
         return (
             <AppLayout>
-                <View style={{flex: 1, backgroundColor: 'white'}}>
-                    <View style={styles.container}>
+                <View style={styles.container}>
+                    <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
 
-                        <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                    <Header
+                        centerComponent={{
+                            text: 'Hermans Snackcorner',
+                            style: {color: '#fff', fontSize: RF(2.75)}
+                        }}
+                        containerStyle={styles.headerContainer}
+                        rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                    />
 
-                        <Header
-                            centerComponent={{
-                                text: 'Hermans Snackcorner',
-                                style: {color: '#fff', fontSize: RF(2.75)}
-                            }}
-                            containerStyle={styles.headerContainer}
-                            rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
-                        />
+                    <FetchProducts/>
 
-                        <FetchProducts/>
-
-                        <CustomNavigation/>
-
-                    </View>
-
+                    <CustomNavigation/>
                 </View>
             </AppLayout>
         );

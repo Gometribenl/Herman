@@ -3,7 +3,7 @@ import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, TextInput, View, S
 import {Actions} from 'react-native-router-flux';
 import {Button, Header} from 'react-native-elements';
 import RF from "react-native-responsive-fontsize"
-import {API, AppColors, AppLayout} from './../global';
+import {API, AppColors} from './../global';
 
 const styles = StyleSheet.create({
     container: {

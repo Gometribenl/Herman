@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Alert, AsyncStorage, Platform, SafeAreaView, StatusBar, StyleSheet, View,} from 'react-native';
 import {Header} from 'react-native-elements';
 import BottomNavigation, {Badge, IconTab} from 'react-native-material-bottom-navigation'
@@ -92,7 +92,7 @@ class Home extends Component {
 
     render() {
         return (
-            <View>
+            <Fragment>
                 <SafeAreaView style={{flex: 0,backgroundColor: AppColors.AppColors.primary.dark}}/>
                 <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
                     <View style={{flex: 1,backgroundColor: 'white'}}>
@@ -133,8 +133,7 @@ class Home extends Component {
 
                     </View>
                 </SafeAreaView>
-            </View>
-
+            </Fragment>
         );
     }
 }

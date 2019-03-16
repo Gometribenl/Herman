@@ -1,5 +1,6 @@
 import VersionNumber from 'react-native-version-number';
 import React from "react";
+import {Platform, StyleSheet} from "react-native";
 
 export class AppColors {
     static AppColors = {
@@ -14,6 +15,37 @@ export class AppColors {
             dark: "#c79900",
         }
     };
+}
+
+export class Styles {
+    static styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: "#fff",
+            justifyContent: 'flex-end',
+        },
+
+        buttonSection: {
+            flexDirection: "row",
+            marginHorizontal: 20,
+            alignItems: 'center'
+        },
+
+        headerContainer: {
+            height: Platform.select({
+                android: 56,
+                default: 44,
+            }),
+
+
+            // Fix Header height in Android
+            paddingTop: Platform.select({
+                android: 0
+            }),
+
+            backgroundColor: AppColors.AppColors.primary.regular,
+        },
+    });
 }
 
 export class API {

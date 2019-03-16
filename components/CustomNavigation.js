@@ -2,15 +2,13 @@ import {Platform} from "react-native";
 import React from "react";
 import {AppColors} from "../global";
 import {Actions} from "react-native-router-flux";
-import BottomNavigation, {Badge, IconTab} from 'react-native-material-bottom-navigation'
+import BottomNavigation, {Badge, IconTab} from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class CustomNavigation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            activeTab: 'home',
-        };
+        console.warn(this.props.activeTab);
     }
 
     tabs = [
@@ -69,10 +67,10 @@ export default class CustomNavigation extends React.Component {
                     })
                 }}
                 tabs={this.tabs}
-                activeTab={this.state.activeTab}
+                activeTab={this.props.activeTab}
                 onTabPress={newTab => {
-                    this.state.activeTab = newTab.key;
-                    Actions.jump(newTab.key);
+                    //console.warn(newTab.key);
+                    Actions.replace(newTab.key.toString());
                 }}
                 renderTab={this.renderTab}
                 renderBadge={this.renderBadge}

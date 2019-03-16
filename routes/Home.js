@@ -2,41 +2,19 @@ import React, {Component} from 'react';
 import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, View,} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import FetchProducts from '../components/FetchProducts';
-import {AppColors} from "../global";
+import {AppColors, Styles} from "../global";
 import AppLayout from "../components/AppLayout";
 import {Header} from "react-native-elements";
 import RF from "react-native-responsive-fontsize";
 import CustomNavigation from "../components/CustomNavigation";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        justifyContent: 'flex-end',
-    },
-    headerContainer: {
-        height: Platform.select({
-            android: 56,
-            default: 44,
-        }),
+const styles = Styles.styles;
 
-
-        // Fix Header height in Android
-        paddingTop: Platform.select({
-            android: 0
-        }),
-
-        backgroundColor: AppColors.AppColors.primary.regular,
-    },
-});
-
-
-class Home extends Component {
-
-    state = {
-        deviceId: ''
-    };
+export default class Home extends Component {
+    constructor() {
+        super();
+    }
 
     async userLogout() {
         try {
@@ -65,11 +43,12 @@ class Home extends Component {
 
                     <FetchProducts/>
 
-                    <CustomNavigation/>
+                    <CustomNavigation
+                        activeTab="home"
+                    />
+
                 </View>
             </AppLayout>
         );
     }
 }
-
-export default Home;

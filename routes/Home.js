@@ -93,7 +93,7 @@ class Home extends Component {
     render() {
         return (
             <View>
-                <SafeAreaView style={{backgroundColor: AppColors.AppColors.primary.dark}}/>
+                <SafeAreaView style={{flex: 0,backgroundColor: AppColors.AppColors.primary.dark}}/>
                 <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
                     <View style={{flex: 1,backgroundColor: 'white'}}>
                         <View style={styles.container}>

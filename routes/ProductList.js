@@ -1,42 +1,41 @@
 import React, {Component} from 'react';
-import AppLayout from "./Home";
-import {StatusBar, View} from "react-native";
-import {AppColors, Styles} from "../global";
-import {Header, Text} from "react-native-elements";
-import RF from "react-native-responsive-fontsize";
+import AppLayout from "../components/AppLayout";
+import {StyleSheet, View} from "react-native";
 import CustomNavigation from "../components/CustomNavigation";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FetchProducts from "../components/FetchProducts";
+import CustomHeader from "../components/CustomHeader";
+import CustomStatusBar from "../components/CustomStatusBar";
 
-const styles = Styles.styles;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+    },
+});
 
 export default class ProductList extends Component {
     constructor() {
         super();
     }
 
-
     render() {
         return (
             <AppLayout>
                 <View style={styles.container}>
-                    <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                    <CustomStatusBar/>
 
-                    <Header
-                        centerComponent={{
-                            text: 'Hermans Snackcorner',
-                            style: {color: '#fff', fontSize: RF(2.75)}
-                        }}
-                        containerStyle={styles.headerContainer}
-                        rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                    <CustomHeader
+                        headerTitle={"Producten"}
                     />
 
-                    <Text>ProductList</Text>
-
-                    <CustomNavigation
-                        activeTab="products"
-                    />
+                    <FetchProducts/>
 
                 </View>
+
+                <CustomNavigation
+                    activeTab={"products"}
+                />
+
             </AppLayout>
         );
     }

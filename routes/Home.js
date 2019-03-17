@@ -1,53 +1,43 @@
 import React, {Component} from 'react';
-import {Alert, AsyncStorage, Platform, StatusBar, StyleSheet, View,} from 'react-native';
-import {Actions} from 'react-native-router-flux';
-import FetchProducts from '../components/FetchProducts';
-import {AppColors, Styles} from "../global";
+import {StyleSheet, View} from 'react-native';
 import AppLayout from "../components/AppLayout";
-import {Header} from "react-native-elements";
-import RF from "react-native-responsive-fontsize";
+import {Text} from "react-native-elements";
 import CustomNavigation from "../components/CustomNavigation";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import CustomHeader from "../components/CustomHeader";
+import CustomStatusBar from "../components/CustomStatusBar";
 
-const styles = Styles.styles;
+const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        backgroundColor: "#fff"
+    },
+
+});
 
 export default class Home extends Component {
     constructor() {
         super();
     }
 
-    async userLogout() {
-        try {
-            await AsyncStorage.removeItem('jwt');
-            Alert.alert("Success", "You have been successfully logged out!");
-            Actions.auth();
-        } catch (error) {
-            console.log('AsyncStorage error: ' + error.message);
-        }
-    }
-
     render() {
         return (
             <AppLayout>
                 <View style={styles.container}>
-                    <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                    <CustomStatusBar/>
 
-                    <Header
-                        centerComponent={{
-                            text: 'Hermans Snackcorner',
-                            style: {color: '#fff', fontSize: RF(2.75)}
-                        }}
-                        containerStyle={styles.headerContainer}
-                        rightComponent={<Icon name="sign-out" size={30} onPress={this.userLogout}/>}
+                    <CustomHeader
+                        headerTitle={"Hermans Snackcorner"}
                     />
 
-                    <FetchProducts/>
-
-                    <CustomNavigation
-                        activeTab="home"
-                    />
+                    <Text>Welkom bij Hermans Snackcorner!</Text>
 
                 </View>
+
+                <CustomNavigation
+                    activeTab={"home"}
+                />
+
             </AppLayout>
         );
     }

@@ -10,8 +10,8 @@ export default class AppLayout extends React.Component {
     render() {
         return (
             <Fragment>
-                <SafeAreaView style={{flex: 0, backgroundColor: AppColors.AppColors.primary.dark}}/>
-                <SafeAreaView style={{flex: 1, backgroundColor: AppColors.AppColors.secondary.dark}}>
+                <SafeAreaView style={{flex: 0, backgroundColor: this.props.topColor}}/>
+                <SafeAreaView style={{flex: 1, backgroundColor: this.props.bottomColor}}>
                     <View style={{flex: 1, backgroundColor: 'white'}}>
                         {this.props.children}
                     </View>
@@ -20,3 +20,8 @@ export default class AppLayout extends React.Component {
         );
     }
 }
+
+AppLayout.defaultProps = {
+    topColor: AppColors.AppColors.primary.dark,
+    bottomColor: AppColors.AppColors.secondary.dark
+};

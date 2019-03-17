@@ -17,9 +17,7 @@ const styles = StyleSheet.create({
         // Fix Header height in Android
         paddingTop: Platform.select({
             android: 0
-        }),
-
-        backgroundColor: AppColors.AppColors.primary.regular,
+        })
     },
 });
 
@@ -42,12 +40,22 @@ export default class CustomHeader extends React.Component {
         return (
             <Header
                 centerComponent={{
-                    text: 'Hermans Snackcorner',
+                    text: this.props.headerTitle,
                     style: {color: '#fff', fontSize: RF(2.75)}
                 }}
-                containerStyle={styles.headerContainer}
-                rightComponent={<Icon name="sign-out" size={30} onPress={CustomHeader.userLogout}/>}
+                containerStyle={[styles.headerContainer,
+                    {
+                        backgroundColor: this.props.backgroundColor
+                    }
+                ]}
+                rightComponent={this.props.rightComponent}
             />
         )
     }
 }
+
+CustomHeader.defaultProps = {
+    headerTitle: "Hermans Snackcorner",
+    backgroundColor: AppColors.AppColors.primary.regular,
+    rightComponent: <Icon name="sign-out" size={30} onPress={CustomHeader.userLogout}/>,
+};

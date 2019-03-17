@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Platform, StatusBar, StyleSheet, View} from 'react-native';
-import {AppColors} from "../global";
+import {StyleSheet, View} from 'react-native';
 import AppLayout from "../components/AppLayout";
-import {Header, Text} from "react-native-elements";
+import {Text} from "react-native-elements";
 import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
+import CustomStatusBar from "./ShoppingCart";
 
 const styles = StyleSheet.create({
 
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 });
 
-export default class Home extends Component {
+export default class Home extends React.Component {
     constructor() {
         super();
     }
@@ -24,23 +24,20 @@ export default class Home extends Component {
         return (
             <AppLayout>
                 <View style={styles.container}>
-                    <StatusBar backgroundColor={AppColors.AppColors.primary.dark} barStyle="light-content"/>
+                    <CustomStatusBar/>
 
-                    <CustomHeader/>
-
-                    <Text
-                        style={{
-                            height: 500
-                        }}
-                    >
-                        Welkom bij Hermans Snackcorner!
-                    </Text>
-
-                    <CustomNavigation
-                        activeTab={"home"}
+                    <CustomHeader
+                        headerTitle={"Hermans Snackcorner"}
                     />
 
+                    <Text>Welkom bij Hermans Snackcorner!</Text>
+
                 </View>
+
+                <CustomNavigation
+                    activeTab={"home"}
+                />
+
             </AppLayout>
         );
     }

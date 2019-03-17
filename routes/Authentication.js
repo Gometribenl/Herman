@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     textSection: {},
 });
 
-class Authentication extends Component {
+export default class Authentication extends Component {
 
     constructor() {
         super();
@@ -63,7 +63,7 @@ class Authentication extends Component {
                     .then((response) => {
                         if (response.success === true) {
                             // Go to Home
-                            Actions.home();
+                            Actions.replace('home');
                         } else {
                             Alert.alert("Error", response.message.toString());
                         }
@@ -131,7 +131,7 @@ class Authentication extends Component {
 
                 if (responseData.success === true) {
                     Authentication.saveItem("jwt", responseData.jwt);
-                    Actions.home();
+                    Actions.replace('home');
                 } else {
                     Alert.alert("Error", responseData.message);
                 }
@@ -193,5 +193,3 @@ class Authentication extends Component {
         );
     }
 }
-
-export default Authentication;

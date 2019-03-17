@@ -3,8 +3,8 @@ import AppLayout from "../components/AppLayout";
 import {StyleSheet, View} from "react-native";
 import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
-import {Text} from "react-native-elements";
 import CustomStatusBar from "../components/CustomStatusBar";
+import {Text} from "react-native-elements";
 
 const styles = StyleSheet.create({
     container: {

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 });
 
-export default class Home extends React.Component {
+export default class Home extends Component {
     constructor() {
         super();
     }

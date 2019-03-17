@@ -1,8 +1,8 @@
+import React, {Fragment, Component} from "react";
 import {SafeAreaView, View} from "react-native";
-import React, {Fragment} from "react";
 import {AppColors} from "../global";
 
-export default class AppLayout extends React.Component {
+export default class AppLayout extends Component {
     constructor(props) {
         super(props);
     }

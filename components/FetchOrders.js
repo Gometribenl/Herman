@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component} from "react";
 import {ActivityIndicator, AsyncStorage, FlatList, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
 
-export default class FetchOrders extends React.Component {
+export default class FetchOrders extends Component {
 
     constructor(props) {
         super(props);

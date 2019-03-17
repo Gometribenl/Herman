@@ -1,8 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
 import {StatusBar} from "react-native";
 import {AppColors} from "../global";
 
-export default class CustomStatusBar extends React.Component {
+export default class CustomStatusBar extends Component {
     constructor(props) {
         super(props);
     }

@@ -1,11 +1,11 @@
+import React, {Component} from "react";
 import {Platform} from "react-native";
-import React from "react";
 import {AppColors} from "../global";
 import {Actions} from "react-native-router-flux";
 import BottomNavigation, {Badge, IconTab} from 'react-native-material-bottom-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class CustomNavigation extends React.Component {
+export default class CustomNavigation extends Component {
     constructor(props) {
         super(props);
     }

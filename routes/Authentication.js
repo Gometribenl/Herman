@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     textSection: {},
 });
 
-class Authentication extends React.Component {
+class Authentication extends Component {
 
     constructor() {
         super();

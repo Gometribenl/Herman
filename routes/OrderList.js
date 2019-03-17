@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class OrderList extends React.Component {
+export default class OrderList extends Component {
     constructor() {
         super();
     }

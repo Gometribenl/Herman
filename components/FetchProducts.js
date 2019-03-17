@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Component} from "react";
 import {FlatList, ActivityIndicator, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import {API} from './../global'
 
-export default class FetchProducts extends React.Component {
+export default class FetchProducts extends Component {
 
     constructor(props) {
         super(props);

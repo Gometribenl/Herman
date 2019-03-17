@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import RF from "react-native-responsive-fontsize";
 import {Header} from "react-native-elements";
 import {Alert, AsyncStorage, Platform, StyleSheet} from "react-native";
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class CustomHeader extends React.Component {
+export default class CustomHeader extends Component {
     constructor(props) {
         super(props);
     }

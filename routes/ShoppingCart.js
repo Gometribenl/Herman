@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class ShoppingCart extends React.Component {
+export default class ShoppingCart extends Component {
     constructor() {
         super();
     }

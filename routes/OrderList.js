@@ -4,7 +4,7 @@ import {StyleSheet, View} from "react-native";
 import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
 import FetchOrders from "../components/FetchOrders";
-import CustomStatusBar from "./ShoppingCart";
+import CustomStatusBar from "../components/CustomStatusBar";
 
 const styles = StyleSheet.create({
     container: {

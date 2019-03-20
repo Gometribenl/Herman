@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import {FlatList, ActivityIndicator, View} from 'react-native';
+import {FlatList, ActivityIndicator, View, ImageBackground} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import {API} from './../global'
+import AppLayout from "../routes/ProductList";
 
 export default class FetchProducts extends Component {
 
@@ -48,7 +49,9 @@ export default class FetchProducts extends Component {
 
 
         return (
-            <View style={{flex: 1}}>
+            <View style={{
+                flex: 1,
+            }}>
                 <FlatList
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
@@ -59,7 +62,8 @@ export default class FetchProducts extends Component {
                                 size: "large",
                                 imageProps: {
                                     resizeMode: "contain",
-                                    backgroundColor: 'white'
+                                    backgroundColor: "transparent"
+
                                 },
                                 source: {
                                     uri: item.avatar_url
@@ -71,7 +75,8 @@ export default class FetchProducts extends Component {
                                 size: "medium",
                                 imageProps: {
                                     resizeMode: "contain",
-                                    backgroundColor: 'white'
+                                    backgroundColor: "rgba(255, 200, 200, 0)"
+
                                 },
                                 source: {
                                     uri: "https://herman.wardpieters.nl/images/cart.png"
@@ -81,6 +86,9 @@ export default class FetchProducts extends Component {
                             subtitle={item.price_formatted}
                             onPress={() => {
                                 this.refs.toast.show(item.name, DURATION.LENGTH_SHORT);
+                            }}
+                            containerStyle={{
+                                backgroundColor: "rgba(255, 200, 200, 0)"
                             }}
                         />
                     )}

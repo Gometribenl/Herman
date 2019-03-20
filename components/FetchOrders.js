@@ -72,7 +72,7 @@ export default class FetchOrders extends Component {
                                 size: "large",
                                 imageProps: {
                                     resizeMode: "contain",
-                                    backgroundColor: 'white'
+                                    backgroundColor: "transparent"
                                 },
                                 source: {
                                     uri: "http://localhost/img.png"

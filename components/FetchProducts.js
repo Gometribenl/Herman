@@ -45,6 +45,8 @@ export default class FetchProducts extends Component {
             )
         }
 
+
+
         return (
             <View style={{flex: 1}}>
                 <FlatList
@@ -63,6 +65,7 @@ export default class FetchProducts extends Component {
                                     uri: item.avatar_url
                                 }
                             }}
+
                             rightAvatar={{
                                 rounded: false,
                                 size: "medium",

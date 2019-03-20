@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
-import {API} from './../global'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {API} from './../global';
 
 export default class FetchProducts extends Component {
 
@@ -68,18 +69,7 @@ export default class FetchProducts extends Component {
                                 }
                             }}
 
-                            rightAvatar={{
-                                rounded: false,
-                                size: "medium",
-                                imageProps: {
-                                    resizeMode: "contain",
-                                    backgroundColor: "rgba(255, 200, 200, 0)"
-
-                                },
-                                source: {
-                                    uri: "https://herman.wardpieters.nl/images/cart.png"
-                                }
-                            }}
+                            rightAvatar={<Icon name="shopping-basket" size={25} color="#fff"/>}
                             title={item.name}
                             subtitle={item.price_formatted}
                             onPress={() => {

@@ -20,22 +20,23 @@ export default class ProductList extends Component {
     render() {
         return (
             <AppLayout>
-                <ImageBackground style={{ width: '100%', height: '100%' }} source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}} >
+                <ImageBackground style={{width: '100%', height: '100%'}}
+                                 source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
 
-                <View style={styles.container}>
-                    <CustomStatusBar/>
+                    <View style={styles.container}>
+                        <CustomStatusBar/>
 
-                    <CustomHeader
-                        headerTitle={"Producten"}
+                        <CustomHeader
+                            headerTitle={"Producten"}
+                        />
+
+                        <FetchProducts/>
+
+                    </View>
+
+                    <CustomNavigation
+                        activeTab={"products"}
                     />
-
-                    <FetchProducts/>
-
-                </View>
-
-                <CustomNavigation
-                    activeTab={"products"}
-                />
                 </ImageBackground>
             </AppLayout>
         );

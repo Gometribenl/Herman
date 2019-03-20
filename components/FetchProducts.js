@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-import {FlatList, ActivityIndicator, View, ImageBackground} from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import {API} from './../global'
-import AppLayout from "../routes/ProductList";
 
 export default class FetchProducts extends Component {
 
@@ -45,7 +44,6 @@ export default class FetchProducts extends Component {
                 </View>
             )
         }
-
 
 
         return (

@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from "react";
+import React, {Component, Fragment} from "react";
 import {SafeAreaView, View} from "react-native";
 import {AppColors} from "../global";
 

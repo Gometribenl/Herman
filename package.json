@@ -10,6 +10,7 @@
     "native-cli": "^1.0.0",
     "react": "16.6.3",
     "react-native": "^0.58.6",
+    "react-native-display": "^1.0.8",
     "react-native-easy-toast": "^1.2.0",
     "react-native-elements": "^1.1.0",
     "react-native-material-bottom-navigation": "^1.0.2",

@@ -5,7 +5,6 @@ import Authentication from "./routes/Authentication";
 import ProductList from "./routes/ProductList";
 import OrderList from "./routes/OrderList";
 import ShoppingCart from "./routes/ShoppingCart";
-
 export default class App extends Component {
     render() {
         return (

@@ -67,7 +67,6 @@ export default class CustomNavigation extends Component {
                 tabs={this.tabs}
                 activeTab={this.props.activeTab}
                 onTabPress={newTab => {
-                    console.log(newTab);
                     Actions.replace(newTab.key);
                 }}
                 renderTab={this.renderTab}

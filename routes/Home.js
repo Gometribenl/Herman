@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import AppLayout from "../components/AppLayout";
 import {Text} from "react-native-elements";
 import CustomNavigation from "../components/CustomNavigation";
@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: "#fff"
     },
 
 });
@@ -23,20 +22,26 @@ export default class Home extends Component {
     render() {
         return (
             <AppLayout>
-                <View style={styles.container}>
-                    <CustomStatusBar/>
+                <ImageBackground style={{width: '100%', height: '100%'}}
+                                 source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
 
-                    <CustomHeader
-                        headerTitle={"Hermans Snackcorner"}
+                    <View style={styles.container}>
+                        <CustomStatusBar/>
+
+                        <CustomHeader
+                            headerTitle={"Hermans Snackcorner"}
+                        />
+
+                        <Text>Welkom bij Hermans Snackcorner!</Text>
+
+
+                    </View>
+
+
+                    <CustomNavigation
+                        activeTab={"home"}
                     />
-
-                    <Text>Welkom bij Hermans Snackcorner!</Text>
-
-                </View>
-
-                <CustomNavigation
-                    activeTab={"home"}
-                />
+                </ImageBackground>
 
             </AppLayout>
         );

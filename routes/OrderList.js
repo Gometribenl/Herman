@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AppLayout from "../components/AppLayout";
-import {StyleSheet, View} from "react-native";
+import {ImageBackground, StyleSheet, View} from "react-native";
 import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
 import FetchOrders from "../components/FetchOrders";
@@ -9,7 +9,6 @@ import CustomStatusBar from "../components/CustomStatusBar";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
     },
 });
 
@@ -21,21 +20,24 @@ export default class OrderList extends Component {
     render() {
         return (
             <AppLayout>
-                <View style={styles.container}>
-                    <CustomStatusBar/>
+                <ImageBackground style={{width: '100%', height: '100%'}}
+                                 source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
 
-                    <CustomHeader
-                        headerTitle={"Bestellingen"}
+                    <View style={styles.container}>
+                        <CustomStatusBar/>
+
+                        <CustomHeader
+                            headerTitle={"Bestellingen"}
+                        />
+
+                        <FetchOrders/>
+
+                    </View>
+
+                    <CustomNavigation
+                        activeTab={"orders"}
                     />
-
-                    <FetchOrders/>
-
-                </View>
-
-                <CustomNavigation
-                    activeTab={"orders"}
-                />
-
+                </ImageBackground>
             </AppLayout>
         );
     }

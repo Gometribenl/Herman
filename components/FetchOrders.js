@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import {ActivityIndicator, AsyncStorage, FlatList, View} from 'react-native';
-import {ListItem} from 'react-native-elements';
-import Toast, {DURATION} from 'react-native-easy-toast'
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
+import CustomListItem from "./CustomListItem";
 
 export default class FetchOrders extends Component {
 
@@ -66,27 +65,14 @@ export default class FetchOrders extends Component {
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({item}) => (
-                        <ListItem
-                            leftAvatar={{
-                                rounded: false,
-                                size: "large",
-                                imageProps: {
-                                    resizeMode: "contain",
-                                    backgroundColor: 'white'
-                                },
-                                source: {
-                                    uri: "http://localhost/img.png"
-                                }
-                            }}
+                        <CustomListItem
                             title={"Bestelling #" + item.id.toString()}
-                            subtitle={"Betaald met: " + item.payment_method.toString()}
-                            onPress={() => {
-                                this.refs.toast.show(item.id.toString(), DURATION.LENGTH_SHORT);
-                            }}
+                            subtitle={"Betaalmethode: " + item.payment_method.toString()}
+                            hidden_text={"Betaald? " + item.paid.toString()}
                         />
                     )}
                 />
-                <Toast ref="toast"/>
+
             </View>
         );
     }

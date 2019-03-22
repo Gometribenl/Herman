@@ -63,7 +63,7 @@ export default class Authentication extends Component {
                     .then((response) => {
                         if (response.success === true) {
                             // Go to Home
-                            Actions.replace('home');
+                            Actions.home();
                         } else {
                             Alert.alert("Error", response.message.toString());
                         }
@@ -131,7 +131,7 @@ export default class Authentication extends Component {
 
                 if (responseData.success === true) {
                     Authentication.saveItem("jwt", responseData.jwt);
-                    Actions.replace('home');
+                    Actions.home();
                 } else {
                     Alert.alert("Error", responseData.message);
                 }

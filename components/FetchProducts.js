@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import {FlatList, ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast'
-import {API} from './../global'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {API} from './../global';
 
 export default class FetchProducts extends Component {
 
@@ -45,8 +46,11 @@ export default class FetchProducts extends Component {
             )
         }
 
+
         return (
-            <View style={{flex: 1}}>
+            <View style={{
+                flex: 1,
+            }}>
                 <FlatList
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
@@ -57,27 +61,22 @@ export default class FetchProducts extends Component {
                                 size: "large",
                                 imageProps: {
                                     resizeMode: "contain",
-                                    backgroundColor: 'white'
+                                    backgroundColor: "transparent"
+
                                 },
                                 source: {
                                     uri: item.avatar_url
                                 }
                             }}
-                            rightAvatar={{
-                                rounded: false,
-                                size: "medium",
-                                imageProps: {
-                                    resizeMode: "contain",
-                                    backgroundColor: 'white'
-                                },
-                                source: {
-                                    uri: "https://herman.wardpieters.nl/images/cart.png"
-                                }
-                            }}
+
+                            rightAvatar={<Icon name="shopping-basket" size={25} color="#fff"/>}
                             title={item.name}
                             subtitle={item.price_formatted}
                             onPress={() => {
                                 this.refs.toast.show(item.name, DURATION.LENGTH_SHORT);
+                            }}
+                            containerStyle={{
+                                backgroundColor: "rgba(255, 200, 200, 0)"
                             }}
                         />
                     )}

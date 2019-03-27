@@ -5,9 +5,9 @@ import {Platform, StyleSheet} from "react-native";
 export class AppColors {
     static AppColors = {
         primary: {
-            regular: "#ff3131",
-            light: "#ff6d5c",
-            dark: "#c30007",
+            regular: "#ffc90e",
+            light: "#fffc54",
+            dark: "#c79900",
         },
         secondary: {
             regular: "#ffc90e",

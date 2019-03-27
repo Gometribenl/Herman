@@ -5,6 +5,7 @@ import CustomNavigation from "../components/CustomNavigation";
 import FetchProducts from "../components/FetchProducts";
 import CustomHeader from "../components/CustomHeader";
 import CustomStatusBar from "../components/CustomStatusBar";
+import {AppColors} from "../global";
 
 const styles = StyleSheet.create({
     container: {
@@ -24,9 +25,12 @@ export default class ProductList extends Component {
                                  source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
 
                     <View style={styles.container}>
-                        <CustomStatusBar/>
+                        <CustomStatusBar
+                            backgroundColor={AppColors.AppColors.secondary.dark}
+                        />
 
                         <CustomHeader
+                            backgroundColor={AppColors.AppColors.secondary.regular}
                             headerTitle={"Producten"}
                         />
 

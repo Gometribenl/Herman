@@ -36,7 +36,6 @@ export default class Home extends Component {
 
                         <CustomHeader
                             backgroundColor={AppColors.AppColors.secondary.regular}
-                            rightComponent={null}
                         />
 
 

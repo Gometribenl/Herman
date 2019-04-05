@@ -41,7 +41,7 @@ export default class CustomHeader extends Component {
             <Header
                 centerComponent={{
                     text: this.props.headerTitle,
-                    style: {color: '#fff', fontSize: RF(2.75)}
+                    style: {color: '#000', fontSize: RF(2.50), fontWeight:'900'}
                 }}
                 containerStyle={[styles.headerContainer,
                     {

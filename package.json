@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.2",
+    "@react-native-community/async-storage": "^1.2.4",
     "native-cli": "^1.0.0",
     "react": "16.6.3",
     "react-native": "^0.59.1",

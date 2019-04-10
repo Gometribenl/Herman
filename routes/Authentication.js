@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Alert, AsyncStorage, ImageBackground, StyleSheet, TextInput, View} from 'react-native';
+import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Button, Text} from 'react-native-elements';
 import {API, AppColors} from './../global';

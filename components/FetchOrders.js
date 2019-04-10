@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {ActivityIndicator, AsyncStorage, FlatList, View} from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
 import CustomListItem from "./CustomListItem";

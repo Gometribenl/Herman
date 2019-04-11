@@ -125,6 +125,7 @@ export default class Authentication extends Component {
                     />
 
                     <View style={styles.container}>
+                        <Text style={[styles.userInfo]}>Naam</Text>
                         <TextInput style={styles.input}
                                    editable={true}
                                    onChangeText={(name) => this.setState({name: name})}

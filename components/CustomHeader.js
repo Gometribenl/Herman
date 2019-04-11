@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import RF from "react-native-responsive-fontsize";
 import {Header} from "react-native-elements";
-import {Alert, AsyncStorage, Platform, StyleSheet} from "react-native";
+import {Alert, Platform, StyleSheet} from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import {Actions} from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {AppColors} from "../global";
@@ -28,7 +29,7 @@ export default class CustomHeader extends Component {
 
     static async userLogout() {
         try {
-            await AsyncStorage.removeItem('jwt');
+            await AsyncStorage.removeItem('api_token');
             Alert.alert("Success", "You have been successfully logged out!");
             Actions.auth();
         } catch (error) {

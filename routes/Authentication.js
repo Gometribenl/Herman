@@ -44,8 +44,8 @@ export default class Authentication extends Component {
                 })
                     .then((response) => response.json())
                     .then((response) => {
-                        if (response.data.success === true) Actions.home();
-                        else Alert.alert("Error", response.message.toString());
+                        if (response.data.status === true) Actions.home();
+                        else Alert.alert("Error", response.data.message.toString());
                     })
                     .done();
             }
@@ -75,8 +75,12 @@ export default class Authentication extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData.success === true) Alert.alert("Success", "Your account has been created successfully, you can now login!");
-                else Alert.alert("Error", responseData.message);
+                if (responseData.data.status === true) {
+                    Alert.alert("Success", "Your account has been created successfully, you can now login!");
+                }
+                else {
+                    Alert.alert("Error", responseData.errors[0]);
+                }
             })
             .done();
     }
@@ -102,11 +106,16 @@ export default class Authentication extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData.success === true) {
+                if (!responseData.hasOwnProperty('message')) {
                     Authentication.saveItem("api_token", responseData.data.api_token);
                     Actions.home();
                 } else {
-                    Alert.alert("Error", responseData.message);
+                    let errors = [];
+
+                    for (let k in responseData.errors) {
+                        errors.push(responseData.errors[k][0])
+                    }
+                    Alert.alert("Error", errors[0]);
                 }
             })
             .done();

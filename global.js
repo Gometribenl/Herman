@@ -18,6 +18,7 @@ export class AppColors {
 }
 
 export class API {
-    static BASE_URL = "https://herman.wardpieters.nl/api/";
+    //tatic BASE_URL = "https://herman.wardpieters.nl/api/";
+    static BASE_URL = "http://10.0.2.2/api/";
     static USER_AGENT = "Herman/" + VersionNumber.appVersion + " (" + VersionNumber.buildVersion + "; " + VersionNumber.bundleIdentifier + ")";
 }

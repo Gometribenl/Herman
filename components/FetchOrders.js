@@ -68,7 +68,7 @@ export default class FetchOrders extends Component {
                         <CustomListItem
                             title={"Bestelling #" + item.id.toString()}
                             subtitle={"Betaalmethode: " + item.payment_method.toString()}
-                            hidden_text={"Betaald? " + item.paid.toString()}
+                            hidden_text={"Betaald? " + item.is_paid.toString()}
                         />
                     )}
                 />

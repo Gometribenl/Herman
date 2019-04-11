@@ -20,23 +20,16 @@ export default class OrderList extends Component {
     render() {
         return (
             <AppLayout>
-                <ImageBackground style={{width: '100%', height: '100%'}}
-                                 source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
+                <ImageBackground style={{width: '100%', height: '100%'}} source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
 
                     <View style={styles.container}>
                         <CustomStatusBar/>
-
-                        <CustomHeader
-                            headerTitle={"Bestellingen"}
-                        />
-
+                        <CustomHeader headerTitle={"Bestellingen"}/>
                         <FetchOrders/>
-
                     </View>
 
-                    <CustomNavigation
-                        activeTab={"orders"}
-                    />
+                    <CustomNavigation activeTab={"orders"}/>
+
                 </ImageBackground>
             </AppLayout>
         );

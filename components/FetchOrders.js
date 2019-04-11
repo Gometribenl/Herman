@@ -20,7 +20,7 @@ export default class FetchOrders extends Component {
     fetchOrders() {
         let url = API.BASE_URL + "orders";
 
-        AsyncStorage.getItem('api_token').then((token) => {
+        AsyncStorage.getItem('jwt').then((token) => {
             // If a token has been stored, verify it and login
             if (token !== null) {
                 fetch(url, {

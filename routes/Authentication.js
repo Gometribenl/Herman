@@ -30,7 +30,7 @@ export default class Authentication extends Component {
     validateToken() {
         let URL = API.BASE_URL + "validate";
 
-        AsyncStorage.getItem('api_token').then((token) => {
+        AsyncStorage.getItem('jwt').then((token) => {
             // If a token has been stored, verify it and login
             if (token !== null) {
                 fetch(URL, {
@@ -107,7 +107,7 @@ export default class Authentication extends Component {
             .then((response) => response.json())
             .then((responseData) => {
                 if (!responseData.hasOwnProperty('message')) {
-                    Authentication.saveItem("api_token", responseData.data.api_token);
+                    Authentication.saveItem("jwt", responseData.access_token);
                     Actions.home();
                 } else {
                     let errors = [];

@@ -29,7 +29,7 @@ export default class CustomHeader extends Component {
 
     static async userLogout() {
         try {
-            await AsyncStorage.removeItem('api_token');
+            await AsyncStorage.removeItem('jwt');
             Alert.alert("Success", "You have been successfully logged out!");
             Actions.auth();
         } catch (error) {

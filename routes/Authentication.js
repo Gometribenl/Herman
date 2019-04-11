@@ -8,16 +8,12 @@ import CustomHeader from "../components/CustomHeader";
 import AppLayout from "../components/AppLayout";
 import CustomStatusBar from "../components/CustomStatusBar";
 
-// /*<============================================Functionality===========================================>*/
-
 export default class Authentication extends Component {
-
     constructor() {
         super();
-
         this.validateToken();
-
         this.state = {
+            name: null,
             email: null,
             password: null
         };
@@ -32,29 +28,24 @@ export default class Authentication extends Component {
     }
 
     validateToken() {
-        let URL = API.BASE_URL + "user/validate";
+        let URL = API.BASE_URL + "validate";
 
-        AsyncStorage.getItem('jwt').then((token) => {
+        AsyncStorage.getItem('api_token').then((token) => {
             // If a token has been stored, verify it and login
             if (token !== null) {
                 fetch(URL, {
-                    method: 'POST',
+                    method: 'GET',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        'X-API-KEY': API.API_KEY,
-                        'User-Agent': API.USER_AGENT
+                        'User-Agent': API.USER_AGENT,
+                        'Authorization': "Bearer " + token
                     },
-                    body: JSON.stringify({'jwt': token})
                 })
                     .then((response) => response.json())
                     .then((response) => {
-                        if (response.success === true) {
-                            // Go to Home
-                            Actions.home();
-                        } else {
-                            Alert.alert("Error", response.message.toString());
-                        }
+                        if (response.data.success === true) Actions.home();
+                        else Alert.alert("Error", response.message.toString());
                     })
                     .done();
             }
@@ -62,7 +53,7 @@ export default class Authentication extends Component {
     };
 
     userSignUp() {
-        let URL = API.BASE_URL + "user/register";
+        let URL = API.BASE_URL + "register";
         if (!this.state.email || !this.state.password) {
             Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
             return;
@@ -73,29 +64,25 @@ export default class Authentication extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-API-KEY': API.API_KEY,
                 'User-Agent': API.USER_AGENT
             },
             body: JSON.stringify({
+                name: this.state.name,
                 email: this.state.email,
                 password: this.state.password,
+                password_confirmation: this.state.password,
             })
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData.success === true) {
-                    Alert.alert("Success", "Your account has been created successfully, you can now login!");
-
-                } else {
-                    Alert.alert("Error", responseData.message);
-                }
-
+                if (responseData.success === true) Alert.alert("Success", "Your account has been created successfully, you can now login!");
+                else Alert.alert("Error", responseData.message);
             })
             .done();
     }
 
     userLogin() {
-        let URL = API.BASE_URL + "user/login";
+        let URL = API.BASE_URL + "login";
         if (!this.state.email || !this.state.password) {
             Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
             return;
@@ -106,7 +93,6 @@ export default class Authentication extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-API-KEY': API.API_KEY,
                 'User-Agent': API.USER_AGENT
             },
             body: JSON.stringify({
@@ -116,70 +102,63 @@ export default class Authentication extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-
                 if (responseData.success === true) {
-                    Authentication.saveItem("jwt", responseData.jwt);
+                    Authentication.saveItem("api_token", responseData.data.api_token);
                     Actions.home();
                 } else {
                     Alert.alert("Error", responseData.message);
                 }
-
             })
             .done();
     }
 
-// /*<============================================show===========================================>*/
-
     render() {
         return (
-            <AppLayout
-                topColor={AppColors.AppColors.secondary.dark}
-            >
+            <AppLayout topColor={AppColors.AppColors.secondary.dark}>
                 <ImageBackground style={{width: '100%', height: '100%'}}
                                  source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
-
-                    <CustomStatusBar
-                        backgroundColor={AppColors.AppColors.secondary.dark}
-                    />
+                    <CustomStatusBar backgroundColor={AppColors.AppColors.secondary.dark}/>
 
                     <CustomHeader
                         backgroundColor={AppColors.AppColors.secondary.regular}
                         rightComponent={null}
                     />
 
-
                     <View style={styles.container}>
+                        <TextInput style={styles.input}
+                                   editable={true}
+                                   onChangeText={(name) => this.setState({name: name})}
+                                   ref="name"
+                                   returnKeyType="next"
+                                   value={this.state.name}
+                                   autoComplete="name"
+                        />
                         <Text style={[styles.userInfo]}>E-mailadres</Text>
-                        <View>
-                            <TextInput style={styles.input}
-                                       editable={true}
-                                       onChangeText={(email) => this.setState({email})}
-                                       ref='email'
-                                       returnKeyType='next'
-                                       value={this.state.email}
-                                       autoComplete={'tel'}
-
-                            />
-                        </View>
+                        <TextInput style={styles.input}
+                                   editable={true}
+                                   onChangeText={(email) => this.setState({email: email})}
+                                   ref="email"
+                                   returnKeyType="next"
+                                   value={this.state.email}
+                                   autoComplete="email"
+                        />
 
                         <Text style={[styles.userInfo]}>Wachtwoord</Text>
-                        <View>
+                        <TextInput style={styles.input}
+                                   editable={true}
+                                   onChangeText={(password) => this.setState({password: password})}
+                                   ref="password"
+                                   returnKeyType='next'
+                                   secureTextEntry={true}
+                                   value={this.state.password}
+                                   autoComplete="password"
+                        />
 
-                            <TextInput style={styles.input}
-                                       editable={true}
-                                       onChangeText={(password) => this.setState({password})}
-                                       ref='password'
-                                       returnKeyType='next'
-                                       secureTextEntry={true}
-                                       value={this.state.password}
-                            />
-
-                        </View>
                         <View style={styles.authSection}>
                             <Text style={[styles.loginSection]}
-                                  onPress={(this.userLogin.bind(this))}> Inloggen </Text>
-                            <Text style={[styles.regSection]}
-                                onPress={(this.userSignUp.bind(this))}> Registeren </Text>
+                                  onPress={(this.userLogin.bind(this))}>Inloggen</Text>
+                            <Text style={[styles.registerSection]}
+                                  onPress={(this.userSignUp.bind(this))}>Registeren</Text>
 
                         </View>
                     </View>
@@ -187,11 +166,8 @@ export default class Authentication extends Component {
             </AppLayout>
         );
     }
-
-
 }
 
-// /*<=============================================STYLE=============================================>*/
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -199,8 +175,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
 
-// /*<============================================ButtonSection===========================================>*/
-
+    // Buttons
     authSection: {
         color: "#000",
         justifyContent: "center",
@@ -214,14 +189,13 @@ const styles = StyleSheet.create({
         marginBottom: 7,
     },
 
-    regSection: {
+    registerSection: {
         fontSize: 20,
         fontWeight: '300',
     },
 
-// /*<============================================signup/inSection===========================================>*/
 
-
+    //Signup/login section
     loginContainer: {
         alignItems: 'center',
         flexGrow: 1,

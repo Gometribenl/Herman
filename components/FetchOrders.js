@@ -18,14 +18,13 @@ export default class FetchOrders extends Component {
     }
 
     fetchOrders() {
-        let url = API.BASE_URL + "order/list";
+        let url = API.BASE_URL + "orders";
 
-        AsyncStorage.getItem('jwt').then((token) => {
+        AsyncStorage.getItem('api_token').then((token) => {
             // If a token has been stored, verify it and login
             if (token !== null) {
                 fetch(url, {
                     headers: {
-                        'X-API-KEY': API.API_KEY,
                         'User-Agent': API.USER_AGENT,
                         'Authorization': "Bearer " + token
                     }

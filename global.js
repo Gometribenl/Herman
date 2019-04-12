@@ -18,6 +18,7 @@ export class AppColors {
 }
 
 export class API {
+    static IMAGE_URL = "https://herman.wardpieters.nl/images/";
     static BASE_URL = "https://herman.wardpieters.nl/api/";
     static USER_AGENT = "Herman/" + VersionNumber.appVersion + " (" + VersionNumber.buildVersion + "; " + VersionNumber.bundleIdentifier + ")";
 }

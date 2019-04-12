@@ -5,7 +5,7 @@ import CustomNavigation from "../components/CustomNavigation";
 import FetchProducts from "../components/FetchProducts";
 import CustomHeader from "../components/CustomHeader";
 import CustomStatusBar from "../components/CustomStatusBar";
-import {AppColors} from "../global";
+import {API, AppColors} from "../global";
 
 const styles = StyleSheet.create({
     container: {
@@ -22,7 +22,7 @@ export default class ProductList extends Component {
         return (
             <AppLayout>
                 <ImageBackground style={{width: '100%', height: '100%'}}
-                                 source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
+                                 source={{uri: API.IMAGE_URL+'bg.png'}}>
 
                     <View style={styles.container}>
                         <CustomStatusBar

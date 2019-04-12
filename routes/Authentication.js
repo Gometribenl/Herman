@@ -125,7 +125,7 @@ export default class Authentication extends Component {
         return (
             <AppLayout topColor={AppColors.AppColors.secondary.dark}>
                 <ImageBackground style={{width: '100%', height: '100%'}}
-                                 source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
+                                 source={{uri: API.IMAGE_URL + 'bg.png'}}>
                     <CustomStatusBar backgroundColor={AppColors.AppColors.secondary.dark}/>
 
                     <CustomHeader

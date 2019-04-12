@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Alert} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {API} from "../global";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -29,9 +30,9 @@ export default class ShoppingCartButton extends Component {
                     .then((responseData) => {
                         console.log(responseData);
                         if (responseData.data.status === true) {
-
+                            Alert.alert("Product", responseData.data.message);
                         } else {
-
+                            Alert.alert("Fout", responseData.data.message);
                         }
                     })
                     .done();

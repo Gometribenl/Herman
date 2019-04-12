@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {API} from './../global';
+import ShoppingCartButton from "./ShoppingCartButton";
 
 export default class FetchProducts extends Component {
 
@@ -64,9 +64,8 @@ export default class FetchProducts extends Component {
                                     uri: item.avatar_url
                                 }
                             }}
-
                             rightAvatar={
-                                <Icon onPress={() => console.log('hello')} name="shopping-basket" size={25} color="#fff"/>
+                                <ShoppingCartButton productId={item.id}/>
                             }
                             title={item.name}
                             subtitle={item.price_formatted}

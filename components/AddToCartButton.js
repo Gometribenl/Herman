@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {API} from "../global";
 import AsyncStorage from "@react-native-community/async-storage";
 
-export default class ShoppingCartButton extends Component {
+export default class AddToCartButton extends Component {
     constructor(props) {
         super(props);
     }

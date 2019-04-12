@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {API} from './../global';
-import ShoppingCartButton from "./ShoppingCartButton";
+import AddToCartButton from "./AddToCartButton";
 
 export default class FetchProducts extends Component {
 
@@ -65,7 +65,7 @@ export default class FetchProducts extends Component {
                                 }
                             }}
                             rightAvatar={
-                                <ShoppingCartButton productId={item.id}/>
+                                <AddToCartButton productId={item.id}/>
                             }
                             title={item.name}
                             subtitle={item.price_formatted}

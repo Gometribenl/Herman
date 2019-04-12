@@ -45,7 +45,6 @@ export default class FetchProducts extends Component {
             )
         }
 
-
         return (
             <View style={{flex: 1}}>
                 <FlatList
@@ -66,7 +65,9 @@ export default class FetchProducts extends Component {
                                 }
                             }}
 
-                            rightAvatar={<Icon name="shopping-basket" size={25} color="#fff"/>}
+                            rightAvatar={
+                                <Icon onPress={() => console.log('hello')} name="shopping-basket" size={25} color="#fff"/>
+                            }
                             title={item.name}
                             subtitle={item.price_formatted}
                             containerStyle={{

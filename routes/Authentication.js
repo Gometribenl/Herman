@@ -44,8 +44,8 @@ export default class Authentication extends Component {
                 })
                     .then((response) => response.json())
                     .then((response) => {
-                        if (response.data.status === true) Actions.home();
-                        else Alert.alert("Error", response.data.message.toString());
+                        if (response.status === true) Actions.home();
+                        else Alert.alert("Error", response.message.toString());
                     })
                     .done();
             }

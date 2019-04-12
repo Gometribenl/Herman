@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import RF from "react-native-responsive-fontsize";
 import {Header} from "react-native-elements";
-import {Alert, AsyncStorage, Platform, StyleSheet} from "react-native";
+import {Alert, Platform, StyleSheet} from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import {Actions} from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {AppColors} from "../global";
@@ -41,7 +42,7 @@ export default class CustomHeader extends Component {
             <Header
                 centerComponent={{
                     text: this.props.headerTitle,
-                    style: {color: '#fff', fontSize: RF(2.75)}
+                    style: {color: '#000', fontSize: RF(2.50), fontWeight:'900'}
                 }}
                 containerStyle={[styles.headerContainer,
                     {

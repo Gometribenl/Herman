@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {ActivityIndicator, AsyncStorage, FlatList, View} from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
 import CustomListItem from "./CustomListItem";
@@ -17,14 +18,13 @@ export default class FetchOrders extends Component {
     }
 
     fetchOrders() {
-        let url = API.BASE_URL + "order/list";
+        let url = API.BASE_URL + "orders";
 
         AsyncStorage.getItem('jwt').then((token) => {
             // If a token has been stored, verify it and login
             if (token !== null) {
                 fetch(url, {
                     headers: {
-                        'X-API-KEY': API.API_KEY,
                         'User-Agent': API.USER_AGENT,
                         'Authorization': "Bearer " + token
                     }
@@ -68,7 +68,7 @@ export default class FetchOrders extends Component {
                         <CustomListItem
                             title={"Bestelling #" + item.id.toString()}
                             subtitle={"Betaalmethode: " + item.payment_method.toString()}
-                            hidden_text={"Betaald? " + item.paid.toString()}
+                            hidden_text={"Betaald? " + item.is_paid.toString()}
                         />
                     )}
                 />

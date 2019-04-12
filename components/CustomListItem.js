@@ -4,7 +4,6 @@ import {ListItem} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Display from 'react-native-display';
 
-
 export default class CustomListItem extends Component {
     constructor(props) {
         super(props);
@@ -12,14 +11,15 @@ export default class CustomListItem extends Component {
         this.state = {
             hidden: false,
         }
-
     }
 
     render() {
         return (
             <View>
                 <ListItem
-                    rightAvatar={<Icon name="arrow-down" size={25} color="#000"/>}
+                    rightAvatar={
+                        <Icon name="arrow-down" size={25} color="#000"/>
+                    }
                     title={this.props.title}
                     subtitle={this.props.subtitle}
                     onPress={() => {

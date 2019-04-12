@@ -5,6 +5,7 @@ import {Text} from "react-native-elements";
 import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
 import CustomStatusBar from "../components/CustomStatusBar";
+import {API, AppColors} from "../global";
 
 const styles = StyleSheet.create({
 
@@ -21,28 +22,24 @@ export default class Home extends Component {
 
     render() {
         return (
-            <AppLayout>
+            <AppLayout
+                topColor={AppColors.AppColors.secondary.dark}>
                 <ImageBackground style={{width: '100%', height: '100%'}}
-                                 source={{uri: 'https://herman.wardpieters.nl/images/bg.png'}}>
+                                 source={{uri: API.IMAGE_URL + 'bg.png'}}>
 
                     <View style={styles.container}>
-                        <CustomStatusBar/>
+                        <CustomStatusBar
+                            backgroundColor={AppColors.AppColors.secondary.dark}/>
 
                         <CustomHeader
-                            headerTitle={"Hermans Snackcorner"}
-                        />
+                            backgroundColor={AppColors.AppColors.secondary.regular}/>
 
                         <Text>Welkom bij Hermans Snackcorner!</Text>
 
-
                     </View>
-
-
                     <CustomNavigation
-                        activeTab={"home"}
-                    />
+                        activeTab={"home"}/>
                 </ImageBackground>
-
             </AppLayout>
         );
     }

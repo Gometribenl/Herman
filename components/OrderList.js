@@ -27,6 +27,11 @@ export default class OrderList extends Component {
                             hidden: !this.state.hidden
                         });
                     }}
+                    containerStyle={{
+                        backgroundColor: "#f5f5f5",
+                        paddingTop: 10,
+                        paddingBottom: 10
+                    }}
                 />
 
                 <Display enable={this.state.hidden} style={{backgroundColor: "#f5f5f5"}}>

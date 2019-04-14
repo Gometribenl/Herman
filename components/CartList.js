@@ -18,7 +18,7 @@ export default class CartList extends Component {
             <View>
                 <ListItem
                     rightAvatar={
-                        <Icon name="arrow-down" size={23} color="#000"/>
+                        <Icon name="trash-o" size={23} color="#000"/>
                     }
                     title={this.props.title}
                     subtitle={this.props.subtitle}
@@ -28,19 +28,23 @@ export default class CartList extends Component {
                         });
                     }}
                     leftAvatar={{
-                        style: {
-                            backgroundColor: "transparent"
+                        overlayContainerStyle: {
+                            backgroundColor: 'transparent'
                         },
                         rounded: false,
-                        size: "medium",
+                        size: "large",
                         imageProps: {
-                            resizeMode: "contain",
-                            backgroundColor: "transparent"
+                            resizeMode: "contain"
 
                         },
                         source: {
                             uri: this.props.avatar_url
                         }
+                    }}
+                    containerStyle={{
+                        backgroundColor: "#f5f5f5",
+                        paddingTop: 5,
+                        paddingBottom: 5
                     }}
                 />
 

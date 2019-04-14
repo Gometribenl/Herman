@@ -40,6 +40,18 @@ export default class FetchCart extends Component {
         })
     }
 
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: "100%",
+                    backgroundColor: "#c2c2c2",
+                }}
+            />
+        );
+    };
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -54,6 +66,7 @@ export default class FetchCart extends Component {
                 <FlatList
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
+                    ItemSeparatorComponent={this.renderSeparator}
                     renderItem={({item}) => (
                         <CartList
                             title={item.product.name.toString()}

@@ -4,7 +4,7 @@ import {ListItem} from 'react-native-elements';
 import {API} from './../global';
 import AddToCartButton from "./AddToCartButton";
 
-export default class FetchProducts extends Component {
+export default class FetchCart extends Component {
 
     constructor(props) {
         super(props);
@@ -13,11 +13,11 @@ export default class FetchProducts extends Component {
             isLoading: true
         };
 
-        this.fetchProducts();
+        this.fetchCart();
     }
 
-    fetchProducts() {
-        let url = API.BASE_URL + "products";
+    fetchCart() {
+        let url = API.BASE_URL + "cart";
 
         return fetch(url, {headers: {'User-Agent': API.USER_AGENT}})
             .then((response) => response.json())

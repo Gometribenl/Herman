@@ -7,16 +7,22 @@ import {API, AppColors} from './../global';
 import CustomHeader from "../components/CustomHeader";
 import AppLayout from "../components/AppLayout";
 import CustomStatusBar from "../components/CustomStatusBar";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export default class Authentication extends Component {
     constructor() {
         super();
-        this.validateToken();
+
         this.state = {
             name: null,
             email: null,
-            password: null
+            password: null,
+            spinner: false,
         };
+    }
+
+    componentDidMount() {
+        this.validateToken();
     }
 
     static async saveItem(item, selectedValue) {
@@ -29,6 +35,9 @@ export default class Authentication extends Component {
 
     validateToken() {
         let URL = API.BASE_URL + "validate";
+        this.setState({
+            spinner: true
+        });
 
         AsyncStorage.getItem('jwt').then((token) => {
             // If a token has been stored, verify it and login
@@ -44,10 +53,20 @@ export default class Authentication extends Component {
                 })
                     .then((response) => response.json())
                     .then((response) => {
-                        if (response.status === true) Actions.home();
-                        else Alert.alert("Error", response.message.toString());
+                        this.setState({
+                            spinner: false
+                        });
+
+                        setTimeout(function() {
+                            if (response.status === true) Actions.home();
+                            else Alert.alert("Error", response.message.toString());
+                        }, 100);
                     })
                     .done();
+            } else {
+                this.setState({
+                    spinner: false
+                });
             }
         })
     };
@@ -134,6 +153,14 @@ export default class Authentication extends Component {
                     />
 
                     <View style={styles.container}>
+
+                        <Spinner
+                            visible={this.state.spinner}
+                            textContent={'Inloggen...'}
+                            textStyle={styles.spinnerTextStyle}
+                            overlayColor={"rgba(0, 0, 0, 0.5)"}
+                        />
+
                         <Text style={[styles.userInfo]}>Naam</Text>
                         <TextInput style={styles.input}
                                    editable={true}
@@ -183,6 +210,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
+    },
+
+    // Spinner
+    spinnerTextStyle: {
+        color: '#FFF'
     },
 
     // Buttons

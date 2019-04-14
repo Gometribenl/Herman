@@ -23,14 +23,16 @@ export default class CustomListItem extends Component {
                     title={this.props.title}
                     subtitle={this.props.subtitle}
                     onPress={() => {
-                        this.setState({
-                            hidden: !this.state.hidden
-                        });
+                        if(!this.props.children != null) {
+                            this.setState({
+                                hidden: !this.state.hidden
+                            });
+                        }
                     }}
                 />
 
-                <Display enable={this.state.hidden}>
-                    <Text>{this.props.hidden_text}</Text>
+                <Display enable={this.state.hidden} style={{backgroundColor: "#f5f5f5"}}>
+                    {this.props.children}
                 </Display>
 
             </View>

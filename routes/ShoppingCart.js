@@ -4,8 +4,8 @@ import {ImageBackground, StyleSheet, View} from "react-native";
 import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
 import CustomStatusBar from "../components/CustomStatusBar";
-import {Text} from "react-native-elements";
-import {API, AppColors} from "../global";
+import {API} from "../global";
+import FetchCart from "../components/FetchCart";
 
 
 const styles = StyleSheet.create({
@@ -30,7 +30,7 @@ export default class ShoppingCart extends Component {
                         <CustomHeader
                              headerTitle={"Winkelmand"}/>
 
-                        <Text>Winkelmand</Text>
+                        <FetchCart/>
 
                     </View>
                     <CustomNavigation

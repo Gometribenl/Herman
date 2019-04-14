@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
 import CustomListItem from "./CustomListItem";
+import {Text} from "react-native-elements";
 
 export default class FetchOrders extends Component {
 
@@ -68,8 +69,9 @@ export default class FetchOrders extends Component {
                         <CustomListItem
                             title={"Bestelling #" + item.id.toString()}
                             subtitle={"Betaalmethode: " + item.payment_method.toString()}
-                            hidden_text={"Betaald? " + item.is_paid.toString()}
-                        />
+                        >
+                            <Text>Betaald? {item.is_paid.toString()}</Text>
+                        </CustomListItem>
                     )}
                 />
 

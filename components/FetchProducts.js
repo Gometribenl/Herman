@@ -36,6 +36,18 @@ export default class FetchProducts extends Component {
             });
     }
 
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: "100%",
+                    backgroundColor: "#c2c2c2",
+                }}
+            />
+        );
+    };
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -50,15 +62,17 @@ export default class FetchProducts extends Component {
                 <FlatList
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
+                    ItemSeparatorComponent={this.renderSeparator}
                     renderItem={({item}) => (
                         <ListItem
                             leftAvatar={{
+                                overlayContainerStyle: {
+                                    backgroundColor: 'transparent'
+                                },
                                 rounded: false,
                                 size: "large",
                                 imageProps: {
-                                    resizeMode: "contain",
-                                    backgroundColor: "transparent"
-
+                                    resizeMode: "contain"
                                 },
                                 source: {
                                     uri: item.avatar_url
@@ -70,7 +84,9 @@ export default class FetchProducts extends Component {
                             title={item.name}
                             subtitle={item.price_formatted}
                             containerStyle={{
-                                backgroundColor: "rgba(255, 200, 200, 0)"
+                                backgroundColor: "#f5f5f5",
+                                paddingTop: 5,
+                                paddingBottom: 5
                             }}
                         />
                     )}

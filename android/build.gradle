@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "28.0.2"
+        buildToolsVersion = "28.0.3"
         minSdkVersion = 16
         compileSdkVersion = 28
         targetSdkVersion = 27
@@ -36,4 +36,15 @@ allprojects {
 task wrapper(type: Wrapper) {
     gradleVersion = '4.7'
     distributionUrl = distributionUrl.replace("bin", "all")
+}
+
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 28
+                buildToolsVersion "28.0.3"
+            }
+        }
+    }
 }

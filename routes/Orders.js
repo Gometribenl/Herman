@@ -3,9 +3,8 @@ import AppLayout from "../components/AppLayout";
 import {StyleSheet, View} from "react-native";
 import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
+import FetchOrders from "../components/FetchOrders";
 import CustomStatusBar from "../components/CustomStatusBar";
-import FetchCart from "../components/FetchCart";
-
 
 const styles = StyleSheet.create({
     container: {
@@ -13,7 +12,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class ShoppingCart extends Component {
+export default class Orders extends Component {
     constructor() {
         super();
     }
@@ -21,17 +20,13 @@ export default class ShoppingCart extends Component {
     render() {
         return (
             <AppLayout>
-                <View style={styles.container}>
-                    <CustomStatusBar/>
+                    <View style={styles.container}>
+                        <CustomStatusBar/>
+                        <CustomHeader headerTitle={"Bestellingen"}/>
+                        <FetchOrders/>
+                    </View>
 
-                    <CustomHeader
-                        headerTitle={"Winkelmand"}/>
-
-                    <FetchCart/>
-
-                </View>
-                <CustomNavigation
-                    activeTab={"cart"}/>
+                    <CustomNavigation activeTab={"orders"}/>
             </AppLayout>
         );
     }

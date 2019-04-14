@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {ListItem} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Display from 'react-native-display';
 
-export default class CustomListItem extends Component {
+export default class OrderList extends Component {
     constructor(props) {
         super(props);
 
@@ -27,10 +27,15 @@ export default class CustomListItem extends Component {
                             hidden: !this.state.hidden
                         });
                     }}
+                    containerStyle={{
+                        backgroundColor: "#f5f5f5",
+                        paddingTop: 10,
+                        paddingBottom: 10
+                    }}
                 />
 
-                <Display enable={this.state.hidden}>
-                    <Text>{this.props.hidden_text}</Text>
+                <Display enable={this.state.hidden} style={{backgroundColor: "#f5f5f5"}}>
+                    {this.props.children}
                 </Display>
 
             </View>

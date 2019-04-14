@@ -8,11 +8,9 @@ import CustomStatusBar from "../components/CustomStatusBar";
 import {API, AppColors} from "../global";
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
-    },
-
+    }
 });
 
 export default class Home extends Component {

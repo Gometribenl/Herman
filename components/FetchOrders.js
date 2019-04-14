@@ -3,7 +3,8 @@ import {ActivityIndicator, FlatList, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
-import CustomListItem from "./CustomListItem";
+import OrderList from "./OrderList";
+import {Text} from "react-native-elements";
 
 export default class FetchOrders extends Component {
 
@@ -50,6 +51,18 @@ export default class FetchOrders extends Component {
         });
     }
 
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: "100%",
+                    backgroundColor: "#c2c2c2",
+                }}
+            />
+        );
+    };
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -64,12 +77,14 @@ export default class FetchOrders extends Component {
                 <FlatList
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
+                    ItemSeparatorComponent={this.renderSeparator}
                     renderItem={({item}) => (
-                        <CustomListItem
+                        <OrderList
                             title={"Bestelling #" + item.id.toString()}
                             subtitle={"Betaalmethode: " + item.payment_method.toString()}
-                            hidden_text={"Betaald? " + item.is_paid.toString()}
-                        />
+                        >
+                            <Text>Betaald? {item.is_paid.toString()}</Text>
+                        </OrderList>
                     )}
                 />
 

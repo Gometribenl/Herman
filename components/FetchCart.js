@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import {ActivityIndicator, FlatList, View} from 'react-native';
-import {ListItem} from 'react-native-elements';
+import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 import {API} from './../global';
-import AddToCartButton from "./AddToCartButton";
+import AsyncStorage from "@react-native-community/async-storage";
+import CartList from "./CartList";
 
 export default class FetchCart extends Component {
 
@@ -17,24 +17,40 @@ export default class FetchCart extends Component {
     }
 
     fetchCart() {
-        let url = API.BASE_URL + "cart";
+        AsyncStorage.getItem('jwt').then((token) => {
+            if (token !== null) {
+                let URL = API.BASE_URL + "cart";
 
-        return fetch(url, {headers: {'User-Agent': API.USER_AGENT}})
-            .then((response) => response.json())
-            .then((responseJson) => {
+                fetch(URL, {method: 'GET', headers: {'User-Agent': API.USER_AGENT, 'Authorization': "Bearer " + token}})
+                    .then((response) => response.json())
+                    .then((responseJson) => {
 
-                this.setState({
-                    isLoading: false,
-                    dataSource: responseJson,
-                }, function () {
+                        this.setState({
+                            isLoading: false,
+                            dataSource: responseJson.order_items,
+                        }, function () {
 
-                });
+                        });
 
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+        })
     }
+
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: "100%",
+                    backgroundColor: "#c2c2c2",
+                }}
+            />
+        );
+    };
 
     render() {
         if (this.state.isLoading) {
@@ -50,29 +66,15 @@ export default class FetchCart extends Component {
                 <FlatList
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
+                    ItemSeparatorComponent={this.renderSeparator}
                     renderItem={({item}) => (
-                        <ListItem
-                            leftAvatar={{
-                                rounded: false,
-                                size: "large",
-                                imageProps: {
-                                    resizeMode: "contain",
-                                    backgroundColor: "transparent"
-
-                                },
-                                source: {
-                                    uri: item.avatar_url
-                                }
-                            }}
-                            rightAvatar={
-                                <AddToCartButton productId={item.id}/>
-                            }
-                            title={item.name}
-                            subtitle={item.price_formatted}
-                            containerStyle={{
-                                backgroundColor: "rgba(255, 200, 200, 0)"
-                            }}
-                        />
+                        <CartList
+                            title={item.product.name.toString()}
+                            subtitle={"Aantal : " + item.quantity.toString()}
+                            avatar_url={item.product.avatar_url.toString()}
+                        >
+                            <Text>Attributes: {item.attributes.toString()}</Text>
+                        </CartList>
                     )}
                 />
             </View>

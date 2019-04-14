@@ -42,7 +42,7 @@ export default class AddToCartButton extends Component {
 
     render() {
         return (
-            <Icon onPress={this.addProductToCart.bind(this)} name="shopping-basket" size={25} color="#fff"/>
+            <Icon onPress={this.addProductToCart.bind(this)} name="shopping-basket" size={25} color="#000"/>
         )
     }
 }

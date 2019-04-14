@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class ProductList extends Component {
+export default class Products extends Component {
     constructor() {
         super();
     }
@@ -21,9 +21,6 @@ export default class ProductList extends Component {
     render() {
         return (
             <AppLayout>
-                <ImageBackground style={{width: '100%', height: '100%'}}
-                                 source={{uri: API.IMAGE_URL+'bg.png'}}>
-
                     <View style={styles.container}>
                         <CustomStatusBar
                             backgroundColor={AppColors.AppColors.secondary.dark}
@@ -41,7 +38,6 @@ export default class ProductList extends Component {
                     <CustomNavigation
                         activeTab={"products"}
                     />
-                </ImageBackground>
             </AppLayout>
         );
     }

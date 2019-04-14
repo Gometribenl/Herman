@@ -3,7 +3,7 @@ import {ActivityIndicator, FlatList, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
-import CustomListItem from "./CustomListItem";
+import OrderList from "./OrderList";
 import {Text} from "react-native-elements";
 
 export default class FetchOrders extends Component {
@@ -66,12 +66,12 @@ export default class FetchOrders extends Component {
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({item}) => (
-                        <CustomListItem
+                        <OrderList
                             title={"Bestelling #" + item.id.toString()}
                             subtitle={"Betaalmethode: " + item.payment_method.toString()}
                         >
                             <Text>Betaald? {item.is_paid.toString()}</Text>
-                        </CustomListItem>
+                        </OrderList>
                     )}
                 />
 

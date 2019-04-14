@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Router, Scene} from 'react-native-router-flux';
 import Home from "./routes/Home";
 import Authentication from "./routes/Authentication";
-import ProductList from "./routes/ProductList";
-import OrderList from "./routes/OrderList";
+import Products from "./routes/Products";
+import Orders from "./routes/Orders";
 import ShoppingCart from "./routes/ShoppingCart";
 export default class App extends Component {
     render() {
@@ -24,13 +24,13 @@ export default class App extends Component {
                         title='Home'
                     />
                     <Scene
-                        component={ProductList}
+                        component={Products}
                         hideNavBar={true}
                         key='products'
                         title='Products'
                     />
                     <Scene
-                        component={OrderList}
+                        component={Orders}
                         hideNavBar={true}
                         key='orders'
                         title='Orders'

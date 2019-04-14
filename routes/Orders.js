@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class OrderList extends Component {
+export default class Orders extends Component {
     constructor() {
         super();
     }

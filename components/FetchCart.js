@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 import {API} from './../global';
-import CustomListItem from "./CustomListItem";
 import AsyncStorage from "@react-native-community/async-storage";
+import CartList from "./CartList";
 
 export default class FetchCart extends Component {
 
@@ -55,12 +55,13 @@ export default class FetchCart extends Component {
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({item}) => (
-                        <CustomListItem
+                        <CartList
                             title={item.product.name.toString()}
                             subtitle={"Aantal : " + item.quantity.toString()}
+                            avatar_url={item.product.avatar_url.toString()}
                         >
                             <Text>Attributes: {item.attributes.toString()}</Text>
-                        </CustomListItem>
+                        </CartList>
                     )}
                 />
             </View>

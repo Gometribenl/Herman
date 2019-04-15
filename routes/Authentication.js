@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
-import {Button, Text} from 'react-native-elements';
+import {Text} from 'react-native-elements';
 import {API, AppColors} from './../global';
 import CustomHeader from "../components/CustomHeader";
 import AppLayout from "../components/AppLayout";
@@ -21,10 +21,6 @@ export default class Authentication extends Component {
         };
     }
 
-    componentDidMount() {
-        this.validateToken();
-    }
-
     static async saveItem(item, selectedValue) {
         try {
             await AsyncStorage.setItem(item, selectedValue);
@@ -33,44 +29,49 @@ export default class Authentication extends Component {
         }
     }
 
+    componentDidMount() {
+        this.validateToken();
+    }
+
     validateToken() {
         let URL = API.BASE_URL + "validate";
         this.setState({
             spinner: true
         });
 
-        AsyncStorage.getItem('jwt').then((token) => {
-            // If a token has been stored, verify it and login
-            if (token !== null) {
-                fetch(URL, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'User-Agent': API.USER_AGENT,
-                        'Authorization': "Bearer " + token
-                    },
-                })
-                    .then((response) => response.json())
-                    .then((response) => {
-                        this.setState({
-                            spinner: false
-                        });
-
-                        setTimeout(function() {
-                            if (response.status === true) Actions.home();
-                            else Alert.alert("Error", response.message.toString());
-                        }, 100);
+        AsyncStorage.getItem('jwt')
+            .then((token) => {
+                // If a token has been stored, verify it and login
+                if (token !== null) {
+                    fetch(URL, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'User-Agent': API.USER_AGENT,
+                            'Authorization': "Bearer " + token
+                        },
                     })
-                    .catch(error => {
-                        Alert.alert("Error", error.message);
-                    });
-            } else {
+                        .then((response) => response.json())
+                        .then((response) => {
+                            this.setState({
+                                spinner: false
+                            });
+
+                            setTimeout(function () {
+                                if (response.status === true) Actions.home();
+                                else Alert.alert("Error", response.message.toString());
+                            }, 100);
+                        })
+                        .catch(error => {
+                            Alert.alert("Error", error.message);
+                        });
+                }
+
                 this.setState({
                     spinner: false
                 });
-            }
-        })
+            })
     };
 
     userSignUp() {
@@ -98,8 +99,7 @@ export default class Authentication extends Component {
             .then((responseData) => {
                 if (responseData.data.status === true) {
                     Alert.alert("Success", "Your account has been created successfully, you can now login!");
-                }
-                else {
+                } else {
                     Alert.alert("Error", responseData.errors[0]);
                 }
             })

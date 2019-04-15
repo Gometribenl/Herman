@@ -3,7 +3,7 @@ package nl.wardpieters.herman;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.reactnativecommunity.netinfo.NetInfoPackage;
+
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.apsl.versionnumber.RNVersionNumberPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -27,7 +27,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new NetInfoPackage(),
             new AsyncStoragePackage(),
             new RNVersionNumberPackage(),
             new VectorIconsPackage()

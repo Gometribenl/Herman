@@ -42,13 +42,12 @@ export default class CartList extends Component {
                         }
                     }}
                     containerStyle={{
-                        backgroundColor: "#f5f5f5",
                         paddingTop: 5,
                         paddingBottom: 5
                     }}
                 />
 
-                <Display enable={this.state.hidden} style={{backgroundColor: "#f5f5f5"}}>
+                <Display enable={this.state.hidden}>
                     {this.props.children}
                 </Display>
 

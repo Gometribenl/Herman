@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import NetInfo from "@react-native-community/netinfo";
 import {Actions} from 'react-native-router-flux';
 import {Button, Text} from 'react-native-elements';
 import {API, AppColors} from './../global';
@@ -22,7 +23,10 @@ export default class Authentication extends Component {
     }
 
     componentDidMount() {
-        this.validateToken();
+        NetInfo.isConnected.fetch().then(isConnected => {
+            // Only try to login if user is connected
+            this.validateToken();
+        });
     }
 
     static async saveItem(item, selectedValue) {

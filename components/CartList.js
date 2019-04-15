@@ -1,15 +1,15 @@
 import React, {Component} from "react";
 import {View} from 'react-native';
 import {ListItem} from "react-native-elements";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Display from 'react-native-display';
+import RemoveFromCartButton from "./Buttons/RemoveFromCartButton";
 
 export default class CartList extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            hidden: false,
+            hidden: false
         }
     }
 
@@ -18,7 +18,7 @@ export default class CartList extends Component {
             <View>
                 <ListItem
                     rightAvatar={
-                        <Icon name="trash-o" size={23} color="#000"/>
+                        <RemoveFromCartButton onRefresh={this.props.onRefresh} orderItemId={this.props.orderItemId}/>
                     }
                     title={this.props.title}
                     subtitle={this.props.subtitle}

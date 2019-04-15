@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {ActivityIndicator, FlatList, View, Alert} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {API} from './../global';
-import AddToCartButton from "./AddToCartButton";
+import AddToCartButton from "./Buttons/AddToCartButton";
 
 export default class FetchProducts extends Component {
 

@@ -1,19 +1,18 @@
 import React, {Component} from "react";
 import {Alert} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {API} from "../global";
+import {API} from "../../global";
 import AsyncStorage from "@react-native-community/async-storage";
 
-export default class AddToCartButton extends Component {
+export default class RemoveFromCartButton extends Component {
     constructor(props) {
         super(props);
     }
 
-    addProductToCart() {
+    removeOrderItemFromCart() {
         AsyncStorage.getItem('jwt').then((token) => {
-            // If a token has been stored, verify it and login
             if (token !== null) {
-                let URL = API.BASE_URL + "cart/add";
+                let URL = API.BASE_URL + "cart/remove";
                 fetch(URL, {
                     method: 'POST',
                     headers: {
@@ -23,14 +22,15 @@ export default class AddToCartButton extends Component {
                         'Authorization': "Bearer " + token
                     },
                     body: JSON.stringify({
-                        product_id: this.props.productId
+                        order_item_id: this.props.orderItemId
                     })
                 })
                     .then((response) => response.json())
                     .then((responseData) => {
                         console.log(responseData);
                         if (responseData.data.status === true) {
-                            Alert.alert("Product", responseData.data.message);
+                            Alert.alert("orderItem", responseData.data.message);
+                            this.props.onRefresh();
                         } else {
                             Alert.alert("Fout", responseData.data.message);
                         }
@@ -44,7 +44,7 @@ export default class AddToCartButton extends Component {
 
     render() {
         return (
-            <Icon onPress={this.addProductToCart.bind(this)} name="shopping-basket" size={25} color="#000"/>
+            <Icon onPress={this.removeOrderItemFromCart.bind(this)} name="trash-o" size={23} color="#000"/>
         )
     }
 }

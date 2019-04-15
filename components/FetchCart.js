@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import {ActivityIndicator, FlatList, Text, View, Alert} from 'react-native';
+import {ActivityIndicator, FlatList, Text, View, Alert, RefreshControl} from 'react-native';
 import {API} from './../global';
 import AsyncStorage from "@react-native-community/async-storage";
 import CartList from "./CartList";
 import {Button} from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
 
 export default class FetchCart extends Component {
 
@@ -15,6 +14,7 @@ export default class FetchCart extends Component {
             isLoading: true,
             responseJson: null,
             dataSource: null,
+            refreshing: false,
         };
 
         this.fetchCart();
@@ -43,6 +43,11 @@ export default class FetchCart extends Component {
                     });
             }
         })
+    }
+
+    onRefresh() {
+        this.setState({ dataSource: [] });
+        this.fetchCart();
     }
 
     renderSeparator = () => {
@@ -78,16 +83,25 @@ export default class FetchCart extends Component {
                                 title={item.product.name.toString()}
                                 subtitle={"Aantal : " + item.quantity.toString()}
                                 avatar_url={item.product.avatar_url.toString()}
+                                orderItemId={item.id}
+                                onRefresh={this.onRefresh.bind(this)}
                             >
                                 <Text>Attributes: {item.attributes.toString()}</Text>
                             </CartList>
                         )}
+                        refreshControl={
+                            <RefreshControl
+                                //refresh control used for the Pull to Refresh
+                                refreshing={this.state.refreshing}
+                                onRefresh={this.onRefresh.bind(this)}
+                            />
+                        }
                     />
                 </View>
-                <View style={{flex: 0, height: "20%"}}>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
-                        <Text style={{fontSize: 20, marginTop: 20, marginLeft: 10}}>Totaal: {this.state.responseJson.total_price_formatted.toString()}</Text>
-                        <Button value={"Betalen"}/>
+                <View style={{flex: 0, height: "20%", backgroundColor: "white"}}>
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+                        <Text style={{fontSize: 20, marginTop: 20}}>Totaal: {this.state.responseJson.total_price_formatted.toString()}</Text>
+                        <Button style={{marginTop: 15}} title={"Betalen"}/>
                     </View>
                 </View>
             </View>

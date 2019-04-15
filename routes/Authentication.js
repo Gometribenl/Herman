@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import NetInfo from "@react-native-community/netinfo";
 import {Actions} from 'react-native-router-flux';
 import {Button, Text} from 'react-native-elements';
 import {API, AppColors} from './../global';
@@ -18,15 +17,12 @@ export default class Authentication extends Component {
             name: null,
             email: null,
             password: null,
-            spinner: false,
+            spinner: false
         };
     }
 
     componentDidMount() {
-        NetInfo.isConnected.fetch().then(isConnected => {
-            // Only try to login if user is connected
-            this.validateToken();
-        });
+        this.validateToken();
     }
 
     static async saveItem(item, selectedValue) {
@@ -66,7 +62,9 @@ export default class Authentication extends Component {
                             else Alert.alert("Error", response.message.toString());
                         }, 100);
                     })
-                    .done();
+                    .catch(error => {
+                        Alert.alert("Error", error.message);
+                    });
             } else {
                 this.setState({
                     spinner: false
@@ -105,7 +103,9 @@ export default class Authentication extends Component {
                     Alert.alert("Error", responseData.errors[0]);
                 }
             })
-            .done();
+            .catch(error => {
+                Alert.alert("Error", error.message);
+            });
     }
 
     userLogin() {
@@ -141,7 +141,9 @@ export default class Authentication extends Component {
                     Alert.alert("Error", errors[0]);
                 }
             })
-            .done();
+            .catch(error => {
+                Alert.alert("Error", error.message);
+            });
     }
 
     render() {

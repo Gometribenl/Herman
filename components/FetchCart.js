@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
+import {ActivityIndicator, FlatList, Text, View, Alert} from 'react-native';
 import {API} from './../global';
 import AsyncStorage from "@react-native-community/async-storage";
 import CartList from "./CartList";
-import {Button, ListItem} from "react-native-elements";
+import {Button} from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export default class FetchCart extends Component {
@@ -38,8 +38,8 @@ export default class FetchCart extends Component {
                         });
 
                     })
-                    .catch((error) => {
-                        console.error(error);
+                    .catch(error => {
+                        Alert.alert("Error", error.message);
                     });
             }
         })

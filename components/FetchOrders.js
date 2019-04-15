@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ActivityIndicator, FlatList, View} from 'react-native';
+import {ActivityIndicator, FlatList, View, Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {API} from './../global'
 import {Actions} from "react-native-router-flux";
@@ -41,9 +41,9 @@ export default class FetchOrders extends Component {
                         });
 
                     })
-                    .catch((error) => {
-                        console.error(error);
-                    }).done();
+                    .catch(error => {
+                        Alert.alert("Error", error.message);
+                    });
             } else {
                 // Token is null so log user out
                 Actions.auth();

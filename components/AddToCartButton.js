@@ -35,7 +35,9 @@ export default class AddToCartButton extends Component {
                             Alert.alert("Fout", responseData.data.message);
                         }
                     })
-                    .done();
+                    .catch(error => {
+                        Alert.alert("Error", error.message);
+                    });
             }
         })
     }

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ActivityIndicator, FlatList, View} from 'react-native';
+import {ActivityIndicator, FlatList, View, Alert} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {API} from './../global';
 import AddToCartButton from "./AddToCartButton";
@@ -31,8 +31,8 @@ export default class FetchProducts extends Component {
                 });
 
             })
-            .catch((error) => {
-                console.error(error);
+            .catch(error => {
+                Alert.alert("Error", error.message);
             });
     }
 

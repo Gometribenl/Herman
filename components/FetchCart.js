@@ -100,7 +100,7 @@ export default class FetchCart extends Component {
                 </View>
                 <View style={{flex: 0, height: "20%", backgroundColor: "white"}}>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
-                        <Text style={{fontSize: 20, marginTop: 20}}>Totaal: {this.state.responseJson.total_price_formatted.toString()}</Text>
+                        <Text style={{fontSize: 20, marginTop: 20}}>Totaal: {this.state.responseJson.total_price.formatted.toString()}</Text>
                         <Button style={{marginTop: 15}} title={"Betalen"}/>
                     </View>
                 </View>

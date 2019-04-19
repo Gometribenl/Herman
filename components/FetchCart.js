@@ -4,6 +4,7 @@ import {API} from './../global';
 import AsyncStorage from "@react-native-community/async-storage";
 import CartList from "./CartList";
 import {Button} from "react-native-elements";
+import PayButton from "./Buttons/PayButton";
 
 export default class FetchCart extends Component {
 
@@ -101,7 +102,7 @@ export default class FetchCart extends Component {
                 <View style={{flex: 0, height: "20%", backgroundColor: "white"}}>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
                         <Text style={{fontSize: 20, marginTop: 20}}>Totaal: {this.state.responseJson.total_price.formatted.toString()}</Text>
-                        <Button style={{marginTop: 15}} title={"Betalen"}/>
+                        <PayButton/>
                     </View>
                 </View>
             </View>

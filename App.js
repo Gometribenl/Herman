@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Linking} from 'react-native';
 import {Router, Scene} from 'react-native-router-flux';
 import Home from "./routes/Home";
 import Authentication from "./routes/Authentication";
@@ -6,6 +7,15 @@ import Products from "./routes/Products";
 import Orders from "./routes/Orders";
 import ShoppingCart from "./routes/ShoppingCart";
 export default class App extends Component {
+
+    componentDidMount() {
+        Linking.getInitialURL().then((url) => {
+            if (url) {
+                console.log('Initial url is: ' + url);
+            }
+        }).catch(err => console.error('An error occurred', err));
+    }
+
     render() {
         return (
             <Router>

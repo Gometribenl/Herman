@@ -24,16 +24,18 @@
           </intent-filter>
 
           <intent-filter android:autoVerify="true">
-              <category android:name="android.intent.category.VIEW" />
+              <action android:name="android.intent.category.VIEW" />
               <category android:name="android.intent.category.DEFAULT" />
               <category android:name="android.intent.category.BROWSABLE" />
+
               <data android:scheme="https" android:host="herman.wardpieters.nl" android:pathPrefix="/"/>
           </intent-filter>
 
           <intent-filter android:autoVerify="true">
-              <category android:name="android.intent.category.VIEW" />
+              <action android:name="android.intent.category.VIEW" />
               <category android:name="android.intent.category.DEFAULT" />
               <category android:name="android.intent.category.BROWSABLE" />
+
               <data android:scheme="https" android:host="herman.wardpieters.nl" />
           </intent-filter>
 

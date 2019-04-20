@@ -17,7 +17,7 @@ export default class Authentication extends Component {
             name: null,
             email: null,
             password: null,
-            spinner: false
+            spinner: true
         };
     }
 
@@ -35,9 +35,6 @@ export default class Authentication extends Component {
 
     validateToken() {
         let URL = API.BASE_URL + "validate";
-        this.setState({
-            spinner: true
-        });
 
         AsyncStorage.getItem('jwt')
             .then((token) => {
@@ -61,14 +58,12 @@ export default class Authentication extends Component {
                             setTimeout(function () {
                                 if (response.status === true) Actions.home();
                                 else Alert.alert("Error", response.message.toString());
-                            }, 100);
+                            }, 20);
                         })
                         .catch(error => {
                             Alert.alert("Error", error.message);
                         });
-                }
-
-                this.setState({
+                } else this.setState({
                     spinner: false
                 });
             })

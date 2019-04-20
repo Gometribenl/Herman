@@ -97,6 +97,16 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    // Create a variable called keystorePropertiesFile, and initialize it to your
+    // keystore.properties file, in the rootProject folder.
+    def localPropertiesFile = rootProject.file("keystore.properties")
+
+    // Initialize a new Properties() object called keystoreProperties.
+    def localProperties = new Properties()
+
+    // Load your keystore.properties file into the keystoreProperties object.
+    localProperties.load(new FileInputStream(localPropertiesFile))
+
     defaultConfig {
         applicationId "nl.wardpieters.herman"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -116,8 +126,21 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            // Using a signing config in a release build
+            signingConfig signingConfigs.release
         }
     }
+
+    signingConfigs {
+        release {
+            keyAlias localProperties['keyAlias']
+            keyPassword localProperties['keyPassword']
+            storeFile file(localProperties['storeFile'])
+            storePassword localProperties['storePassword']
+        }
+    }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->

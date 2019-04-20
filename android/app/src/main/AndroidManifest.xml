@@ -22,14 +22,21 @@
               <action android:name="android.intent.action.MAIN" />
               <category android:name="android.intent.category.LAUNCHER" />
           </intent-filter>
+
           <intent-filter android:autoVerify="true">
               <category android:name="android.intent.category.VIEW" />
               <category android:name="android.intent.category.DEFAULT" />
               <category android:name="android.intent.category.BROWSABLE" />
-
-              <data android:scheme="https" android:host="herman.wardpieters.nl" />
-              <data android:scheme="herman" android:host="order" />
+              <data android:scheme="https" android:host="herman.wardpieters.nl" android:pathPrefix="/"/>
           </intent-filter>
+
+          <intent-filter android:autoVerify="true">
+              <category android:name="android.intent.category.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <data android:scheme="https" android:host="herman.wardpieters.nl" />
+          </intent-filter>
+
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>

@@ -5,6 +5,7 @@ import {API} from './../global'
 import {Actions} from "react-native-router-flux";
 import OrderList from "./OrderList";
 import {Text} from "react-native-elements";
+import OrderProductsList from "./OrderProductsList";
 
 export default class FetchOrders extends Component {
 
@@ -79,11 +80,8 @@ export default class FetchOrders extends Component {
                     keyExtractor={item => item.id.toString()}
                     ItemSeparatorComponent={this.renderSeparator}
                     renderItem={({item}) => (
-                        <OrderList
-                            title={"Bestelling #" + item.id.toString()}
-                            subtitle={"Betaalmethode: " + item.payment_method.toString()}
-                        >
-                            <Text>Betaald? {item.is_paid.toString()}</Text>
+                        <OrderList order={item}>
+                            <OrderProductsList totalPrice={item.total_price.formatted} items={item.order_items}/>
                         </OrderList>
                     )}
                 />

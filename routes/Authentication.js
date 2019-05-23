@@ -139,7 +139,7 @@ export default class Authentication extends Component {
                 } else {
                     let responseData = response.json();
                     if (!responseData.message) {
-                        Authentication.saveItem("jwt", responseData.access_token);
+                        this.saveItem("jwt", responseData.access_token);
                         Actions.home();
                     } else {
                         console.log(responseData.statusCode);
@@ -186,7 +186,7 @@ export default class Authentication extends Component {
                                    ref="name"
                                    returnKeyType="next"
                                    value={this.state.name}
-                                   autoComplete="name"
+                                   textContentType="name"
                         />
                         <Text style={[styles.userInfo]}>E-mailadres</Text>
                         <TextInput style={styles.input}
@@ -195,7 +195,8 @@ export default class Authentication extends Component {
                                    ref="email"
                                    returnKeyType="next"
                                    value={this.state.email}
-                                   autoComplete="email"
+                                   textContentType="emailAddress"
+                                   keyboardType="email-address"
                         />
 
                         <Text style={[styles.userInfo]}>Wachtwoord</Text>
@@ -203,10 +204,10 @@ export default class Authentication extends Component {
                                    editable={true}
                                    onChangeText={(password) => this.setState({password: password})}
                                    ref="password"
-                                   returnKeyType='next'
+                                   returnKeyType='go'
                                    secureTextEntry={true}
                                    value={this.state.password}
-                                   autoComplete="password"
+                                   textContentType="password"
                         />
 
                         <View style={styles.authSection}>

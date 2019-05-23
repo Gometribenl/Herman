@@ -21,7 +21,7 @@ export default class Authentication extends Component {
         };
     }
 
-    static async saveItem(item, selectedValue) {
+    async saveItem(item, selectedValue) {
         try {
             await AsyncStorage.setItem(item, selectedValue);
         } catch (error) {
@@ -69,7 +69,7 @@ export default class Authentication extends Component {
             })
     };
 
-    userSignUp() {
+    userSignUp = () => {
         let URL = API.BASE_URL + "register";
         if (!this.state.email || !this.state.password) {
             Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
@@ -92,18 +92,27 @@ export default class Authentication extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData.data.status === true) {
+                console.log(responseData);
+                if (responseData.access_token) {
                     Alert.alert("Success", "Your account has been created successfully, you can now login!");
+                    this.saveItem("jwt", responseData.access_token);
+                    Actions.Home();
                 } else {
-                    Alert.alert("Error", responseData.errors[0]);
+                    let message= "";
+                    for (var key in responseData.errors) {
+                        for (var key1 in responseData.errors[key]) {
+                            message += "\n" + responseData.errors[key][key1];
+                        }
+                    }
+                    Alert.alert(responseData.message, message);
                 }
             })
             .catch(error => {
                 Alert.alert("Error", error.message);
             });
-    }
+    };
 
-    userLogin() {
+    userLogin = () => {
         let URL = API.BASE_URL + "login";
         if (!this.state.email || !this.state.password) {
             Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
@@ -122,24 +131,32 @@ export default class Authentication extends Component {
                 password: this.state.password,
             })
         })
-            .then((response) => response.json())
-            .then((responseData) => {
-                if (!responseData.hasOwnProperty('message')) {
-                    Authentication.saveItem("jwt", responseData.access_token);
-                    Actions.home();
+            .then((response) => {
+                console.log(response.status);
+                if (response.status !== 200) {
+                    Alert.alert("Error " + response.status,
+                        "HTTP Error " + response.status + " occurred, please try again.");
                 } else {
-                    let errors = [];
-
-                    for (let k in responseData.errors) {
-                        errors.push(responseData.errors[k][0])
+                    let responseData = response.json();
+                    if (!responseData.message) {
+                        Authentication.saveItem("jwt", responseData.access_token);
+                        Actions.home();
+                    } else {
+                        console.log(responseData.statusCode);
+                        let message= "";
+                        for (let key in responseData.errors) {
+                            for (let key1 in responseData.errors[key]) {
+                                message += "\n" + responseData.errors[key][key1];
+                            }
+                        }
+                        Alert.alert(responseData.message, message);
                     }
-                    Alert.alert("Error", errors[0]);
                 }
             })
             .catch(error => {
                 Alert.alert("Error", error.message);
             });
-    }
+    };
 
     render() {
         return (
@@ -194,9 +211,9 @@ export default class Authentication extends Component {
 
                         <View style={styles.authSection}>
                             <Text style={[styles.loginSection]}
-                                  onPress={(this.userLogin.bind(this))}>Inloggen</Text>
+                                  onPress={(this.userLogin)}>Inloggen</Text>
                             <Text style={[styles.registerSection]}
-                                  onPress={(this.userSignUp.bind(this))}>Registeren</Text>
+                                  onPress={(this.userSignUp)}>Registeren</Text>
 
                         </View>
                     </View>

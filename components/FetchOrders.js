@@ -1,11 +1,10 @@
 import React, {Component} from "react";
-import {ActivityIndicator, FlatList, View, Alert} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import {API} from './../global'
+import {ActivityIndicator, Alert, FlatList, View} from 'react-native';
+import {API, AuthHeaders, token} from './../global'
 import {Actions} from "react-native-router-flux";
 import OrderList from "./OrderList";
-import {Text} from "react-native-elements";
 import OrderProductsList from "./OrderProductsList";
+import axios from 'axios';
 
 export default class FetchOrders extends Component {
 
@@ -15,41 +14,36 @@ export default class FetchOrders extends Component {
         this.state = {
             isLoading: true
         };
+    }
 
+    componentDidMount() {
         this.fetchOrders();
     }
 
     fetchOrders() {
-        let url = API.BASE_URL + "orders";
+        let URL = API.BASE_URL + "orders";
+        console.log("fetchOrders token: " + token);
 
-        AsyncStorage.getItem('jwt').then((token) => {
-            // If a token has been stored, verify it and login
-            if (token !== null) {
-                fetch(url, {
-                    headers: {
-                        'User-Agent': API.USER_AGENT,
-                        'Authorization': "Bearer " + token
-                    }
-                })
-                    .then((response) => response.json())
-                    .then((responseJson) => {
+        if (token !== null) {
+            axios.get(URL, {
+                headers: AuthHeaders(token)
+            }).then((response) => {
+                console.log(response);
 
-                        this.setState({
-                            isLoading: false,
-                            dataSource: responseJson,
-                        }, function () {
+                this.setState({
+                    isLoading: false,
+                    dataSource: response.data,
+                });
 
-                        });
-
-                    })
-                    .catch(error => {
-                        Alert.alert("Error", error.message);
-                    });
-            } else {
-                // Token is null so log user out
-                Actions.auth();
-            }
-        });
+            })
+                .catch(error => {
+                    console.log(error.response);
+                    Alert.alert("Error", error.message);
+                });
+        } else {
+            // Token is null so log user out
+            Actions.auth();
+        }
     }
 
     renderSeparator = () => {

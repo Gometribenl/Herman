@@ -3,11 +3,12 @@ import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Text} from 'react-native-elements';
-import {API, AppColors} from './../global';
+import {API, AppColors, AuthHeaders, Headers, token, updateToken} from './../global';
 import CustomHeader from "../components/CustomHeader";
 import AppLayout from "../components/AppLayout";
 import CustomStatusBar from "../components/CustomStatusBar";
 import Spinner from "react-native-loading-spinner-overlay";
+import axios from 'axios';
 
 export default class Authentication extends Component {
     constructor() {
@@ -35,30 +36,30 @@ export default class Authentication extends Component {
 
     validateToken() {
         let URL = API.BASE_URL + "validate";
+        console.info("validateToken()");
 
         AsyncStorage.getItem('jwt')
-            .then((token) => {
+            .then((AsyncToken) => {
+                updateToken(AsyncToken);
                 // If a token has been stored, verify it and login
                 if (token !== null) {
-                    fetch(URL, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                            'User-Agent': API.USER_AGENT,
-                            'Authorization': "Bearer " + token
-                        },
+                    console.log("Token: " + token);
+
+                    axios.get(URL, {
+                        headers: AuthHeaders(token)
                     })
-                        .then((response) => response.json())
                         .then((response) => {
+                            console.log(response);
                             this.setState({
                                 spinner: false
                             });
 
-                            setTimeout(function () {
-                                if (response.status === true) Actions.home();
-                                else Alert.alert("Error", response.message.toString());
-                            }, 20);
+                            if (response.data.status) {
+                                Actions.home();
+                            } else {
+                                AsyncStorage.removeItem("jwt");
+                                Alert.alert("Error", response.data.message.toString());
+                            }
                         })
                         .catch(error => {
                             Alert.alert("Error", error.message);
@@ -71,40 +72,34 @@ export default class Authentication extends Component {
 
     userSignUp = () => {
         let URL = API.BASE_URL + "register";
-        if (!this.state.email || !this.state.password) {
-            Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
+        if (!this.state.name || !this.state.email || !this.state.password) {
+            Alert.alert("Information required", "You are required to fill in your name, email address and password to register!");
             return;
         }
 
-        fetch(URL, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'User-Agent': API.USER_AGENT
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                email: this.state.email,
-                password: this.state.password,
-                password_confirmation: this.state.password,
-            })
+        axios.post(URL, {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            password_confirmation: this.state.password
+        }, {
+            headers: Headers
         })
-            .then((response) => response.json())
-            .then((responseData) => {
-                console.log(responseData);
-                if (responseData.access_token) {
+            .then((response) => {
+                console.log(response);
+                if (response.data.access_token) {
+                    updateToken(response.data.access_token);
+                    this.saveItem("jwt", response.data.access_token);
                     Alert.alert("Success", "Your account has been created successfully, you can now login!");
-                    this.saveItem("jwt", responseData.access_token);
-                    Actions.Home();
+                    Actions.home();
                 } else {
-                    let message= "";
-                    for (var key in responseData.errors) {
-                        for (var key1 in responseData.errors[key]) {
-                            message += "\n" + responseData.errors[key][key1];
+                    let message = "";
+                    for (var key in response.data.errors) {
+                        for (var key1 in response.data.errors[key]) {
+                            message += "\n" + response.data.errors[key][key1];
                         }
                     }
-                    Alert.alert(responseData.message, message);
+                    Alert.alert(response.data.message, message);
                 }
             })
             .catch(error => {
@@ -119,40 +114,27 @@ export default class Authentication extends Component {
             return;
         }
 
-        fetch(URL, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'User-Agent': API.USER_AGENT
-            },
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password,
-            })
-        })
-            .then((response) => {
-                console.log(response.status);
-                if (response.status !== 200) {
-                    Alert.alert("Error " + response.status,
-                        "HTTP Error " + response.status + " occurred, please try again.");
-                } else {
-                    let responseData = response.json();
-                    if (!responseData.message) {
-                        this.saveItem("jwt", responseData.access_token);
-                        Actions.home();
-                    } else {
-                        console.log(responseData.statusCode);
-                        let message= "";
-                        for (let key in responseData.errors) {
-                            for (let key1 in responseData.errors[key]) {
-                                message += "\n" + responseData.errors[key][key1];
-                            }
-                        }
-                        Alert.alert(responseData.message, message);
+        axios.post(URL, {
+            email: this.state.email,
+            password: this.state.password,
+        }, {
+            headers: Headers
+        }).then((response) => {
+            console.log(response);
+            if (response.data.access_token) {
+                updateToken(response.data.access_token);
+                this.saveItem("jwt", response.data.access_token);
+                Actions.home();
+            } else {
+                let message = "";
+                for (let key in response.data.errors) {
+                    for (let key1 in response.data.errors[key]) {
+                        message += "\n" + response.data.errors[key][key1];
                     }
                 }
-            })
+                Alert.alert(response.data.message, message);
+            }
+        })
             .catch(error => {
                 Alert.alert("Error", error.message);
             });

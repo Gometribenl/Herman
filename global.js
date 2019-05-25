@@ -1,6 +1,5 @@
 import VersionNumber from 'react-native-version-number';
 import React from "react";
-import {Platform, StyleSheet} from "react-native";
 
 export class AppColors {
     static AppColors = {
@@ -22,3 +21,23 @@ export class API {
     static BASE_URL = "https://herman.wardpieters.nl/api/";
     static USER_AGENT = "Herman/" + VersionNumber.appVersion + " (" + VersionNumber.buildVersion + "; " + VersionNumber.bundleIdentifier + ")";
 }
+
+export let token = undefined;
+export function updateToken(newToken) {
+    token = newToken;
+}
+
+export function AuthHeaders(token) {
+    return {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'User-Agent': API.USER_AGENT,
+        'Authorization': "Bearer " + token
+    }
+}
+
+export let Headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'User-Agent': API.USER_AGENT
+};

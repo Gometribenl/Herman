@@ -5,7 +5,7 @@ import {Alert, Platform, StyleSheet} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {Actions} from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {AppColors} from "../global";
+import {AppColors, updateToken} from "../global";
 
 const styles = StyleSheet.create({
     headerContainer: {
@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
             android: 56,
             default: 44,
         }),
-
 
         // Fix Header height in Android
         paddingTop: Platform.select({
@@ -30,6 +29,7 @@ export default class CustomHeader extends Component {
     static async userLogout() {
         try {
             await AsyncStorage.removeItem('jwt');
+            updateToken(undefined);
             Alert.alert("Success", "You have been successfully logged out!");
             Actions.auth();
         } catch (error) {

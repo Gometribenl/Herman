@@ -18,7 +18,7 @@ export default class Login extends Component {
             name: null,
             email: null,
             password: null,
-            spinner: true
+            spinner: false
         };
     }
 
@@ -31,12 +31,14 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.AuthRef) this.validateToken();
+        if (Actions.prevScene !== "register") this.validateToken();
     }
 
     validateToken() {
         let URL = API.BASE_URL + "validate";
         console.info("validateToken()");
+
+        this.setState({spinner: true});
 
         AsyncStorage.getItem('jwt')
             .then((AsyncToken) => {

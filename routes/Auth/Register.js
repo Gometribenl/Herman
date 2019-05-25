@@ -31,7 +31,7 @@ export default class Register extends Component {
     }
 
     userLogin = () => {
-        Actions.auth({AuthRef: "register"});
+        Actions.auth();
     };
 
     userSignUp = () => {

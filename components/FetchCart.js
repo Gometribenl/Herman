@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import {ActivityIndicator, FlatList, Text, View, Alert, RefreshControl} from 'react-native';
-import {API} from './../global';
+import {API, AuthHeaders, token} from './../global';
 import AsyncStorage from "@react-native-community/async-storage";
 import CartList from "./CartList";
 import {Button} from "react-native-elements";
 import PayButton from "./Buttons/PayButton";
+import axios from "axios";
+import {Actions} from "react-native-router-flux";
 
 export default class FetchCart extends Component {
 
@@ -17,33 +19,37 @@ export default class FetchCart extends Component {
             dataSource: null,
             refreshing: false,
         };
+    }
 
+    componentDidMount() {
         this.fetchCart();
     }
 
     fetchCart() {
-        AsyncStorage.getItem('jwt').then((token) => {
-            if (token !== null) {
-                let URL = API.BASE_URL + "cart";
+        let URL = API.BASE_URL + "cart";
+        console.log("fetchCart token: " + token);
 
-                fetch(URL, {method: 'GET', headers: {'User-Agent': API.USER_AGENT, 'Authorization': "Bearer " + token}})
-                    .then((response) => response.json())
-                    .then((responseJson) => {
+        if (token !== null) {
+            axios.get(URL, {
+                headers: AuthHeaders(token)
+            }).then((response) => {
+                console.log(response);
 
-                        this.setState({
-                            isLoading: false,
-                            responseJson: responseJson,
-                            dataSource: responseJson.order_items,
-                        }, function () {
+                this.setState({
+                    isLoading: false,
+                    responseJson: response.data,
+                    dataSource: response.data.order_items,
+                });
 
-                        });
-
-                    })
-                    .catch(error => {
-                        Alert.alert("Error", error.message);
-                    });
-            }
-        })
+            })
+                .catch(error => {
+                    console.log(error.response);
+                    Alert.alert("Error", error.message);
+                });
+        } else {
+            // Token is null so log user out
+            Actions.auth();
+        }
     }
 
     onRefresh() {
@@ -63,6 +69,20 @@ export default class FetchCart extends Component {
         );
     };
 
+    renderItem = ({item}) => {
+        return(
+            <CartList
+                title={item.product.name.toString()}
+                subtitle={"Aantal : " + item.quantity.toString()}
+                avatar_url={item.product.avatar_url.toString()}
+                orderItemId={item.id}
+                onRefresh={this.onRefresh.bind(this)}
+            >
+                <Text>Attributes: {item.attributes.toString()}</Text>
+            </CartList>
+        );
+    };
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -79,17 +99,7 @@ export default class FetchCart extends Component {
                         data={this.state.dataSource}
                         keyExtractor={item => item.id.toString()}
                         ItemSeparatorComponent={this.renderSeparator}
-                        renderItem={({item}) => (
-                            <CartList
-                                title={item.product.name.toString()}
-                                subtitle={"Aantal : " + item.quantity.toString()}
-                                avatar_url={item.product.avatar_url.toString()}
-                                orderItemId={item.id}
-                                onRefresh={this.onRefresh.bind(this)}
-                            >
-                                <Text>Attributes: {item.attributes.toString()}</Text>
-                            </CartList>
-                        )}
+                        renderItem={this.renderItem}
                         refreshControl={
                             <RefreshControl
                                 //refresh control used for the Pull to Refresh

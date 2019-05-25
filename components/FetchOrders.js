@@ -58,6 +58,14 @@ export default class FetchOrders extends Component {
         );
     };
 
+    renderItem = ({item}) => {
+        return(
+            <OrderList order={item}>
+                <OrderProductsList totalPrice={item.total_price.formatted} items={item.order_items}/>
+            </OrderList>
+        );
+    };
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -73,11 +81,7 @@ export default class FetchOrders extends Component {
                     data={this.state.dataSource}
                     keyExtractor={item => item.id.toString()}
                     ItemSeparatorComponent={this.renderSeparator}
-                    renderItem={({item}) => (
-                        <OrderList order={item}>
-                            <OrderProductsList totalPrice={item.total_price.formatted} items={item.order_items}/>
-                        </OrderList>
-                    )}
+                    renderItem={this.renderItem}
                 />
 
             </View>

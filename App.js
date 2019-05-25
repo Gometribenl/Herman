@@ -64,7 +64,7 @@ export default class App extends Component {
                         hideNavBar={true}
                         initial={true}
                         key='auth'
-                        title='Authentication'
+                        title='Login'
                     />
                     <Scene
                         component={Register}

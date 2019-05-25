@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import {ActivityIndicator, FlatList, Text, View, Alert, RefreshControl} from 'react-native';
 import {API, AuthHeaders, token} from './../global';
-import AsyncStorage from "@react-native-community/async-storage";
 import CartList from "./CartList";
-import {Button} from "react-native-elements";
 import PayButton from "./Buttons/PayButton";
 import axios from "axios";
 import {Actions} from "react-native-router-flux";

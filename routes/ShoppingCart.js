@@ -5,9 +5,10 @@ import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
 import CustomStatusBar from "../components/CustomStatusBar";
 import FetchCart from "../components/FetchCart";
-import {API} from "../global";
+import {API, AuthHeaders, token} from "../global";
 import {Actions} from "react-native-router-flux";
 import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
 
 
 const styles = StyleSheet.create({
@@ -23,40 +24,9 @@ export default class ShoppingCart extends Component {
 
     componentDidMount() {
         if (this.props.orderId) {
-            // TODO: Check payment status
             console.log(this.orderIsPaid(this.props.orderId));
-            if (this.orderIsPaid(this.props.orderId)) {
-                Alert.alert("Betaling", "U heeft een betaling gedaan voor bestelling #" + this.props.orderId);
-            } else {
-                Alert.alert("Betaling", "De betaling voor bestelling #" + this.props.orderId + " is mislukt of wordt nog verwerkt");
-            }
+            Alert.alert("Bestelling #" + this.props.orderId, "Wanneer uw betaling verwerkt is ontvangt u een notificatie!");
         }
-    }
-
-    orderIsPaid(orderId) {
-        let isPaid = false;
-
-        AsyncStorage.getItem('jwt')
-            .then((token) => {
-                fetch(API.BASE_URL + "orders/" + orderId, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'User-Agent': API.USER_AGENT,
-                        'Authorization': "Bearer " + token
-                    },
-                })
-                    .then((response) => response.json())
-                    .then((response) => {
-                        if (response.is_paid) isPaid = true;
-                    })
-                    .catch(error => {
-                        Alert.alert("Error", error.message);
-                    });
-            })
-            .done(() => {
-                return isPaid;
-            });
     }
 
     render() {

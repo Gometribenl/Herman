@@ -9,18 +9,26 @@ import Register from "./routes/Auth/Register";
 import firebase from 'react-native-firebase';
 import type { RemoteMessage } from 'react-native-firebase';
 
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Require cycle:']);
+
 
 export default class App extends Component {
 
     componentDidMount(): void {
         this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
-            console.log(message);
+            console.log("New Firebase message:" + message);
+        });
+
+        this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(fcmToken => {
+            //TODO: Update database entry
+            console.log("New Firebase token: " + fcmToken);
         });
 
         firebase.messaging().hasPermission()
             .then(enabled => {
                 if (enabled) {
-                    console.log("user has permissions");
+                    console.log("User has given the app permission to send notifications");
 
                     firebase.messaging().getToken()
                         .then(fcmToken => {
@@ -28,12 +36,23 @@ export default class App extends Component {
                                 console.log(fcmToken);
                             }
                         });
+                } else {
+                    // User has not allowed notifications so request permission
+                    firebase.messaging().requestPermission()
+                        .then(() => {
+                            // User has authorised
+                            console.log("User has authorised");
+                        })
+                        .catch(error => {
+                            // User has rejected permissions
+                        });
                 }
             });
     }
 
     componentWillUnmount() {
         this.messageListener();
+        this.onTokenRefreshListener();
     }
 
     render() {

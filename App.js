@@ -6,8 +6,35 @@ import Products from "./routes/Products";
 import Orders from "./routes/Orders";
 import ShoppingCart from "./routes/ShoppingCart";
 import Register from "./routes/Auth/Register";
+import firebase from 'react-native-firebase';
+import type { RemoteMessage } from 'react-native-firebase';
+
 
 export default class App extends Component {
+
+    componentDidMount(): void {
+        this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
+            console.log(message);
+        });
+
+        firebase.messaging().hasPermission()
+            .then(enabled => {
+                if (enabled) {
+                    console.log("user has permissions");
+
+                    firebase.messaging().getToken()
+                        .then(fcmToken => {
+                            if (fcmToken) {
+                                console.log(fcmToken);
+                            }
+                        });
+                }
+            });
+    }
+
+    componentWillUnmount() {
+        this.messageListener();
+    }
 
     render() {
         return (

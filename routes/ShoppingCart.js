@@ -5,10 +5,6 @@ import CustomNavigation from "../components/CustomNavigation";
 import CustomHeader from "../components/CustomHeader";
 import CustomStatusBar from "../components/CustomStatusBar";
 import FetchCart from "../components/FetchCart";
-import {API, AuthHeaders, token} from "../global";
-import {Actions} from "react-native-router-flux";
-import AsyncStorage from "@react-native-community/async-storage";
-import axios from "axios";
 
 
 const styles = StyleSheet.create({

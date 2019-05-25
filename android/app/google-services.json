@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "257255183234",
+    "firebase_url": "https://hermans-snackcorner-26cc0.firebaseio.com",
+    "project_id": "hermans-snackcorner-26cc0",
+    "storage_bucket": "hermans-snackcorner-26cc0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257255183234:android:debafef8b3386ed7",
+        "android_client_info": {
+          "package_name": "nl.wardpieters.herman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257255183234-u6j3t0atcb1r5m6ufq736m66o8bb75g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPAosniWV7JSstDg30EhC1quaSWAI2RaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257255183234-u6j3t0atcb1r5m6ufq736m66o8bb75g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

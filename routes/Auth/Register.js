@@ -3,14 +3,14 @@ import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Text} from 'react-native-elements';
-import {API, AppColors, AuthHeaders, Headers, token, updateToken} from './../global';
-import CustomHeader from "../components/CustomHeader";
-import AppLayout from "../components/AppLayout";
-import CustomStatusBar from "../components/CustomStatusBar";
+import {API, AppColors, AuthHeaders, Headers, token, updateToken} from '../../global';
+import CustomHeader from "../../components/CustomHeader";
+import AppLayout from "../../components/AppLayout";
+import CustomStatusBar from "../../components/CustomStatusBar";
 import Spinner from "react-native-loading-spinner-overlay";
 import axios from 'axios';
 
-export default class Authentication extends Component {
+export default class Register extends Component {
     constructor() {
         super();
 
@@ -18,7 +18,7 @@ export default class Authentication extends Component {
             name: null,
             email: null,
             password: null,
-            spinner: true
+            spinner: false
         };
     }
 
@@ -30,44 +30,8 @@ export default class Authentication extends Component {
         }
     }
 
-    componentDidMount() {
-        this.validateToken();
-    }
-
-    validateToken() {
-        let URL = API.BASE_URL + "validate";
-        console.info("validateToken()");
-
-        AsyncStorage.getItem('jwt')
-            .then((AsyncToken) => {
-                updateToken(AsyncToken);
-                // If a token has been stored, verify it and login
-                if (token !== null) {
-                    console.log("Token: " + token);
-
-                    axios.get(URL, {
-                        headers: AuthHeaders(token)
-                    })
-                        .then((response) => {
-                            console.log(response);
-                            this.setState({
-                                spinner: false
-                            });
-
-                            if (response.data.status) {
-                                Actions.home();
-                            } else {
-                                AsyncStorage.removeItem("jwt");
-                                Alert.alert("Error", response.data.message.toString());
-                            }
-                        })
-                        .catch(error => {
-                            Alert.alert("Error", error.message);
-                        });
-                } else this.setState({
-                    spinner: false
-                });
-            })
+    userLogin = () => {
+        Actions.auth({AuthRef: "register"});
     };
 
     userSignUp = () => {
@@ -76,6 +40,8 @@ export default class Authentication extends Component {
             Alert.alert("Information required", "You are required to fill in your name, email address and password to register!");
             return;
         }
+
+        this.setState({spinner: true});
 
         axios.post(URL, {
             name: this.state.name,
@@ -87,6 +53,7 @@ export default class Authentication extends Component {
         })
             .then((response) => {
                 console.log(response);
+                this.setState({spinner: false});
                 if (response.data.access_token) {
                     updateToken(response.data.access_token);
                     this.saveItem("jwt", response.data.access_token);
@@ -103,39 +70,7 @@ export default class Authentication extends Component {
                 }
             })
             .catch(error => {
-                Alert.alert("Error", error.message);
-            });
-    };
-
-    userLogin = () => {
-        let URL = API.BASE_URL + "login";
-        if (!this.state.email || !this.state.password) {
-            Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
-            return;
-        }
-
-        axios.post(URL, {
-            email: this.state.email,
-            password: this.state.password,
-        }, {
-            headers: Headers
-        }).then((response) => {
-            console.log(response);
-            if (response.data.access_token) {
-                updateToken(response.data.access_token);
-                this.saveItem("jwt", response.data.access_token);
-                Actions.home();
-            } else {
-                let message = "";
-                for (let key in response.data.errors) {
-                    for (let key1 in response.data.errors[key]) {
-                        message += "\n" + response.data.errors[key][key1];
-                    }
-                }
-                Alert.alert(response.data.message, message);
-            }
-        })
-            .catch(error => {
+                this.setState({spinner: false});
                 Alert.alert("Error", error.message);
             });
     };
@@ -156,7 +91,7 @@ export default class Authentication extends Component {
 
                         <Spinner
                             visible={this.state.spinner}
-                            textContent={'Inloggen...'}
+                            textContent={'Registreren...'}
                             textStyle={styles.spinnerTextStyle}
                             overlayColor={"rgba(0, 0, 0, 0.5)"}
                         />
@@ -193,10 +128,10 @@ export default class Authentication extends Component {
                         />
 
                         <View style={styles.authSection}>
-                            <Text style={[styles.loginSection]}
-                                  onPress={(this.userLogin)}>Inloggen</Text>
                             <Text style={[styles.registerSection]}
                                   onPress={(this.userSignUp)}>Registeren</Text>
+                            <Text style={[styles.loginSection]}
+                                  onPress={(this.userLogin)}>Heeft u al een account?</Text>
 
                         </View>
                     </View>
@@ -226,13 +161,13 @@ const styles = StyleSheet.create({
 
     },
 
-    loginSection: {
+    registerSection: {
         fontSize: 30,
         fontWeight: '700',
         marginBottom: 7,
     },
 
-    registerSection: {
+    loginSection: {
         fontSize: 20,
         fontWeight: '300',
     },

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Router, Scene} from 'react-native-router-flux';
 import Home from "./routes/Home";
-import Authentication from "./routes/Authentication";
+import Login from "./routes/Auth/Login";
 import Products from "./routes/Products";
 import Orders from "./routes/Orders";
 import ShoppingCart from "./routes/ShoppingCart";
+import Register from "./routes/Auth/Register";
 
 export default class App extends Component {
 
@@ -13,11 +14,17 @@ export default class App extends Component {
             <Router>
                 <Scene key='root'>
                     <Scene
-                        component={Authentication}
+                        component={Login}
                         hideNavBar={true}
                         initial={true}
                         key='auth'
                         title='Authentication'
+                    />
+                    <Scene
+                        component={Register}
+                        hideNavBar={true}
+                        key='register'
+                        title='Register'
                     />
                     <Scene
                         component={Home}

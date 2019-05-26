@@ -58,8 +58,7 @@ export default class Home extends Component {
 
     render() {
         return (
-            <AppLayout
-                topColor={AppColors.AppColors.secondary.dark}>
+            <AppLayout topColor={AppColors.AppColors.secondary.dark}>
                 <ImageBackground style={{width: '100%', height: '100%'}}
                                  source={{uri: API.IMAGE_URL + 'bg.png'}}>
 

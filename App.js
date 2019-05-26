@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Router, Scene} from 'react-native-router-flux';
+import {Router, Scene, Stack} from 'react-native-router-flux';
 import Home from "./routes/Home";
 import Login from "./routes/Auth/Login";
 import Products from "./routes/Products";
@@ -58,7 +58,7 @@ export default class App extends Component {
     render() {
         return (
             <Router>
-                <Scene key='root'>
+                <Stack key='root'>
                     <Scene
                         component={Login}
                         hideNavBar={true}
@@ -96,7 +96,7 @@ export default class App extends Component {
                         key='cart'
                         title='Cart'
                     />
-                </Scene>
+                </Stack>
             </Router>
         )
     }

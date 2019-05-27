@@ -20,7 +20,6 @@ export default class ShoppingCart extends Component {
 
     componentDidMount() {
         if (this.props.orderId) {
-            console.log(this.orderIsPaid(this.props.orderId));
             Alert.alert("Bestelling #" + this.props.orderId, "Wanneer uw betaling verwerkt is ontvangt u een notificatie!");
         }
     }

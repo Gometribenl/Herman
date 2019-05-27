@@ -16,20 +16,13 @@ export default class OrderList extends Component {
     }
 
     componentDidMount() {
-        this.setState({title: "Bestelling #" + this.props.order.id});
         moment.locale('nl');
         let formattedDate = moment(this.props.order.updated_at).format('LL');
 
-
-        if (this.props.order.is_paid) {
-            this.setState({
-                subtitle: "Betaald op " + formattedDate
-            });
-        } else {
-            this.setState({
-                subtitle: "Besteld op " + formattedDate
-            });
-        }
+        this.setState({
+            title: "Bestelling #" + this.props.order.id,
+            subtitle: "Betaald op " + formattedDate
+        });
     }
 
     render() {

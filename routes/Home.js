@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
         width: 130,
         height: 130,
         left: "58%",
-        top:"12%",
+        top: "12%",
     },
 
     info: {
-        marginLeft:"3%",
+        marginLeft: "3%",
     }
 
 });
@@ -39,6 +39,16 @@ export default class Home extends Component {
     constructor() {
         super();
     }
+
+    openURL = (url) => {
+        Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+                Linking.openURL(url);
+            } else {
+                console.log("Don't know how to open URI: " + url);
+            }
+        });
+    };
 
     componentDidMount() {
         Linking.getInitialURL().then((url) => {
@@ -70,33 +80,34 @@ export default class Home extends Component {
                             backgroundColor={AppColors.AppColors.secondary.regular}/>
 
 
+                        <View style={{flex: 0, height: "25%"}}>
+                            <Image
+                                style={styles.logo}
+                                source={{uri: API.IMAGE_URL + 'logo.png'}}/>
+                        </View>
 
-                            <View style={{flex: 0, height: "25%"}}>
-                                <Image
-                                    style={styles.logo}
-                                    source={{uri: API.IMAGE_URL + 'logo.png'}}/>
-                            </View>
-
-                        <View style={{flex: 0, height: "75%"}}>
-                                <ImageSlider
-                                    style={{
-                                        maxHeight: "77%"
-                                    }}
-                                    images={[
+                        <View style={{flex: 0, height: "45%"}}>
+                            <ImageSlider
+                                images={[
                                     'http://placeimg.com/640/480/any',
                                     'http://placeimg.com/640/480/any',
                                     'http://placeimg.com/640/480/any'
                                 ]}
-                                />
+                            />
 
-                            <Icon style={styles.info} name="map-marker" size={20} color="#000"><Text>    PEC Zwolle stadion</Text></Icon>
-                            <Icon style={styles.info} name="phone" size={20} color="#000"><Text>   06 - 44 21 73 08</Text></Icon>
-                            <Icon style={styles.info} name="envelope" size={20} color="#000"><Text>  info@hermanssnackcorner.nl</Text></Icon>
-                            </View>
+                        </View>
 
-
-
-
+                        <View style={{position: "absolute", bottom: 3}}>
+                            <Icon style={styles.info} name="map-marker" size={20} color="#000">
+                                <Text onPress={() => {this.openURL("https://goo.gl/maps/ER9L9aaw3k2EhBLu5")}}>   PEC Zwolle stadion</Text>
+                            </Icon>
+                            <Icon style={styles.info} name="phone" size={20} color="#000">
+                                <Text onPress={() => {this.openURL("tel:31644217308")}}>  06 - 44 21 73 08</Text>
+                            </Icon>
+                            <Icon style={styles.info} name="envelope" size={20} color="#000">
+                                <Text onPress={() => {this.openURL("mailto:info@hermanssnackcorner.nl")}}> info@hermanssnackcorner.nl</Text>
+                            </Icon>
+                        </View>
 
 
                     </View>

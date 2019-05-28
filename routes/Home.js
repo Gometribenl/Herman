@@ -89,9 +89,9 @@ export default class Home extends Component {
                         <View style={{flex: 0, height: "45%"}}>
                             <ImageSlider
                                 images={[
-                                    'http://placeimg.com/640/480/any',
-                                    'http://placeimg.com/640/480/any',
-                                    'http://placeimg.com/640/480/any'
+                                    API.IMAGE_URL + "slider/slider1.jpg",
+                                    API.IMAGE_URL + "slider/slider2.jpg",
+                                    API.IMAGE_URL + "slider/slider3.jpg",
                                 ]}
                             />
 

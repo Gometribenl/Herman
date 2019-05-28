@@ -4,6 +4,8 @@ import {ListItem} from 'react-native-elements';
 import {API, Headers, token} from './../global';
 import AddToCartButton from "./Buttons/AddToCartButton";
 import axios from "axios";
+import ProductList from "./ProductList";
+import ProductAttributeList from "./ProductAttributeList";
 
 export default class FetchProducts extends Component {
 
@@ -53,31 +55,9 @@ export default class FetchProducts extends Component {
 
     renderItem = ({item}) => {
         return(
-            <ListItem
-                leftAvatar={{
-                    overlayContainerStyle: {
-                        backgroundColor: 'transparent'
-                    },
-                    rounded: false,
-                    size: "large",
-                    imageProps: {
-                        resizeMode: "contain"
-                    },
-                    source: {
-                        uri: item.avatar_url
-                    }
-                }}
-                rightAvatar={
-                    <AddToCartButton productId={item.id}/>
-                }
-                title={item.name}
-                subtitle={item.price_formatted}
-                containerStyle={{
-                    backgroundColor: "#f5f5f5",
-                    paddingTop: 5,
-                    paddingBottom: 5
-                }}
-            />
+            <ProductList product={item}>
+                <ProductAttributeList attributes={item.attributes}/>
+            </ProductList>
         );
     };
 

@@ -55,9 +55,7 @@ export default class FetchProducts extends Component {
 
     renderItem = ({item}) => {
         return(
-            <ProductList product={item}>
-                <ProductAttributeList attributes={item.attributes}/>
-            </ProductList>
+            <ProductList product={item}/>
         );
     };
 

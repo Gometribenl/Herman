@@ -4,6 +4,7 @@ import {ListItem} from "react-native-elements";
 import Display from 'react-native-display';
 import 'moment/locale/nl'
 import AddToCartButton from "./Buttons/AddToCartButton";
+import ProductAttributeList from "./ProductAttributeList";
 
 export default class ProductList extends Component {
     constructor(props) {
@@ -11,8 +12,20 @@ export default class ProductList extends Component {
 
         this.state = {
             hidden: false,
+            attributesChecked: []
         };
     }
+
+    handleCheckBoxClick = (id, value) => {
+        console.log("handleCheckBoxClick", id, value);
+
+        let tempCheckBoxChecked = this.state.attributesChecked;
+        tempCheckBoxChecked[id] = value;
+
+        this.setState({
+            attributesChecked: tempCheckBoxChecked
+        });
+    };
 
     render() {
         return (
@@ -32,7 +45,7 @@ export default class ProductList extends Component {
                         }
                     }}
                     rightAvatar={
-                        <AddToCartButton productId={this.props.product.id}/>
+                        <AddToCartButton productId={this.props.product.id} attributes={this.state.attributesChecked}/>
                     }
                     title={this.props.product.name}
                     subtitle={this.props.product.price_formatted}
@@ -49,7 +62,7 @@ export default class ProductList extends Component {
                 />
 
                 <Display enable={this.state.hidden} style={{backgroundColor: "#f5f5f5"}}>
-                    {this.props.children}
+                    <ProductAttributeList onClick={this.handleCheckBoxClick} attributes={this.props.product.attributes}/>
                 </Display>
 
             </View>

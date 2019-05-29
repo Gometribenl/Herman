@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import {View} from 'react-native';
 import {CheckBox} from "react-native-elements";
 
-let tempCheckValues = [];
-
 export default class ProductAttributeList extends Component {
     constructor(props) {
         super(props);
@@ -13,11 +11,19 @@ export default class ProductAttributeList extends Component {
         };
     }
 
-    checkBoxChanged(id, value) {
-        this.setState({
-            checkBoxChecked: tempCheckValues
+    componentWillMount() {
+        let tmpArray = [];
+
+        this.props.attributes.map((item) => {
+            tmpArray[item.id] = false;
         });
 
+        this.setState({
+            checkBoxChecked: tmpArray
+        });
+    }
+
+    checkBoxChanged(id, value) {
         let tempCheckBoxChecked = this.state.checkBoxChecked;
         tempCheckBoxChecked[id] = !value;
 
@@ -25,6 +31,7 @@ export default class ProductAttributeList extends Component {
             checkBoxChecked: tempCheckBoxChecked
         });
 
+        this.props.onClick(id, !value);
     }
 
     render() {
@@ -32,9 +39,6 @@ export default class ProductAttributeList extends Component {
             <View style={{flexDirection: 'column'}}>
                 {
                     this.props.attributes.map((item) => {
-
-                        tempCheckValues[item.id] = false;
-
                         return (
                             <CheckBox
                                 key={item.id}

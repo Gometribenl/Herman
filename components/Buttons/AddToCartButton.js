@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {Alert} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {API, AuthHeaders, token} from "../../global";
-import AsyncStorage from "@react-native-community/async-storage";
 import {Actions} from "react-native-router-flux";
 import axios from 'axios';
 

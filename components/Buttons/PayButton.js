@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Alert, Linking} from "react-native";
 import {API, AuthHeaders, token} from "../../global";
-import AsyncStorage from "@react-native-community/async-storage";
 import {Button} from "react-native-elements";
 import {Actions} from "react-native-router-flux";
 import axios from 'axios';

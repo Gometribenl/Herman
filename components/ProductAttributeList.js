@@ -15,7 +15,7 @@ export default class ProductAttributeList extends Component {
         let tmpArray = [];
 
         this.props.attributes.map((item) => {
-            tmpArray[item.id] = false;
+            tmpArray[item.id] = !!this.props.defaultValue;
         });
 
         this.setState({

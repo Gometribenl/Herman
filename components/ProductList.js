@@ -62,7 +62,7 @@ export default class ProductList extends Component {
                 />
 
                 <Display enable={this.state.hidden} style={{backgroundColor: "#f5f5f5"}}>
-                    <ProductAttributeList onClick={this.handleCheckBoxClick} attributes={this.props.product.attributes}/>
+                    <ProductAttributeList onClick={this.handleCheckBoxClick} attributes={this.props.product.attributes} defaultValue={false}/>
                 </Display>
 
             </View>

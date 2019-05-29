@@ -5,6 +5,7 @@ import CartList from "./CartList";
 import PayButton from "./Buttons/PayButton";
 import axios from "axios";
 import {Actions} from "react-native-router-flux";
+import ProductAttributeList from "./ProductAttributeList";
 
 export default class FetchCart extends Component {
 
@@ -67,6 +68,10 @@ export default class FetchCart extends Component {
         );
     };
 
+    handleCheckBoxClick = (id, value) => {
+        console.log("handleCheckBoxClick", id, value);
+    };
+
     renderItem = ({item}) => {
         return(
             <CartList
@@ -76,7 +81,7 @@ export default class FetchCart extends Component {
                 orderItemId={item.id}
                 onRefresh={this.onRefresh.bind(this)}
             >
-                <Text>Attributes: {item.attributes.toString()}</Text>
+                <ProductAttributeList onClick={this.handleCheckBoxClick} attributes={item.attributes} defaultValue={true}/>
             </CartList>
         );
     };

@@ -79,7 +79,6 @@ export default class Home extends Component {
                         <CustomHeader
                             backgroundColor={AppColors.AppColors.secondary.regular}/>
 
-
                         <View style={{flex: 0, height: "25%"}}>
                             <Image
                                 style={styles.logo}
@@ -94,7 +93,6 @@ export default class Home extends Component {
                                     API.IMAGE_URL + "slider/slider3.jpg",
                                 ]}
                             />
-
                         </View>
 
                         <View style={{position: "absolute", bottom: 3}}>
@@ -108,7 +106,6 @@ export default class Home extends Component {
                                 <Text onPress={() => {this.openURL("mailto:info@hermanssnackcorner.nl")}}> info@hermanssnackcorner.nl</Text>
                             </Icon>
                         </View>
-
 
                     </View>
 

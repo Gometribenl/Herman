@@ -14,7 +14,6 @@ export default class AddToCartButton extends Component {
     addProductToCart() {
         let URL = API.BASE_URL + "cart/add";
         console.log("addProductToCart token: " + token);
-        console.log("" + this.props.attributes);
 
         if (token !== null) {
             axios.post(URL, {

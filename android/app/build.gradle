@@ -94,6 +94,13 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+/* Auto increment version number from git commits */
+def getGitVersion() {
+    def process = "git rev-list master --first-parent --count".execute()
+    return process.text.toInteger()
+}
+def googleVer = getGitVersion()
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -111,7 +118,7 @@ android {
         applicationId "nl.wardpieters.herman"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode googleVer
         versionName "1.0"
     }
     splits {

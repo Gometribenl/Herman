@@ -68,10 +68,6 @@ export default class FetchCart extends Component {
         );
     };
 
-    handleCheckBoxClick = (id, value) => {
-        console.log("handleCheckBoxClick", id, value);
-    };
-
     renderItem = ({item}) => {
         return(
             <CartList
@@ -81,7 +77,7 @@ export default class FetchCart extends Component {
                 orderItemId={item.id}
                 onRefresh={this.onRefresh.bind(this)}
             >
-                <ProductAttributeList onClick={this.handleCheckBoxClick} attributes={item.attributes} defaultValue={true}/>
+                <ProductAttributeList attributes={item.attributes} defaultValue={true} checkedIcon="plus-square-o"/>
             </CartList>
         );
     };

@@ -24,14 +24,16 @@ export default class ProductAttributeList extends Component {
     }
 
     checkBoxChanged(id, value) {
-        let tempCheckBoxChecked = this.state.checkBoxChecked;
-        tempCheckBoxChecked[id] = !value;
+        if (this.props.onClick !== null) {
+            let tempCheckBoxChecked = this.state.checkBoxChecked;
+            tempCheckBoxChecked[id] = !value;
 
-        this.setState({
-            checkBoxChecked: tempCheckBoxChecked
-        });
+            this.setState({
+                checkBoxChecked: tempCheckBoxChecked
+            });
 
-        this.props.onClick(id, !value);
+            this.props.onClick(id, !value);
+        }
     }
 
     render() {
@@ -43,6 +45,9 @@ export default class ProductAttributeList extends Component {
                             <CheckBox
                                 key={item.id}
                                 title={item.name + " - " + item.price_formatted}
+                                checkedIcon={this.props.checkedIcon}
+                                uncheckedIcon={this.props.uncheckedIcon}
+                                uncheckedColor={this.props.uncheckedColor}
                                 checked={this.state.checkBoxChecked[item.id]}
                                 onPress={() => this.checkBoxChanged(item.id, this.state.checkBoxChecked[item.id])}
                             />
@@ -53,3 +58,10 @@ export default class ProductAttributeList extends Component {
         );
     }
 }
+
+ProductAttributeList.defaultProps = {
+    checkedIcon: "check-square-o",
+    uncheckedIcon: "square-o",
+    uncheckedColor: "#bfbfbf",
+    onClick: null
+};

@@ -1,16 +1,11 @@
 import React, {Component} from "react";
 import {View} from 'react-native';
 import {ListItem} from "react-native-elements";
-import Display from 'react-native-display';
 import RemoveFromCartButton from "./Buttons/RemoveFromCartButton";
 
 export default class CartList extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            hidden: false
-        }
     }
 
     render() {
@@ -22,11 +17,6 @@ export default class CartList extends Component {
                     }
                     title={this.props.title}
                     subtitle={this.props.subtitle}
-                    onPress={() => {
-                        this.setState({
-                            hidden: !this.state.hidden
-                        });
-                    }}
                     leftAvatar={{
                         overlayContainerStyle: {
                             backgroundColor: 'transparent'
@@ -47,9 +37,7 @@ export default class CartList extends Component {
                     }}
                 />
 
-                <Display enable={this.state.hidden}>
-                    {this.props.children}
-                </Display>
+                {this.props.children}
 
             </View>
         )

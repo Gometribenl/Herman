@@ -96,7 +96,7 @@ def enableProguardInReleaseBuilds = false
 
 /* Auto increment version number from git commits */
 def getGitVersion() {
-    def process = "git rev-list master --first-parent --count".execute()
+    def process = "git rev-list dev --first-parent --count".execute()
     return process.text.toInteger()
 }
 def googleVer = getGitVersion()

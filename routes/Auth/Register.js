@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native';
+import {Alert, ImageBackground, StyleSheet, TextInput, View, Linking} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Text} from 'react-native-elements';
-import {API, AppColors, AuthHeaders, Headers, token, updateToken} from '../../global';
+import {API, AppColors, Headers, updateToken} from '../../global';
 import CustomHeader from "../../components/CustomHeader";
 import AppLayout from "../../components/AppLayout";
 import CustomStatusBar from "../../components/CustomStatusBar";
@@ -134,6 +134,8 @@ export default class Register extends Component {
                                   onPress={(this.userLogin)}>Heeft u al een account?</Text>
 
                         </View>
+
+                        <Text style={{color: "blue", textAlign: 'center', paddingTop: 10}} onPress={() => {Linking.openURL("https://herman.wardpieters.nl/privacy-policy")}}>Door een account aan te maken gaat U akkoord met het privacybeleid.</Text>
                     </View>
                 </ImageBackground>
             </AppLayout>

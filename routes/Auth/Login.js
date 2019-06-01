@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, ImageBackground, StyleSheet, TextInput, View} from 'react-native';
+import {Alert, ImageBackground, Linking, StyleSheet, TextInput, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Text} from 'react-native-elements';
@@ -163,6 +163,9 @@ export default class Login extends Component {
                                   onPress={(this.userSignUp)}>Nog geen account?</Text>
 
                         </View>
+
+                        <Text style={{color: "blue", textAlign: 'center', paddingTop: 10}} onPress={() => {Linking.openURL("https://herman.wardpieters.nl/privacy-policy")}}>Door gebruik te maken van de app gaat U akkoord met het privacybeleid.</Text>
+
                     </View>
                 </ImageBackground>
             </AppLayout>

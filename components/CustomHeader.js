@@ -5,7 +5,8 @@ import {Alert, Platform, StyleSheet} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {Actions} from "react-native-router-flux";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {AppColors, updateToken} from "../global";
+import {API, AppColors, AuthHeaders, updateToken, deviceToken} from "../global";
+import axios from "axios";
 
 const styles = StyleSheet.create({
     headerContainer: {
@@ -28,8 +29,21 @@ export default class CustomHeader extends Component {
 
     static async userLogout() {
         try {
+            axios.post(API.BASE_URL + "device/deregister", {
+                deviceToken: deviceToken
+            }, {
+                headers: AuthHeaders
+            })
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error.toString());
+                });
+
             await AsyncStorage.removeItem('jwt');
             updateToken(undefined);
+
             Alert.alert("Success", "You have been successfully logged out!");
             Actions.auth();
         } catch (error) {

@@ -3,7 +3,7 @@ import {Alert, ImageBackground, Linking, StyleSheet, TextInput, View} from 'reac
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Text} from 'react-native-elements';
-import {API, AppColors, AuthHeaders, Headers, token, updateToken} from '../../global';
+import {API, AppColors, AuthHeaders, Headers, registerDevice, token, updateToken} from '../../global';
 import CustomHeader from "../../components/CustomHeader";
 import AppLayout from "../../components/AppLayout";
 import CustomStatusBar from "../../components/CustomStatusBar";
@@ -96,6 +96,7 @@ export default class Login extends Component {
             if (response.data.access_token) {
                 updateToken(response.data.access_token);
                 this.saveItem("jwt", response.data.access_token);
+                registerDevice();
                 Actions.home();
             } else {
                 let message = "";

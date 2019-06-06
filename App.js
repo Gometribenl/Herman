@@ -8,10 +8,7 @@ import ShoppingCart from "./routes/ShoppingCart";
 import Register from "./routes/Auth/Register";
 import firebase from 'react-native-firebase';
 import type { RemoteMessage } from 'react-native-firebase';
-
-import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Require cycle:']);
-
+import {updateDeviceToken} from "./global";
 
 export default class App extends Component {
 
@@ -21,8 +18,8 @@ export default class App extends Component {
         });
 
         this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(fcmToken => {
-            //TODO: Update database entry
             console.log("New Firebase token: " + fcmToken);
+            updateDeviceToken(fcmToken);
         });
 
         firebase.messaging().hasPermission()
@@ -34,6 +31,7 @@ export default class App extends Component {
                         .then(fcmToken => {
                             if (fcmToken) {
                                 console.log(fcmToken);
+                                updateDeviceToken(fcmToken);
                             }
                         });
                 } else {

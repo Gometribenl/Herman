@@ -1,5 +1,6 @@
 import VersionNumber from 'react-native-version-number';
 import React from "react";
+import axios from "axios";
 
 export class AppColors {
     static AppColors = {
@@ -14,6 +15,25 @@ export class AppColors {
             dark: "#c79900",
         }
     };
+}
+
+export let deviceToken = undefined;
+export function updateDeviceToken(newToken) {
+    deviceToken = newToken;
+}
+
+export function registerDevice() {
+    axios.post(API.BASE_URL + "device/register", {
+        deviceToken: deviceToken
+    }, {
+        headers: AuthHeaders
+    })
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.log("error", error);
+        });
 }
 
 export class API {

@@ -3,7 +3,7 @@ import {Alert, ImageBackground, Linking, StyleSheet, TextInput, View} from 'reac
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Text} from 'react-native-elements';
-import {API, AppColors, AuthHeaders, Headers, registerDevice, token, updateToken} from '../../global';
+import {API, AppColors, AuthHeaders, deviceToken, Headers, registerDevice, token, updateToken} from '../../global';
 import CustomHeader from "../../components/CustomHeader";
 import AppLayout from "../../components/AppLayout";
 import CustomStatusBar from "../../components/CustomStatusBar";
@@ -77,6 +77,8 @@ export default class Login extends Component {
     };
 
     userLogin = () => {
+        console.log("deviceToken", deviceToken);
+
         let URL = API.BASE_URL + "login";
         if (!this.state.email || !this.state.password) {
             Alert.alert("Information required", "You are required to fill in your emailaddress and password to register!");
@@ -88,6 +90,7 @@ export default class Login extends Component {
         axios.post(URL, {
             email: this.state.email,
             password: this.state.password,
+            deviceToken: deviceToken
         }, {
             headers: Headers
         }).then((response) => {
@@ -96,7 +99,6 @@ export default class Login extends Component {
             if (response.data.access_token) {
                 updateToken(response.data.access_token);
                 this.saveItem("jwt", response.data.access_token);
-                registerDevice();
                 Actions.home();
             } else {
                 let message = "";

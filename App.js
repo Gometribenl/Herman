@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Platform} from 'react-native';
 import {Router, Scene, Stack} from 'react-native-router-flux';
 import Home from "./routes/Home";
 import Login from "./routes/Auth/Login";
@@ -7,21 +8,28 @@ import Orders from "./routes/Orders";
 import ShoppingCart from "./routes/ShoppingCart";
 import Register from "./routes/Auth/Register";
 import firebase from 'react-native-firebase';
-import type { RemoteMessage } from 'react-native-firebase';
 import {updateDeviceToken} from "./global";
 
 export default class App extends Component {
 
-    componentDidMount(): void {
-        this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
-            console.log("New Firebase message:" + message);
-        });
+    componentDidMount() {
+        const channel = new firebase.notifications.Android.Channel(
+            'hermanDefault',
+            'Standaard',
+            firebase.notifications.Android.Importance.Max
+        ).setDescription('Alle notificaties voor deze app');
+
+        firebase.notifications().android.createChannel(channel);
+
+        this.FirebaseInit();
 
         this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(fcmToken => {
             console.log("New Firebase token: " + fcmToken);
             updateDeviceToken(fcmToken);
         });
+    }
 
+    FirebaseInit() {
         firebase.messaging().hasPermission()
             .then(enabled => {
                 if (enabled) {
@@ -46,6 +54,43 @@ export default class App extends Component {
                         });
                 }
             });
+
+        this.messageListener = firebase.notifications().onNotification((notification) => {
+            if (Platform.OS === 'android') {
+
+                const localNotification = new firebase.notifications.Notification({
+                    sound: 'default',
+                    show_in_foreground: true,
+                })
+                    .setNotificationId(notification.notificationId)
+                    .setTitle(notification.title)
+                    .setSubtitle(notification.subtitle)
+                    .setBody(notification.body)
+                    .setData(notification.data)
+                    .android.setChannelId('hermanDefault') // e.g. the id you chose above
+                    .android.setSmallIcon('ic_launcher') // create this icon in Android Studio
+                    .android.setPriority(firebase.notifications.Android.Priority.Max);
+
+                firebase.notifications()
+                    .displayNotification(localNotification)
+                    .catch(err => console.error(err));
+
+            } else if (Platform.OS === 'ios') {
+
+                const localNotification = new firebase.notifications.Notification()
+                    .setNotificationId(notification.notificationId)
+                    .setTitle(notification.title)
+                    .setSubtitle(notification.subtitle)
+                    .setBody(notification.body)
+                    .setData(notification.data)
+                    .ios.setBadge(notification.ios.badge);
+
+                firebase.notifications()
+                    .displayNotification(localNotification)
+                    .catch(err => console.error(err));
+
+            }
+        });
     }
 
     componentWillUnmount() {

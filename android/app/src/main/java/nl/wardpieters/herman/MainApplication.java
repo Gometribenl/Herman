@@ -13,6 +13,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 
 import java.util.Arrays;
@@ -34,7 +35,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNVersionNumberPackage(),
             new VectorIconsPackage(),
             new RNFirebasePackage(),
-            new RNFirebaseMessagingPackage()
+            new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage()
       );
     }
 

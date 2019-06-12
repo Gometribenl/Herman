@@ -22,20 +22,6 @@ export function updateDeviceToken(newToken) {
     deviceToken = newToken;
 }
 
-export function registerDevice() {
-    axios.post(API.BASE_URL + "device/register", {
-        deviceToken: deviceToken
-    }, {
-        headers: AuthHeaders
-    })
-        .then((response) => {
-            console.log(response.data);
-        })
-        .catch(error => {
-            console.log("error", error);
-        });
-}
-
 export class API {
     static IMAGE_URL = "https://herman.wardpieters.nl/images/";
     static BASE_URL = "https://herman.wardpieters.nl/api/";

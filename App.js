@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Platform} from 'react-native';
 import {Router, Scene, Stack} from 'react-native-router-flux';
 import Home from "./routes/Home";
 import Login from "./routes/Auth/Login";

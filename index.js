@@ -10,4 +10,4 @@ import bgMessaging from "./bgMessaging";
 
 AppRegistry.registerComponent(appName, () => App);
 
-AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgMessaging); // <-- Add this line
+AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgMessaging);

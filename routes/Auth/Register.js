@@ -3,7 +3,7 @@ import {Alert, ImageBackground, StyleSheet, TextInput, View, Linking} from 'reac
 import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import {Text} from 'react-native-elements';
-import {API, AppColors, Headers, updateToken} from '../../global';
+import {API, AppColors, Headers, updateToken, deviceToken} from '../../global';
 import CustomHeader from "../../components/CustomHeader";
 import AppLayout from "../../components/AppLayout";
 import CustomStatusBar from "../../components/CustomStatusBar";
@@ -47,7 +47,8 @@ export default class Register extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            password_confirmation: this.state.password
+            password_confirmation: this.state.password,
+            deviceToken: deviceToken
         }, {
             headers: Headers
         })

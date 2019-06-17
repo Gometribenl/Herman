@@ -29,7 +29,7 @@ export default class CustomHeader extends Component {
 
     static async userLogout() {
         try {
-            axios.post(API.BASE_URL + "device/deregister", {
+            axios.post(API.BASE_URL + "logout", {
                 deviceToken: deviceToken
             }, {
                 headers: AuthHeaders

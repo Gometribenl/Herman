@@ -24,6 +24,12 @@ export default class FetchCart extends Component {
         this.fetchCart();
     }
 
+    updateLoading = (value) => {
+        this.setState({
+            isLoading: value
+        });
+    };
+
     fetchCart() {
         let URL = API.BASE_URL + "cart";
         console.log("fetchCart token: " + token);
@@ -111,7 +117,7 @@ export default class FetchCart extends Component {
                 <View style={{flex: 0, height: "20%", backgroundColor: "white"}}>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
                         <Text style={{fontSize: 20, marginTop: 20}}>Totaal: {this.state.responseJson.total_price.formatted.toString()}</Text>
-                        <PayButton/>
+                        <PayButton updateLoading={this.updateLoading}/>
                     </View>
                 </View>
             </View>

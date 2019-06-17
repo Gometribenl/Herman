@@ -10,7 +10,9 @@ export default class PayButton extends Component {
         super(props);
     }
 
-    CheckOutOrder() {
+    CheckOutOrder = () => {
+        this.props.updateLoading(true);
+
         let URL = API.BASE_URL + "cart/checkout";
         console.log("CheckOutOrder token: " + token);
 
@@ -18,6 +20,7 @@ export default class PayButton extends Component {
             axios.get(URL, {
                 headers: AuthHeaders(token)
             }).then((response) => {
+                this.props.updateLoading(false);
                 console.log(response);
                 if (response.data.data.status === true) {
                     Linking.openURL(response.data.data.payment.redirect_url);
@@ -26,18 +29,20 @@ export default class PayButton extends Component {
                 }
             })
                 .catch(error => {
+                    this.props.updateLoading(false);
                     console.log(error.response);
                     Alert.alert("Error", error.message);
                 });
         } else {
+            this.props.updateLoading(false);
             // Token is null so log user out
             Actions.auth();
         }
-    }
+    };
 
     render() {
         return (
-            <Button onPress={this.CheckOutOrder.bind(this)} style={{marginTop: 15}} title={"Betalen"}/>
+            <Button onPress={this.CheckOutOrder} style={{marginTop: 15}} title={"Betalen"}/>
         )
     }
 }

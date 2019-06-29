@@ -30,7 +30,7 @@ export default class OrderProductsList extends Component {
                                 }
                             }}
                             title={item.product.name}
-                            subtitle={item.product.price_formatted}
+                            subtitle={item.price_formatted}
                             containerStyle={{
                                 backgroundColor: "#f5f5f5",
                                 paddingTop: 10,

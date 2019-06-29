@@ -10,13 +10,13 @@ export default class AddToCartButton extends Component {
         super(props);
 
         this.state = {
-            display: "block"
+            display: "inherit"
         };
     }
     
     toggleButton = () => {
-        if (this.state.display === "block") this.setState({display: "none"});
-        else this.setState({display: "block"});
+        if (this.state.display === "inherit") this.setState({display: "none"});
+        else this.setState({display: "inherit"});
 
         this.forceUpdate();
     };
@@ -53,7 +53,7 @@ export default class AddToCartButton extends Component {
 
     render() {
         return (
-            <Icon onPress={this.addProductToCart.bind(this)} name="shopping-basket" size={25} color="#000" style={{display: "block"}}/>
+            <Icon onPress={this.addProductToCart.bind(this)} name="shopping-basket" size={25} color="#000"/>
         )
     }
 }

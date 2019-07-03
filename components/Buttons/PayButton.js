@@ -42,7 +42,7 @@ export default class PayButton extends Component {
 
     render() {
         return (
-            <Button onPress={this.CheckOutOrder} style={{marginTop: 15}} title={"Betalen"}/>
+            <Button onPress={this.CheckOutOrder} containerStyle={{marginTop: 10}} title={"Betalen"}/>
         )
     }
 }

@@ -607,10 +607,17 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.4.2":
+"@babel/runtime@^7.0.0":
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.2.tgz#f5ab6897320f16decd855eed70b705908a313fe8"
   integrity sha512-7Bl2rALb7HpvXFL7TETNzKSAeBVCPHELzc0C//9FCxN8nsiueWSJBqaF+2oIJScyILStASR/Cx5WMkXGYTiJFA==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
+"@babel/runtime@^7.4.3":
+  version "7.7.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.4.tgz#b23a856751e4bf099262f867767889c0e3fe175b"
+  integrity sha512-r24eVUUr0QqNZa+qrImUk8fn5SPhHq+IfYvIoIMg0do3GdK9sMdiLKP3GYVVaxpPKORgm8KRKaNTEhAjgIpLMw==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -791,6 +798,11 @@
   dependencies:
     "@types/istanbul-lib-coverage" "^1.1.0"
     "@types/yargs" "^12.0.9"
+
+"@react-native-community/async-storage@^1.3.0":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.6.3.tgz#1a713e8c5cacd543ab8539080a5ce57ad917da88"
+  integrity sha512-67K2akX90uc252zKMYJt1wISvaEH6ARtdTI9bUkwmOFXVPyVk1DfPnaRmyUzcVdeCBOO1n0xv9YO2GSppIormQ==
 
 "@react-native-community/cli@^1.2.1":
   version "1.5.1"
@@ -1631,7 +1643,7 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.19.0, commander@^2.9.0, commander@~2.19.0:
+commander@^2.19.0, commander@^2.9.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
   integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
@@ -1640,6 +1652,11 @@ commander@~2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
   integrity sha512-MVuS359B+YzaWqjCL/c+22gfryv+mCBPHAv3zyVI2GN8EY6IRP8VwtasXn8jyyhvvq84R4ImN1OKRtcbIasjYA==
+
+commander@~2.20.3:
+  version "2.20.3"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -2577,9 +2594,9 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 handlebars@^4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.1.1.tgz#6e4e41c18ebe7719ae4d38e5aca3d32fa3dd23d3"
-  integrity sha512-3Zhi6C0euYZL5sM0Zcy7lInLXKQ+YLcF/olbN010mzGQ4XVm50JeyBnMqofHh696GrciGruC7kCcApPDJvVgwA==
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.5.3.tgz#5cf75bd8714f7605713511a56be7c349becb0482"
+  integrity sha512-3yPecJoJHK/4c6aZhSvxOyG4vJKDshV36VHp0iVCDVh7o9w2vwi3NSnL2MMPj3YdduqaBcu7cGbggJQM0br9xA==
   dependencies:
     neo-async "^2.6.0"
     optimist "^0.6.1"
@@ -4395,9 +4412,9 @@ negotiator@0.6.1:
   integrity sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
 
 neo-async@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
-  integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
+  integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -5165,6 +5182,13 @@ react-native-iphone-x-helper@^1.0.2:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.0.tgz#9f8a376eb00bc712115abff4420318a0063fa796"
   integrity sha512-xIeTo4s77wwKgBZLVRIZC9tM9/PkXS46Ul76NXmvmixEb3ZwqGdQesR3zRiLMOoIdfOURB6N9bba9po7+x9Bag==
 
+react-native-loading-spinner-overlay@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-1.0.1.tgz#07f85a072b6f7d05b8749668cd626df4cc330347"
+  integrity sha512-njZZWs+cgyq6Ni7tkYEowMmuAuHVljuH4CqTWA0plNOfSzZhEcrW209y7WcgHjRWz0RvvEYF5oWGT8DWtTq8bA==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-material-bottom-navigation@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-material-bottom-navigation/-/react-native-material-bottom-navigation-1.0.2.tgz#5b785887dc20c864c4be1a50f330831c0214094d"
@@ -5229,10 +5253,10 @@ react-native-tab-view@^1.0.0:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-vector-icons@^6.3.0:
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.4.2.tgz#ee0b097e783387544ed160a3192a437c097e551d"
-  integrity sha512-G7Y5HksOQkCanFWKJ+fjwP38XL8tQREOSnw7jrbq28AFrrv41YtafOF4uDSDS7HxMRXs17HeEzn24OzJb63iuA==
+react-native-vector-icons@^6.4.2:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"
+  integrity sha512-MImKVx8JEvVVBnaShMr7/yTX4Y062JZMupht1T+IEgbqBj4aQeQ1z2SH4VHWKNtWtppk4kz9gYyUiMWqx6tNSw==
   dependencies:
     lodash "^4.0.0"
     prop-types "^15.6.2"
@@ -5243,10 +5267,10 @@ react-native-version-number@^0.3.5:
   resolved "https://registry.yarnpkg.com/react-native-version-number/-/react-native-version-number-0.3.5.tgz#90f1b49bcb5e72f801bdc22ed6bad6c7cbbc2222"
   integrity sha512-iANHQrYyDSe5Yts2qVjAjFXpK5EHkJGSFAqnVa3Bu/UKBRUjhnMqvskc3EH+IIvvJH9N2Qpidm1KCq42BWa6jQ==
 
-react-native@^0.59.1:
-  version "0.59.2"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.2.tgz#c2e2d9e185b04e54948f170841d97c24661a0fa9"
-  integrity sha512-gIygrCr42rGEQnfjcAZdCOqgjC0oZtTIp+mdbUW+yqHpNUU1PbYKzUkLlvSFGeN+IUcL8WTaC1JtJvghKhaLmA==
+react-native@^0.59.4:
+  version "0.59.10"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.10.tgz#352f381e382f93a0403be499c9e384bf51c2591c"
+  integrity sha512-guB9YW+pBqS1dnfZ4ntzjINopiCUAbdmshU2wMWD1W32fRczLAopi/7Q2iHKP8LTCdxuYZV3fa9Mew5PSuANAw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^1.2.1"
@@ -6307,11 +6331,11 @@ uglify-es@^3.1.9:
     source-map "~0.6.1"
 
 uglify-js@^3.1.4:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.5.2.tgz#dc0c7ac2da0a4b7d15e84266818ff30e82529474"
-  integrity sha512-imog1WIsi9Yb56yRt5TfYVxGmnWs3WSGU73ieSOlMVFwhJCA9W8fqFFMMj4kgDqiS/80LGdsYnWL7O9UcjEBlg==
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.0.tgz#14b854003386b7a7c045910f43afbc96d2aa5307"
+  integrity sha512-PC/ee458NEMITe1OufAjal65i6lB58R1HWMRcxwvdz1UopW0DYqlRL3xdu3IcTvTXsB02CRHykidkTRL+A3hQA==
   dependencies:
-    commander "~2.19.0"
+    commander "~2.20.3"
     source-map "~0.6.1"
 
 ultron@1.0.x:
